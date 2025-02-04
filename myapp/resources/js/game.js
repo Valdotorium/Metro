@@ -1,13 +1,27 @@
-let game;
-const config = {
-    backgroundColor: 0x000000,
+
+var config = {
     type: Phaser.AUTO,
-    scale: {
-        mode: Phaser.Scale.FIT,
-        parent: 'phaser-example',
-        autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: window.innerWidth,
-        height: window.innerHeight
-    },
-    scene: [Scene1]
+    width: 800,
+    height: 600,
+    scene: {
+        preload: preload,
+        create: create,
+        update: update
+    }
+};
+
+var game = new Phaser.Game(config);
+
+function preload ()
+{
+    this.load.image("tile", "assets/gravel.png");
+}
+
+function create ()
+{
+    this.add.image(400, 300, 'tile')
+}
+
+function update ()
+{
 }
