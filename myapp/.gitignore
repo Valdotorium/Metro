@@ -3,7 +3,7 @@
 
 # Neutralinojs binaries and builds
 /bin
-/dist/myapp
+/dist/myapp-release
 
 # Neutralinojs client (minified)
 neutralino.js
