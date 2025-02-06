@@ -1,3 +1,5 @@
+import { generateTilemap } from "./generate.mjs";
+import { configureGame, loadAssets } from "./load.mjs";
 
 var config = {
     type: Phaser.AUTO,
@@ -14,14 +16,23 @@ var game = new Phaser.Game(config);
 
 function preload ()
 {
-    this.load.image("tile", "assets/gravel.png");
+    configureGame(this)
+    loadAssets(this)
+    generateTilemap(this)
+
 }
 
 function create ()
 {
-    this.add.image(400, 300, 'tile')
+    //display the loaded texture
+    this.add.image(400, 300, "tile");
 }
 
 function update ()
 {
+    if (this.frame == 0){
+        console.log(this.tileMap)
+    }
+    //draw a tilemap
+    this.frame++
 }
