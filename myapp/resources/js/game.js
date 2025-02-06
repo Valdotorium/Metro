@@ -19,12 +19,13 @@ function preload ()
 {
     configureGame(this)
     loadAssets(this)
-    generateTilemap(this)
+
 
 }
 
 function create ()
 {
+    generateTilemap(this)
     //display the loaded texture
     this.add.image(400, 300, "tile");
     if (this.frame == 0){

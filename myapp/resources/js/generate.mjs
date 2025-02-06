@@ -4,16 +4,9 @@ export function generateTilemap(game){
 
     console.log("map size is: ", mapSize)
 
-    game.tileMap = []
-
-    for (let i = 0; i < mapSize; i++){
-
-        let currentRow = []
-        for(let j = 0; j < mapSize; j++){
-            currentRow.push(1)
-        }
-        game.tileMap.push(currentRow)
-    }
-
-    console.log("generated tilemap!", game.tileMap)
+    game.tileMap = game.make.tilemap({ tileWidth: 16, tileHeight: 16, width: mapSize, height: mapSize})
+    const tile = game.tileMap.addTilesetImage('tile');
+    const layer = game.tileMap.createBlankLayer('layer1', tile);
+    layer.fill(0,0,0,mapSize,mapSize)
+    layer.setScale(1);
 }
