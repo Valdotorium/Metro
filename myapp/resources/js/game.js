@@ -1,5 +1,6 @@
 import { generateTilemap } from "./generate.mjs";
 import { configureGame, loadAssets } from "./load.mjs";
+import { drawTileMap } from "./draw.mjs";
 
 var config = {
     type: Phaser.AUTO,
@@ -26,13 +27,21 @@ function create ()
 {
     //display the loaded texture
     this.add.image(400, 300, "tile");
+    if (this.frame == 0){
+        console.log(this.tileMap)
+    }
+    drawTileMap(this)
 }
 
 function update ()
 {
-    if (this.frame == 0){
-        console.log(this.tileMap)
-    }
+
     //draw a tilemap
     this.frame++
+    //TODO: #1 draw tilemap constantly adds images, but never removes them
+    //drawTileMap(this)
+    
+    if (this.frame % 10 == 0){
+        console.log(this.game.loop.actualFPS)
+    }
 }
