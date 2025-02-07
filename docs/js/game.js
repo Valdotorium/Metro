@@ -20,7 +20,6 @@ function preload ()
     configureGame(this)
     loadAssets(this)
 
-
 }
 
 function create ()
@@ -30,11 +29,12 @@ function create ()
         console.log(this.tileMap)
     }
     drawTileMap(this)
+
 }
 
-function update ()
+function update (time, delta)
 {
-
+    this.controls.update(delta);
     //draw a tilemap
     this.frame++
     //TODO: #1 draw tilemap constantly adds images, but never removes them
