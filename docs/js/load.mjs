@@ -1,5 +1,5 @@
 export function loadAssets(game){
-    game.load.image("tile", "assets/images/gravel.png");
+    game.load.image("tile", "assets/images/new_forest.png");
 
     if(game.options.get("loadMap") == true){
         //load tilemap data from JSON file
