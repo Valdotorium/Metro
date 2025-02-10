@@ -6,6 +6,11 @@ export function loadAssets(game){
         game.load.json("tilemap", "assets/json/world.json");
     }
 
+    //testing loading a tileset
+    game.load.image("tileset", "assets/images/tileset.png");
+
+
+
 }
 
 export function configureGame(game){

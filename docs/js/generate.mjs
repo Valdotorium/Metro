@@ -4,11 +4,11 @@ export function generateTilemap(game){
 
     console.log("map size is: ", mapSize)
 
-    game.tileMap = game.make.tilemap({ tileWidth: 16, tileHeight: 16, width: mapSize, height: mapSize})
-    const tile = game.tileMap.addTilesetImage('tile');
-    const layer = game.tileMap.createBlankLayer('layer1', tile);
-    layer.fill(0,0,0,mapSize,mapSize)
-    layer.setScale(1);
+    game.tileMap = game.make.tilemap({ tileWidth: 8, tileHeight: 8, width: mapSize, height: mapSize})
+    const tileset = game.tileMap.addTilesetImage('tileset');
+    const layer = game.tileMap.createBlankLayer('layer1', tileset,0,0);
+    layer.fill(1,0,0,mapSize,mapSize)
+    layer.setScale(4);
 
     const cursors = game.input.keyboard.createCursorKeys();
 
@@ -21,5 +21,5 @@ export function generateTilemap(game){
 
     game.controls = new Phaser.Cameras.Controls.FixedKeyControl(controlConfig);
 
-    game.cameras.main.setBounds(0, 0, layer.width + 600, 0);
+    game.cameras.main.setBounds(0, 0, layer.width + 1000, 600);
 }
