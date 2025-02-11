@@ -33,7 +33,7 @@ export function generateTilemap(game){
         right: cursors.right,
         up: cursors.up,
         down: cursors.down,
-        speed: 0.25
+        speed: 1/game.cameras.main.zoom
     };
 
     game.controls = new Phaser.Cameras.Controls.FixedKeyControl(controlConfig);

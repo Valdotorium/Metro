@@ -18,7 +18,7 @@ export function configureGame(game){
     game.options.set("loadMap", false)
 
     game.tileMapOptions = new Map();
-    game.tileMapOptions.set("size", 1000)
+    game.tileMapOptions.set("size", 250)
 
     game.frame = 0
     game.zoom = 4
