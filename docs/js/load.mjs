@@ -19,8 +19,18 @@ export function configureGame(game){
 
 
     game.tileMapOptions = new Map();
-    game.tileMapOptions.set("size", 20)
+    game.tileMapOptions.set("size", 50)
 
     game.frame = 0
+    game.zoom = 4
 
+}
+
+
+export function setupKeyboard(game){
+    game.keys = new Map()
+    //for all keys
+    for(let i = 65; i <= 90; i++){
+        game.keys.set(String.fromCharCode(i), game.input.keyboard.addKey(i));
+    }
 }

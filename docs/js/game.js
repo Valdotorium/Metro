@@ -1,5 +1,5 @@
 import { generateTilemap } from "./generate.mjs";
-import { configureGame, loadAssets } from "./load.mjs";
+import { configureGame, loadAssets, setupKeyboard } from "./load.mjs";
 import { drawTileMap } from "./draw.mjs";
 
 var config = {
@@ -25,6 +25,7 @@ function preload ()
 
 function create ()
 {
+    setupKeyboard(this);
     generateTilemap(this)
     if (this.frame == 0){
         console.log(this.tileMap)
@@ -35,6 +36,15 @@ function create ()
 
 function update (time, delta)
 {
+    // Update the controls
+    //zoom in or out if a or d are pressed
+    if (this.keys.get("A").isDown && this.cameras.main.zoom < 8) {
+        this.cameras.main.zoom += 0.01;
+    }
+    if (this.keys.get("D").isDown && this.cameras.main.zoom > 0.5) {
+        this.cameras.main.zoom -= 0.01;
+    }
+    // Update the camera controls based on the arrow keys
     this.controls.update(delta);
     //draw a tilemap
     this.frame++
