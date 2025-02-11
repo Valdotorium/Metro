@@ -42,6 +42,12 @@ function create ()
 
 function update (time, delta)
 {
+
+    //get current window dimensions
+    this.windowWidth = window.innerWidth;
+    this.windowHeight = window.innerHeight;
+    console.log(this.windowWidth, this.windowHeight)
+
     //  Update the controls
     //zoom in or out if a or d are pressed
     if (this.keys.get("A").isDown && this.cameras.main.zoom < 8) {
