@@ -50,10 +50,10 @@ function update (time, delta)
 
     //  Update the controls
     //zoom in or out if a or d are pressed
-    if (this.keys.get("A").isDown && this.cameras.main.zoom < 8) {
+    if (this.keys.get("A").isDown && this.cameras.main.zoom < 5) {
         this.cameras.main.zoom += 0.01;
     }
-    if (this.keys.get("D").isDown && this.cameras.main.zoom > 0.5) {
+    if (this.keys.get("D").isDown && this.cameras.main.zoom > 0.3) {
         this.cameras.main.zoom -= 0.01;
     }
     // Update the camera controls based on the arrow keys
@@ -65,5 +65,6 @@ function update (time, delta)
     
     if (this.frame % 10 == 0){
         console.log(this.game.loop.actualFPS)
+        this.controls.speed = 2/this.tileMap.layer.scale 
     }
 }
