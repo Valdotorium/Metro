@@ -25,18 +25,4 @@ export function generateTilemap(game){
     const layer = game.tileMap.createLayer(0, tileset,100,100);
     layer.setScale(4);
 
-    const cursors = game.input.keyboard.createCursorKeys();
-
-    const controlConfig = {
-        camera: game.cameras.main,
-        left: cursors.left,
-        right: cursors.right,
-        up: cursors.up,
-        down: cursors.down,
-        speed: 1/game.cameras.main.zoom
-    };
-
-    game.controls = new Phaser.Cameras.Controls.FixedKeyControl(controlConfig);
-
-    game.cameras.main.setBounds(0,0, layer.width * layer.scale + 200, layer.height * layer.scale + 200);
 }

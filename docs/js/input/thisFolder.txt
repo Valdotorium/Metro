@@ -1,0 +1,6 @@
+Everything that has to do with
+-the player interacting with the game through mouse, keyboard, multitouch, etc...
+belongs here.
+
+keyboard.mjs:; input from the user through keyboard
+input.mjs: coordinating other files and calling functions

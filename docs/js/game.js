@@ -1,7 +1,6 @@
-import { generateTilemap } from "./generate.mjs";
-import { configureGame, loadAssets, setupKeyboard } from "./load.mjs";
-import { drawTileMap } from "./draw.mjs";
-import { updateControls, setupControls } from "./input.mjs";
+import { generateTilemap } from "./tilemap/create.mjs";
+import { configureGame, loadAssets } from "./fileManagement/load.mjs";
+import { updateControls, setupControls, setupKeyboard } from "./input/input.mjs";
 
 var config = {
     type: Phaser.AUTO,
@@ -41,7 +40,6 @@ function create ()
     if (this.frame == 0){
         console.log(this.tileMap)
     }
-    drawTileMap(this)
 
 }
 
