@@ -15,8 +15,8 @@ var config = {
     scale: {
         mode: Phaser.Scale.ENVELOP,
         autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: 1920,
-        height: 1080,
+        width: 1200,
+        height: 800,
       },
     fps: {
         target: 30 // 30x per second
