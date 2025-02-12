@@ -6,6 +6,7 @@ export function setupMouse(game){
 export function dragCamera(game){
 
     //update camera position based on mouse position if clicked
+    //TODO: #2 issue with window resizability and mouse position, need to keep height widt ratio constant?
     console.log(game.mouse.x, game.mouse.y)
     if (game.mouse.x < 50 || game.mouse.y < 50 || game.mouse.x > game.scale.width - 50 || game.mouse.y > game.scale.height - 50){
         const scrollFactor = 0.03;
