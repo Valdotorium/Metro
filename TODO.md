@@ -6,6 +6,6 @@ List of Todos in the near future.
 
 -Acessing local file system with neutralino, test @Valdotorium
 
--Implementing a UI scene and game state manager
+-Implementing a game state manager
 
 -Implementing Buttons
