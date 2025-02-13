@@ -15,7 +15,10 @@ export function loadAssets(game){
 
 export function configureGame(game){
     game.options = new Map()
+
+    //manually setting game constants
     game.options.set("loadMap", false)
+    game.options.set("debug", true)
 
     game.tileMapOptions = new Map();
     game.tileMapOptions.set("size", 250)
