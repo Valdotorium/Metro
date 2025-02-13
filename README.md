@@ -5,7 +5,7 @@
 This game is inspired by MiniMetro
 The player has a tilemap (generated), with a small city on it. As the player builds good transport infrastructure,
 the city grows and surrounding cities appear. Later, there will also be maps based on real cities.
-It should be more complex and have a slowe pace than mini metro.
+It should be more complex and have a slower pace than mini metro.
 
 
  *Ideas*
