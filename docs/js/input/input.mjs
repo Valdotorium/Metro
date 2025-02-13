@@ -1,9 +1,10 @@
 import { zoomControls, setupCameraControls } from "./keyboard.mjs"
-import {setupMouse, dragCamera} from "./mouse.mjs"
+import {setupMouse, dragCamera, touchSupport} from "./mouse.mjs"
 
 export function setupControls(game){
     setupCameraControls(game)
     setupMouse(game)
+    touchSupport(game)
 }
 
 export function updateControls (game) {

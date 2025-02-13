@@ -38,7 +38,6 @@ function preload ()
 
 function create ()
 {
-
     setupKeyboard(this);
     generateTilemap(this)
     setupControls(this)

@@ -17,3 +17,14 @@ export function dragCamera(game){
 
 
 }
+
+export function touchSupport(game){
+    game.input.on('pointerdown', function (pointer)
+    {
+
+        this.mouse.x = pointer.x
+        this.mouse.y = pointer.y
+        this.mouse = pointer
+
+    })
+}
