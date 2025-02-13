@@ -7,16 +7,20 @@ var config = {
     width: window.innerWidth,
     height: window.innerHeight,
     pixelArt: true,
+    inputTouch: true,
+
     scene: {
         preload: preload,
         create: create,
         update: update
     },
     scale: {
-        mode: Phaser.Scale.ENVELOP,
-        autoCenter: false,
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
         width: 1200,
         height: 800,
+        expandParent: true,
+        resizeInterval: 50,
       },
     fps: {
         target: 30 // 30x per second
