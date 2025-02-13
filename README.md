@@ -11,17 +11,27 @@ It should be more complex and have a slower pace than mini metro.
  *Ideas*
 
 Core:
-Implementing Colour Corrections
-Money System
-Highways and Railways (Metro and Surface)
-Dynamic assets (custom tilesets)
-Passengers, Pathfinding, Cities growing
+-Implementing Colour Corrections
+
+-Money System
+
+-Highways and Railways (Metro and Surface)
+
+-Dynamic assets (custom tilesets)
+
+-Passengers, Pathfinding, Cities growing
+
+
 
 Additional:
-Weather and Accidents
-Seasons
-Modding Support
-City Maps, Map builder
+
+-Weather and Accidents
+
+-Seasons
+
+-Modding Support
+
+-City Maps, Map builder
 
 
 
@@ -33,6 +43,9 @@ City Maps, Map builder
  
  in the directory containing game.js (the games main script), there are many folder with javascript files and one text file that
  describes what kind of scripts belong in this folder.
+ 
  Naming of vars:
+ 
  CONSTANTS
+ 
  nonConstantVariables
