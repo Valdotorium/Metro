@@ -14,7 +14,7 @@ var config = {
     },
     scale: {
         mode: Phaser.Scale.ENVELOP,
-        autoCenter: Phaser.Scale.CENTER_BOTH,
+        autoCenter: false,
         width: 1200,
         height: 800,
       },
@@ -34,13 +34,14 @@ function preload ()
 
 function create ()
 {
+
     setupKeyboard(this);
     generateTilemap(this)
     setupControls(this)
     if (this.frame == 0){
         console.log(this.tileMap)
-    }
-
+    }    
+    this.text = this.add.text(20,20).setText('Click to move').setScrollFactor(0);
 }
 
 function update (time, delta)
@@ -49,11 +50,16 @@ function update (time, delta)
     //get current window dimensions
     this.windowWidth = window.innerWidth;
     this.windowHeight = window.innerHeight;
-    console.log(this.windowWidth, this.windowHeight)
+    this.text.setText([
+        `mouseX: ${this.mouse.x}`,
+        `mouseY: ${this.mouse.y}`,
+        `duration: ${this.mouse.getDuration()}`,
+        `window Dimensions: ${this.windowWidth, this.windowHeight}`,
+        `zoom: ${this.cameras.main.zoom}`
+    ])
 
     //  Update the controls
     updateControls(this);
-
 
     // Update the camera controls based on the arrow keys
     this.controls.update(delta);
