@@ -11,7 +11,6 @@ function generateTilemapArray(mapSize){
     return tilemapArray;
 }
 
-
 export function generateTilemap(game){
     //get the tilemap size
     const mapSize = game.tileMapOptions.get("size")

@@ -3,7 +3,6 @@ import { configureGame, loadAssets } from "./fileManagement/load.mjs";
 import { updateControls, setupControls, setupKeyboard } from "./input/input.mjs";
 import { debugText } from "./ui/debugText.mjs";
 
-
 class GameScene extends Phaser.Scene{
     constructor()
     {
@@ -13,9 +12,7 @@ class GameScene extends Phaser.Scene{
     {
         configureGame(this)
         loadAssets(this)
-
     }
-
     create ()
     {
         setupKeyboard(this);
@@ -24,12 +21,9 @@ class GameScene extends Phaser.Scene{
         if (this.frame == 0){
             console.log(this.tileMap)
         }    
-
     }
-
     update ()
     {
-
         //get current window dimensions
         this.windowWidth = window.innerWidth;
         this.windowHeight = window.innerHeight;
@@ -45,29 +39,21 @@ class GameScene extends Phaser.Scene{
         }
     }
 }
-
 class UIScene extends Phaser.Scene{
     constructor()
     {
         super({ key: 'UIScene'});
     }
     create(){
-
         const gameScene = this.scene.get("GameScene")
-        this.text = this.add.text(20,20).setText('Click to move').setScrollFactor(0);
+        this.text = this.add.text(20,20).setText('').setScrollFactor(0);
     }
     update(){
-        
         const gameScene = this.scene.get("GameScene")
         if (gameScene.options.get("debug")){
             debugText(this)
         }
-
-
-
     }
-
-
 }
 
 var config = {

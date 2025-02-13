@@ -9,7 +9,6 @@ export function setupControls(game){
 export function updateControls (game) {
     keyboardControls(game)
     dragCamera(game)
-
 }
 export function setupKeyboard(game){
     game.keys = new Map()
