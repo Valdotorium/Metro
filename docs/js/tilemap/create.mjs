@@ -24,5 +24,6 @@ export function generateTilemap(game){
     const tileset = game.tileMap.addTilesetImage('tileset');
     const layer = game.tileMap.createLayer(0, tileset,100,100);
     layer.setScale(4);
+    game.cameras.main.setBounds(0,0, layer.width * layer.scale + 200, layer.height * layer.scale + 200);
 
 }

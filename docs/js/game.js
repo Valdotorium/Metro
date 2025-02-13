@@ -4,8 +4,6 @@ import { updateControls, setupControls, setupKeyboard } from "./input/input.mjs"
 
 var config = {
     type: Phaser.AUTO,
-    width: window.innerWidth,
-    height: window.innerHeight,
     pixelArt: true,
     inputTouch: true,
 
@@ -64,8 +62,6 @@ function update (time, delta)
     //  Update the controls
     updateControls(this);
 
-    // Update the camera controls based on the arrow keys
-    this.controls.update(delta);
     //draw a tilemap
     this.frame++
 }
