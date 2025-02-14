@@ -1,6 +1,11 @@
 List of Todos in the near future.
 
--Rebuilding moving the map with the pointer  @JoEragon
+TODO:
+-Implementing a simple terrain generator (not before the tilemap is redesigned)
+
+-design the game data array, holding populations and all that stuff @Valdotorium
+
+-redesigning the tilemap and checking if you can set a draw order @Valdotorium
 
 -Implemeting touch support with pointers @JoEragon
 
@@ -8,4 +13,11 @@ List of Todos in the near future.
 
 -Implementing a game state manager
 
+-implement the game clock mechanic (simulation folder!), counting time in minutes,hours,days,months and years with a variable ticking speed @JoEragon / @Igros10 ?
+
 -Implementing Buttons
+
+
+DONE:
+
+-Rebuilding moving the map with the pointer  @JoEragon

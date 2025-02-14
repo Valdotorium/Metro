@@ -17,7 +17,7 @@ export function configureGame(game){
     game.options.set("debug", true)
 
     game.tileMapOptions = new Map();
-    game.tileMapOptions.set("size", 250)
+    game.tileMapOptions.set("size", 125)
 
     game.frame = 0
     game.zoom = 4

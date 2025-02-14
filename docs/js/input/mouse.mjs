@@ -12,6 +12,11 @@ export function dragCamera(game){
     const camera = game.cameras.main;
     let pointer = game.input.activePointer;
 
+    //tmporary
+    game.mouse.x = pointer.x
+    game.mouse.y = pointer.y
+
+
     if (game.input.activePointer.isDown&&/*game.keys.get("SHIFT").isDown&&*/counter==1) {
         camera.scrollX = camera.scrollX + ((cameraDragStartX - pointer.x)/camera.zoom*1.2)
         camera.scrollY = camera.scrollY + ((cameraDragStartY - pointer.y)/camera.zoom*1.2)
