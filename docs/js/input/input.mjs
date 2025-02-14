@@ -1,15 +1,16 @@
-import { keyboardControls } from "./keybinds.mjs"
-import {setupMouse,touchSupport,dragCamera} from "./mouse.mjs"
+import {keyboardControls} from "./keybinds.mjs"
+import {dragCamera} from "./mouse.mjs"
 
 export function setupControls(game){
-    setupMouse(game)
-    touchSupport(game)
+    setupKeyboard(game)
 }
 
 export function updateControls (game) {
     keyboardControls(game)
     dragCamera(game)
 }
+
+//sets up all the keyboard keybinds that are relevant to the game using keycodes
 export function setupKeyboard(game){
     game.keys = new Map()
     //for all keys
