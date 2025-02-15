@@ -5,8 +5,6 @@ TODO:
 
 -design the game data array, holding populations and all that stuff @Valdotorium
 
--redesigning the tilemap and checking if you can set a draw order @Valdotorium
-
 -Implemeting touch support with pointers @JoEragon
 
 -Acessing local file system with neutralino, test @Valdotorium

@@ -8,7 +8,7 @@ export class standardButton{
         this.y = y;
         this.text = text;
         this.parent = parent;
-        this.isClicked = false;
+        this.isHovered = false;
         this.clickFunction = clickFunction;
         //create a text object with a fill color and a font style
         this.textStyle = { fontFamily: 'Arial Black', fontSize: 38, color: '#eeeeee'};
@@ -22,14 +22,14 @@ export class standardButton{
         this.textObj.setOrigin(0.5, 0.5);
 
         this.rect.setInteractive();
-        parent.input.on('pointerdown', (pointer, gameObject) =>
+        parent.input.on('gameobjectdown', (pointer, gameObject) =>
             {
                 //executing the function when it is clicked.
                 //warning: this parameter must have only one parameter: the game object
                 this.clickFunction(this.parent.scene.get("GameScene"))
                 this.textObj.setColor("#eeeeee")
             });
-        parent.input.on('pointerup', (pointer, gameObject) =>
+        parent.input.on('gameobjectup', (pointer, gameObject) =>
             {
                 this.textObj.setColor("#333322")
             });
