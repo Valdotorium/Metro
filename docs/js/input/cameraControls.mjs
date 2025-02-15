@@ -18,12 +18,10 @@ export function cameraControls(game){
     }
     if (game.keys.get("W").isDown) {
         game.cameras.main.scrollY -= 10
-        console.log("scroll")
     }
     if (game.keys.get("R").isDown) {
         game.cameras.main.scrollY = 10
         game.cameras.main.scrollX = 10
-        console.log("scroll")
     }
 
 }

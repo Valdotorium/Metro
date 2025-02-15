@@ -62,6 +62,7 @@ var config = {
     type: Phaser.AUTO,
     pixelArt: true,
     inputTouch: true,
+    backgroundColor: "#b4cee0",
 
     scene: [GameScene, UIScene],
     scale: {
