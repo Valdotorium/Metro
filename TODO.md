@@ -15,9 +15,12 @@ TODO:
 
 -implement the game clock mechanic (simulation folder!), counting time in minutes,hours,days,months and years with a variable ticking speed @JoEragon / @Igros10 ?
 
--Implementing Buttons
+-Algorithm for drawing railway lines on the tilemap
 
+-chill sounds
 
 DONE:
 
 -Rebuilding moving the map with the pointer  @JoEragon
+
+-Implementing Buttons @Valdotorium

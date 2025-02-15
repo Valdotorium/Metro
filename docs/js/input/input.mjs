@@ -5,8 +5,11 @@ import { standardButton } from "./button.mjs"
 let handleClickTest = function handleClickTest(game){
     console.log("Button clicked at frame: ", game.frame) //temporary, replace with your own logic when you have it
 }
+export function setupUI(ui){
+    ui.testButton = new standardButton(ui, 100, 300, "BUTTON", handleClickTest) //temporary
+}
 export function setupControls(game){
-    game.testButton = new standardButton(game, 100, 300, "BUTTON", handleClickTest) //temporary
+
     setupKeyboard(game)
 }
 
