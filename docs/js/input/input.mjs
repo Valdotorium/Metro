@@ -1,7 +1,12 @@
 import {keyboardControls} from "./keybinds.mjs"
 import {dragCamera} from "./mouse.mjs"
+import { standardButton } from "./button.mjs"
 
+let handleClickTest = function handleClickTest(game){
+    console.log("Button clicked at frame: ", game.frame) //temporary, replace with your own logic when you have it
+}
 export function setupControls(game){
+    game.testButton = new standardButton(game, 100, 300, "BUTTON", handleClickTest) //temporary
     setupKeyboard(game)
 }
 
