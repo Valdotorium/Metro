@@ -1,23 +1,30 @@
-function generateTilemapArray(mapSize){
-    //generate a tilemap array with widt mapSize and height mapSize
-    const tilemapArray = Array.from({length: mapSize}, () => Array.from({length: mapSize}, () => 0));
-
-    //fill the array with random numbers between 0 and 15
-    for(let i = 0; i < mapSize; i++){
-        for(let j = 0; j < mapSize; j++){
-            tilemapArray[i][j] = Math.floor(Math.random() * 15);
-        }
-    }
-    return tilemapArray;
-}
-
+import { Tilemap } from "../generator/generate.mjs"
 export function generateTilemap(game){
     //get the tilemap size
     const mapSize = game.tileMapOptions.get("size")
+    if (mapSize < 10){ mapSize = 10 }
+    if (mapSize > 250){ mapSize = 250 }
 
     console.log("map size is: ", mapSize)
-    //generate a tilemap array
-    game.generatedTilemap = generateTilemapArray(mapSize)
+    //generate a tilemap array with values between 0 and 1
+    
+    game.generatedTilemap = Tilemap(mapSize)
+    //translate values < 0.25 to 22, values < 0.5 to 2, values < 0.75 to 1, others to 6 by looping through the two dimensional array
+    for(let i = 0; i < mapSize; i++){
+        for(let j = 0; j < mapSize; j++){
+            if(game.generatedTilemap[i][j] < 0.45){
+                game.generatedTilemap[i][j] = 22
+            }else if(game.generatedTilemap[i][j] < 0.5){
+                game.generatedTilemap[i][j] = 0
+            } else if(game.generatedTilemap[i][j] < 0.55){
+                game.generatedTilemap[i][j] = 2
+            } else {
+                game.generatedTilemap[i][j] = 6
+            }
+        }
+    }
+    
+
     //tiles sized 8x8 are placed in a 6x6 grid, allowed to overlap 1 px each side
     game.tileMap = game.make.tilemap({ data: game.generatedTilemap, tileWidth: 6, tileHeight: 6, width: mapSize, height: mapSize}).setLayerTileSize(8,8)
     let tileset = game.tileMap.addTilesetImage('tileset', null, 8,8);
