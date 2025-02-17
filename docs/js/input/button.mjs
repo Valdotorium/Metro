@@ -1,6 +1,6 @@
 export class standardButton{
 
-    constructor(parent, x, y, text, clickFunction){
+    constructor(parent, x, y,fontsize, text, clickFunction){
         //simple button thats clickable and contains text
         //standardButton parameters: the game object, x, y, text, the function thet is executed when clicking it
         
@@ -11,7 +11,7 @@ export class standardButton{
         this.isHovered = false;
         this.clickFunction = clickFunction;
         //create a text object with a fill color and a font style
-        this.textStyle = { fontFamily: 'Arial Black', fontSize: 38, color: '#eeeeee'};
+        this.textStyle = { fontFamily: 'Arial Black', fontSize: fontsize, color: '#eeeeee'};
         this.textObj = parent.add.text(this.x, this.y, this.text, this.textStyle)
         //create a rectangle with a fill color
         //make it scale to the size of the text

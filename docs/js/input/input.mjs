@@ -4,10 +4,12 @@ import { standardButton } from "./button.mjs"
 import {mousewheelzoom} from "./mouse.mjs"
 
 let handleClickTest = function handleClickTest(game){
-    console.log("Button clicked at frame: ", game.frame) //temporary, replace with your own logic when you have it
+    game.cameras.main.scrollX = 0
+    game.cameras.main.scrollY = 0
+    //temporary, replace with your own logic when you have it
 }
 export function setupUI(ui){
-    ui.testButton = new standardButton(ui, 100, 300, "BUTTON", handleClickTest) //temporary
+    ui.testButton = new standardButton(ui, 200, 300, 30,"RESET CAMERA", handleClickTest) //temporary
 }
 export function setupControls(game){
     mousewheelzoom(game)
