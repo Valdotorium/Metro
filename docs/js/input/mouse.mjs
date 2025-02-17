@@ -25,4 +25,17 @@ export function dragCamera(game){
     }
 
 }
+export function mousewheelzoom(game){
+    game.input.on('wheel', (pointer, gameObjects, deltaX, deltaY, deltaZ) => {
+        
+        const camera = game.cameras.main;
+        const worldPoint = camera.getWorldPoint(pointer.x, pointer.y);
+        const zoomnew = camera.zoom - camera.zoom * 0.001 * deltaY;
+        camera.zoom = Phaser.Math.Clamp(zoomnew, 0.3, 5);
+        camera.preRender();
+        const camanker = camera.getWorldPoint(pointer.x, pointer.y);
+        camera.scrollX -= camanker.x - worldPoint.x;
+        camera.scrollY -= camanker.y - worldPoint.y;
+    });
+}
 
