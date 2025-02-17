@@ -1,7 +1,11 @@
-import { generateZoominNoise } from "./noise.js";
+import { generateSimpleTilemap } from "./simpleTerrain.mjs"
 
-export function Tilemap(size){
-    let noise = generateZoominNoise(size, 10);
-    return noise
+
+export function Tilemap(generator, size){
+    let map;
+    if(generator == "simple"){
+        map = generateSimpleTilemap(size, 25)
+    }
+    return map
 
 }

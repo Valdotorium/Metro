@@ -8,21 +8,7 @@ export function generateTilemap(game){
     console.log("map size is: ", mapSize)
     //generate a tilemap array with values between 0 and 1
     
-    game.generatedTilemap = Tilemap(mapSize)
-    //translate values < 0.25 to 22, values < 0.5 to 2, values < 0.75 to 1, others to 6 by looping through the two dimensional array
-    for(let i = 0; i < mapSize; i++){
-        for(let j = 0; j < mapSize; j++){
-            if(game.generatedTilemap[i][j] < 0.45){
-                game.generatedTilemap[i][j] = 22
-            }else if(game.generatedTilemap[i][j] < 0.5){
-                game.generatedTilemap[i][j] = 0
-            } else if(game.generatedTilemap[i][j] < 0.55){
-                game.generatedTilemap[i][j] = 2
-            } else {
-                game.generatedTilemap[i][j] = 6
-            }
-        }
-    }
+    game.generatedTilemap = Tilemap("simple",mapSize)
     
 
     //tiles sized 8x8 are placed in a 6x6 grid, allowed to overlap 1 px each side

@@ -47,7 +47,7 @@ class UIScene extends Phaser.Scene{
     create(){
         this.ui = setupUI(this)
         const gameScene = this.scene.get("GameScene")
-        const textStyle = { fontFamily: 'Arial Black', fontSize: 38, color: '#ffffff'};
+        const textStyle = { fontFamily: 'Arial Black', fontSize: 22, color: '#ffffff'};
         this.text = this.add.text(20,20,"",textStyle).setScrollFactor(0);
     }
     update(){
