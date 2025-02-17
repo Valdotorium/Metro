@@ -19,7 +19,7 @@ export function configureGame(game){
     game.tileMapOptions.set("size", 50)
 
     game.frame = 0
-    game.cameras.main.zoom = 4
+    game.cameras.main.zoom = 2
 }
 
 

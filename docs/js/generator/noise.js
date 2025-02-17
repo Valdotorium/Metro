@@ -1,3 +1,4 @@
+
 export function generateRandomNoise(size){
     //generate a two dimensional array containing random numbers
     let noise = [];
@@ -7,33 +8,28 @@ export function generateRandomNoise(size){
             noise[i][j] = Math.random();
         }
     }
-
     return noise;
 }
 
 export function generateZoominNoise(targetSize, smoothness){
-    let baseNoise = generateRandomNoise((targetSize / smoothness) + 1);
+    let baseNoise = generateRandomNoise((targetSize / smoothness) + 3);
     let zoominNoise = [];
     for(let i = 0; i < targetSize; i++){
         zoominNoise[i] = [];
         for(let j = 0; j < targetSize; j++){
-            let x = i / smoothness + 0.001;
-            let y = j / smoothness + 0.001;
-            //calculaate weights with real distance (sprt(dx**2+dy**2)) instead of manhattan distance
-            const weightToTopLeftInt = (1.5 - Math.sqrt((x - Math.floor(x))**2 + (y - Math.floor(y))**2)) / 4
-            const weightToTopRightInt = (1.5 - Math.sqrt((x - Math.ceil(x))**2 + (y - Math.floor(y))**2)) / 4
-            const weightToBottomLeftInt = (1.5- Math.sqrt((x - Math.floor(x))**2 + (y - Math.ceil(y))**2)) / 4
-            const weightToBottomRightInt = (1.5 - Math.sqrt((x - Math.ceil(x))**2 + (y - Math.ceil(y))**2)) / 4
+            let x = i / smoothness
+            let y = j / smoothness
+            let x0 = Math.floor(x)
+            let x1 = x0 + 1
+            let y0 = Math.floor(y)
+            let y1 = y0 + 1
 
-            const finalValue = (baseNoise[Math.floor(x)][Math.floor(y)] * weightToTopLeftInt + 
-                                baseNoise[Math.ceil(x)][Math.floor(y)] * weightToTopRightInt +
-                                baseNoise[Math.floor(x)][Math.ceil(y)] * weightToBottomLeftInt + 
-                                baseNoise[Math.ceil(x)][Math.ceil(y)] * weightToBottomRightInt)
-            zoominNoise[i][j] = finalValue;
-            //log important calculation data
-            console.log(`x: ${x}, y: ${y}, weightTopLeftInt: ${weightToTopLeftInt}, weightTopRightInt: ${weightToTopRightInt}, weightBottomLeftInt: ${weightToBottomLeftInt}, weightBottomRightInt: ${weightToBottomRightInt}, finalValue: ${finalValue}`)
+            let p1 = Phaser.Math.Interpolation.SmoothStep(x - x0, baseNoise[x0][y0], baseNoise[x1][y0])
+            let p2 = Phaser.Math.Interpolation.SmoothStep(x - x0, baseNoise[x0][y1], baseNoise[x1][y1])
 
-        }
+            let noiseValue = Phaser.Math.Interpolation.SmoothStep(y - y0, p1, p2)
+            zoominNoise[i][j] = noiseValue;
+        } 
     }
     console.log(baseNoise)
     console.log(zoominNoise)
