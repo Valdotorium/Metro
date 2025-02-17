@@ -10,7 +10,6 @@ export function dragCamera(game){
     game.mouse = game.input.activePointer 
     game.mouse.x = pointer.x
     game.mouse.y = pointer.y
-    game.mouse.isDown = pointer.isDown
 
     if (pointer.isDown&&/*game.keys.get("SHIFT").isDown&&*/counter==1) {
         camera.scrollX = camera.scrollX + ((cameraDragStartX - pointer.x)/camera.zoom*2)
