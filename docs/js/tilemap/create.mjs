@@ -8,7 +8,7 @@ export function generateTilemap(game){
     console.log("map size is: ", mapSize)
     //generate a tilemap array with values between 0 and 1
     
-    game.generatedTilemap = Tilemap("simple",mapSize)
+    game.generatedTilemap = Tilemap("complex",mapSize)
     
 
     //tiles sized 8x8 are placed in a 6x6 grid, allowed to overlap 1 px each side
