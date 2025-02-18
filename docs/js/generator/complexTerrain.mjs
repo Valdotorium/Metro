@@ -2,21 +2,23 @@
 import { generatePerlinNoise } from "./noise.js";
 
 export function generateComplexTilemap(size){
+    //detail factor of the terrain, lower the higher the target size is
+    let detailFactor = 0.5 + 0.5 / (size / 75)
     //generate the noise that roughly sets the coastline
-    let baseNoise = generatePerlinNoise(size,20)
+    let baseNoise = generatePerlinNoise(size,Math.round(20 / detailFactor))
 
     //generate more complex noise
-    let complexNoise = generatePerlinNoise(size, 8)
+    let complexNoise = generatePerlinNoise(size, Math.round(8 / detailFactor))
 
     //even more complex noise
-    let shuffleNoise = generatePerlinNoise(size, 3)
+    let shuffleNoise = generatePerlinNoise(size, Math.round(3 / detailFactor))
 
     //noise for specific tile types
-    let BaseForestNoise = generatePerlinNoise(size, 20)
-    let forestNoise = generatePerlinNoise(size, 3)
-    let sandNoise = generatePerlinNoise(size, 8)
-    let mountainNoise = generatePerlinNoise(size, 3)
-    let mountainBaseNoise = generatePerlinNoise(size, 20)
+    let BaseForestNoise = generatePerlinNoise(size, Math.round(20 / detailFactor))
+    let forestNoise = generatePerlinNoise(size, Math.round(3 / detailFactor))
+    let sandNoise = generatePerlinNoise(size, Math.round(8 / detailFactor))
+    let mountainNoise = generatePerlinNoise(size, Math.round(3 / detailFactor))
+    let mountainBaseNoise = generatePerlinNoise(size, Math.round(20 / detailFactor))
 
     //overlay the mountain noises
     for(let i = 0; i < size; i++){
