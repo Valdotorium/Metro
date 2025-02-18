@@ -18,7 +18,7 @@ class GameScene extends Phaser.Scene{
         setupKeyboard(this);
         generateTilemap(this)
         setupControls(this)
-        this.input.addPointer(1);
+        this.input.addPointer(2)
         if (this.frame == 0){
             console.log(this.tileMap)
         }    
