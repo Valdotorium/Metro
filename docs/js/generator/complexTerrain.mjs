@@ -57,13 +57,16 @@ export function generateComplexTilemap(size){
     //translate the values between 0 and 1 to tile types. see tilemapIndexxes.txt for more info
     for(let i = 0; i < size; i++){
         for(let j = 0; j < size; j++){
-            if(weightedNoise[i][j] < 0.42){
+            if(weightedNoise[i][j] < 0.32){
+                //water
+                weightedNoise[i][j] = 23
+            } else if(weightedNoise[i][j] < 0.42){
                 //water
                 weightedNoise[i][j] = 22
             } else if(weightedNoise[i][j] < 0.48 && sandNoise[i][j] > 0.5){
                 //beach
                 weightedNoise[i][j] = 2
-            }else if(weightedNoise[i][j] < 0.48 && forestNoise[i][j] > 0.7){
+            }else if(weightedNoise[i][j] < 0.45 && forestNoise[i][j] > 0.75){
                 //swamp
                 weightedNoise[i][j] = 7
             }else if(weightedNoise[i][j] < 0.46 && sandNoise[i][j] < 0.4 && forestNoise[i][j] < 0.45){
