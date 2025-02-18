@@ -4,6 +4,11 @@ import { generatePerlinNoise } from "./noise.js";
 export function generateComplexTilemap(size){
     //detail factor of the terrain, lower the higher the target size is
     let detailFactor = 0.5 + 0.5 / (size / 75)
+    let islandNoise;
+    if(size > 140){
+        islandNoise = generatePerlinNoise(size, Math.round(50 / detailFactor))
+    }
+
     //generate the noise that roughly sets the coastline
     let baseNoise = generatePerlinNoise(size,Math.round(20 / detailFactor))
 
@@ -38,8 +43,14 @@ export function generateComplexTilemap(size){
     for(let i = 0; i < size; i++){
         weightedNoise[i] = [];
         for(let j = 0; j < size; j++){
-            let noiseValue = (baseNoise[i][j] * 0.77 + complexNoise[i][j] * 0.12 + shuffleNoise[i][j] * 0.11)
-            weightedNoise[i][j] = noiseValue;
+            if (size <= 140){
+                let noiseValue = (baseNoise[i][j] * 0.77 + complexNoise[i][j] * 0.12 + shuffleNoise[i][j] * 0.11)
+                weightedNoise[i][j] = noiseValue;
+            } else{
+                let noiseValue = (islandNoise[i][j] * 0.52 + baseNoise[i][j] * 0.3 + complexNoise[i][j] * 0.12 + shuffleNoise[i][j] * 0.11)
+                weightedNoise[i][j] = noiseValue;  
+            }
+
         } 
     }
 

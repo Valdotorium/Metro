@@ -29,7 +29,7 @@ export function mousewheelzoom(game){
         const camera = game.cameras.main;
         const worldPoint = camera.getWorldPoint(pointer.x, pointer.y);
         const zoomnew = camera.zoom - camera.zoom * 0.001 * deltaY;
-        camera.zoom = Phaser.Math.Clamp(zoomnew, 0.5, 5);
+        camera.zoom = Phaser.Math.Clamp(zoomnew, 0.3, 5);
         camera.preRender();
         const camanker = camera.getWorldPoint(pointer.x, pointer.y);
         camera.scrollX -= camanker.x - worldPoint.x;
