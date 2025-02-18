@@ -17,6 +17,6 @@ export function generateTilemap(game){
     //create a tilemap layer with the generated tilemap array and the tileset, and place it at (100,100) on the screen, with a scale of 4
     const layer = game.tileMap.createLayer(0, tileset,100,100);
     layer.setScale(4);
-    game.cameras.main.setBounds(0,0, layer.width * layer.scale + 200, layer.height * layer.scale + 200);
+    game.cameras.main.setBounds(-600,-400, layer.width * layer.scale + 1200, layer.height * layer.scale + 800);
 
 }
