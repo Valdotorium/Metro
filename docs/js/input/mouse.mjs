@@ -36,4 +36,14 @@ export function mousewheelzoom(game){
         camera.scrollY -= camanker.y - worldPoint.y;
     });
 }
+export function touchzoom(game){
+    if(game.input.pointer1.isDown&&game.input.pointer2.isDown){
+        const camera = game.cameras.main;
+        let touchzoom = game.input.pointer1.getDistance();
+        const zoomnew = camera.zoom - camera.zoom * 0.001 * touchzoom;
+        camera.zoom = Phaser.Math.Clamp(zoomnew, 0.3, 5);
+
+
+
+}}
 

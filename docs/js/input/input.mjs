@@ -2,6 +2,7 @@ import {keyboardControls} from "./keybinds.mjs"
 import {dragCamera} from "./mouse.mjs"
 import { standardButton } from "./button.mjs"
 import {mousewheelzoom} from "./mouse.mjs"
+import {touchzoom} from "./mouse.mjs"
 
 let handleClickTest = function handleClickTest(game){
     game.cameras.main.scrollX = 0
@@ -19,6 +20,7 @@ export function setupControls(game){
 export function updateControls (game) {
     keyboardControls(game)
     dragCamera(game)
+    touchzoom(game)
 }
 
 //sets up all the keyboard keybinds that are relevant to the game using keycodes
