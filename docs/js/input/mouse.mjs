@@ -48,7 +48,7 @@ export function touchzoom(game){
             dist1 = Math.sqrt(((pointer1.x - pointer2.x)**2)+((pointer1.y - pointer2.y)**2))
             let zoomdist = dist1 - dist2
             let tempzoom = camera.zoom - camera.zoom * 0.01 * zoomdist;
-            camera.zoom = Phaser.Math.Clamp(tempzoom, 0.3, 5);
+            camera.zoom = tempzoom
         }
         if (pointer1.isDown&&con2==0){
             dist2 = Math.sqrt(((pointer1.x - pointer2.x)**2)+((pointer1.y - pointer2.y)**2))

@@ -1,8 +1,10 @@
 import {keyboardControls} from "./keybinds.mjs"
 import {dragCamera} from "./mouse.mjs"
-import { standardButton } from "./button.mjs"
+import {standardButton} from "./button.mjs"
 import {mousewheelzoom} from "./mouse.mjs"
 import {touchzoom} from "./mouse.mjs"
+import { getHoveredTile,setupCurrentTileMarker} from "./selectTiles.mjs"
+
 
 let handleClickTest = function handleClickTest(game){
     game.cameras.main.scrollX = 0
@@ -15,11 +17,14 @@ export function setupUI(ui){
 export function setupControls(game){
     mousewheelzoom(game)
     setupKeyboard(game)
+    setupCurrentTileMarker(game)
 }
 
 export function updateControls (game) {
     keyboardControls(game)
     dragCamera(game)
+    game.mouse.worldPoint = game.input.activePointer.positionToCamera(game.cameras.main);
+    getHoveredTile(game)
     touchzoom(game)
 }
 
