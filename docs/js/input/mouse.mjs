@@ -37,11 +37,12 @@ export function mousewheelzoom(game){
     });
 }
 let con2 = 0;
+let dist1;
+let dist2;
 export function touchzoom(game){
     if(game.input.pointer1.isDown&&game.input.pointer2.isDown){
         const camera = game.cameras.main;
-        let dist1;
-        let dist2;
+
         const pointer1 = game.input.pointer1;
         const pointer2 = game.input.pointer2
         if (pointer1.isDown&&con2==1) {
