@@ -11,11 +11,11 @@ export function dragCamera(game){
     game.mouse.x = pointer.x
     game.mouse.y = pointer.y
 
-    if (pointer.isDown&&/*game.keys.get("SHIFT").isDown&&*/counter==1) {
+    if (pointer.isDown&&counter==1) {
         camera.scrollX = camera.scrollX + ((cameraDragStartX - pointer.x)/camera.zoom*2)
         camera.scrollY = camera.scrollY + ((cameraDragStartY - pointer.y)/camera.zoom*2)
     }
-    if (pointer.isDown&&counter==0/*&&game.keys.get("SHIFT").isDown*/){
+    if (pointer.isDown&&counter==0){
         cameraDragStartX = pointer.x
         cameraDragStartY = pointer.y
         counter++
@@ -36,12 +36,26 @@ export function mousewheelzoom(game){
         camera.scrollY -= camanker.y - worldPoint.y;
     });
 }
+let con2;
 export function touchzoom(game){
     if(game.input.pointer1.isDown&&game.input.pointer2.isDown){
         const camera = game.cameras.main;
-        let touchzoom = game.input.pointer1.getDistance();
-        const zoomnew = camera.zoom - camera.zoom * 0.001 * touchzoom;
-        camera.zoom = Phaser.Math.Clamp(zoomnew, 0.3, 5);
+        let dist1;
+        let dist2;
+        const pointer1 = game.input.pointer1;
+        const pointer2 = game.input.pointer2
+        if (pointer1.isDown&&con2==1) {
+            let dist1 = Math.sqrt(((pointer1.x - pointer2.x)**2)+((pointer1.y - pointer2.y)**2))
+            let zoomdist = dist1 - dist2
+            let tempzoom = camera.zoom + (zoomdist)/camera.zoom
+            camera.zoom = Phaser.Math.Clamp(tempzoom, 0.3, 5);
+        }
+        if (pointer1.isDown&&con2==0){
+            let dist2 = Math.sqrt(((pointer1.x - pointer2.x)**2)+((pointer1.y - pointer2.y)**2))
+            con2++
+        }else{
+            con2 = 0
+        }
 
 
 
