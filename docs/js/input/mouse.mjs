@@ -40,6 +40,9 @@ let con2 = 0;
 let dist1;
 let dist2;
 export function touchzoom(game){
+
+    let zoomdist;
+    let tempzoom;
     if(game.input.pointer1.isDown&&game.input.pointer2.isDown){
         const camera = game.cameras.main;
 
@@ -47,8 +50,8 @@ export function touchzoom(game){
         const pointer2 = game.input.pointer2
         if (pointer1.isDown&&con2==1) {
             dist1 = Math.sqrt(((pointer1.x - pointer2.x)**2)+((pointer1.y - pointer2.y)**2))
-            let zoomdist = dist1 - dist2
-            let tempzoom = camera.zoom - camera.zoom * 0.01 * zoomdist;
+            zoomdist = dist1 - dist2
+            tempzoom = camera.zoom - camera.zoom * 0.01 * zoomdist;
             camera.zoom = tempzoom
         }
         if (pointer1.isDown&&con2==0){
@@ -59,6 +62,11 @@ export function touchzoom(game){
         }
 
 
-
-}}
+    }
+    game.mousetext.setText([
+        `p1down: ${game.input.pointer1.isDown}, p2down ${game.input.pointer2.isDown}`,
+        `zoomdist: ${zoomdist}`,
+        `tempzoom: ${tempzoom}`
+    ])
+}
 
