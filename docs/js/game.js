@@ -8,7 +8,7 @@ class GameScene extends Phaser.Scene{
     {
         super({ key: 'GameScene' });
     }
-    graphics;
+    graphics;       
     preload ()
     {
         configureGame(this)
@@ -16,6 +16,7 @@ class GameScene extends Phaser.Scene{
     }
     create ()
     {
+        this.graphics = this.add.graphics();
         setupKeyboard(this);
         generateTilemap(this)
         setupControls(this)
