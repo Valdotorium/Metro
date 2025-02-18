@@ -51,8 +51,8 @@ export function touchzoom(game){
         if (pointer1.isDown&&con2==1) {
             dist1 = Math.sqrt(((pointer1.x - pointer2.x)**2)+((pointer1.y - pointer2.y)**2))
             zoomdist = dist1 - dist2
-            tempzoom = camera.zoom - camera.zoom * 0.01 * zoomdist;
-            camera.zoom = tempzoom
+            tempzoom = camera.zoom + camera.zoom * 0.01 * zoomdist;
+            camera.zoom = Phaser.Math.Clamp(tempzoom, 0.3, 5)
         }
         if (pointer1.isDown&&con2==0){
             dist2 = Math.sqrt(((pointer1.x - pointer2.x)**2)+((pointer1.y - pointer2.y)**2))
@@ -60,8 +60,6 @@ export function touchzoom(game){
         }else{
             con2 = 0
         }
-
-
     }
     game.mousetext.setText([
         `p1down: ${game.input.pointer1.isDown}, p2down ${game.input.pointer2.isDown}`,
