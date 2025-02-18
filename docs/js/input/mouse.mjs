@@ -36,7 +36,7 @@ export function mousewheelzoom(game){
         camera.scrollY -= camanker.y - worldPoint.y;
     });
 }
-let con2;
+let con2 = 0;
 export function touchzoom(game){
     if(game.input.pointer1.isDown&&game.input.pointer2.isDown){
         const camera = game.cameras.main;
