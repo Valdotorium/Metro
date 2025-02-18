@@ -41,6 +41,7 @@ let con2 = 0;
 let dist1;
 let dist2;
 export function touchzoom(game){
+    //TODO #4 remove "jumping" in multitouch zooming @JoEragon
 
     let zoomdist;
     let tempzoom;
@@ -67,12 +68,12 @@ export function touchzoom(game){
             con2 = 0
         }
     }
-    game.mousetext.setText([
-        `p1down: ${game.input.pointer1.isDown}, p2down ${game.input.pointer2.isDown}`,
-        `zoomdist: ${zoomdist}`,
-        `tempzoom: ${tempzoom}`,
-        `tempzoom: ${tempzoom}`,
-        `lastactivepointer: ${game.input.activePointer.id}`,
-    ])
+    //game.mousetext.setText([
+    //    `p1down: ${game.input.pointer1.isDown}, p2down ${game.input.pointer2.isDown}`,
+    //    `zoomdist: ${zoomdist}`,
+    //    `tempzoom: ${tempzoom}`,
+    //    `tempzoom: ${tempzoom}`,
+    //    `lastactivepointer: ${game.input.activePointer.id}`,
+    //])
 }
 

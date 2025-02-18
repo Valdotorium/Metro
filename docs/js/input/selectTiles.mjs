@@ -5,6 +5,7 @@ export function setupCurrentTileMarker(game){
 }
 
 export function getHoveredTile(game){
+    
         // Rounds down to nearest tile
         const pointerTileX = game.tileMap.worldToTileX(game.mouse.worldPoint.x);
         const pointerTileY = game.tileMap.worldToTileY(game.mouse.worldPoint.y);
@@ -18,5 +19,7 @@ export function getHoveredTile(game){
         // Snap to tile coordinates, but in world space
         game.currentTileMarker.x = game.tileMap.tileToWorldX(pointerTileX);
         game.currentTileMarker.y = game.tileMap.tileToWorldY(pointerTileY);
+
+        //TODO: #5 make the rectangle visible @Valdotorium
         game.currentTileMarker.depth = 0
 }
