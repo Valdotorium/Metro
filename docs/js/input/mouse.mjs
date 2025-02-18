@@ -3,6 +3,7 @@ let counter = 0;
 let cameraDragStartX;
 let cameraDragStartY;
 export function dragCamera(game){
+    if(!game.input.pointer2.isDown){
     const camera = game.cameras.main;
     let pointer = game.input.activePointer;
 
@@ -21,7 +22,7 @@ export function dragCamera(game){
         counter++
     }else{
         counter = 0
-    }
+    }}
 
 }
 export function mousewheelzoom(game){
