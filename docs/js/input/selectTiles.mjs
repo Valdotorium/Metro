@@ -20,6 +20,8 @@ export function getHoveredTile(game){
     //if(game.mouse.worldPoint.y > game.tileMapOptions.get("size")){game.mouse.worldPoint.y = game.tileMapOptions.get("size")}
     const pointerTileX = game.tileMap.worldToTileX(game.mouse.worldPoint.x);
     const pointerTileY = game.tileMap.worldToTileY(game.mouse.worldPoint.y);
+    if(pointerTileX <0){pointerTileX = 0}
+    if(pointerTileY <0){pointerTileY = 0}
     //store the tile that is currently hovered
     
     game.currentHoveredTile = game.tileMap.getTileAt(pointerTileX, pointerTileY);
