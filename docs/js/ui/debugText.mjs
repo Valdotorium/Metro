@@ -3,7 +3,7 @@ export function debugText(game) {
     game.text.setText([
         `mouseX: ${gameScene.mouse.worldPoint.x}, ${gameScene.mouse.worldPoint.y}`,
         `duration: ${gameScene.mouse.getDuration()}`,
-        `window Dimensions: ${gameScene.windowWidth, gameScene.windowHeight}`,
+        `selected Tile: ${gameScene.currentSelectedTile.x}, ${gameScene.currentSelectedTile.y}`,
         `zoom: ${gameScene.cameras.main.zoom}`
     ])
 }

@@ -8,7 +8,9 @@ class GameScene extends Phaser.Scene{
     {
         super({ key: 'GameScene' });
     }
-    graphics;       
+    graphics;    
+    tileMap;   
+    currentTileMarker;
     preload ()
     {
         configureGame(this)
@@ -19,15 +21,11 @@ class GameScene extends Phaser.Scene{
         this.graphics = this.add.graphics();
         setupKeyboard(this);
         generateTilemap(this)
-        setupControls(this)
         this.input.addPointer(2)
         if (this.frame == 0){
             console.log(this.tileMap)
         }    
-        const textStyle = { fontFamily: 'Arial Black', fontSize: 12, color: '#ffffff'};
-        this.mousetext = this.add.text(400,400, " ",textStyle).setScrollFactor(0)
-
-
+        setupControls(this)
     }
     update ()
     {
@@ -44,6 +42,7 @@ class GameScene extends Phaser.Scene{
         if (this.frame == 1){
             this.scene.launch('UIScene');
         }
+
     }
 }
 class UIScene extends Phaser.Scene{
@@ -54,12 +53,13 @@ class UIScene extends Phaser.Scene{
     create(){
         this.ui = setupUI(this)
         const gameScene = this.scene.get("GameScene")
-        const textStyle = { fontFamily: 'Arial Black', fontSize: 22, color: '#ffffff'};
+        const textStyle = { fontFamily: 'Arial Black', fontSize: 28, color: '#ffffff'};
         this.text = this.add.text(20,20,"",textStyle).setScrollFactor(0);
 
     }
     update(){
         const gameScene = this.scene.get("GameScene")
+
         if (gameScene.options.get("debug")){
             debugText(this)
         }

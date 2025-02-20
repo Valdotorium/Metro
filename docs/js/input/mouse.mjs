@@ -41,7 +41,6 @@ let con2 = 0;
 let dist1;
 let dist2;
 export function touchzoom(game){
-    //TODO #4 remove "jumping" in multitouch zooming @JoEragon
 
     let zoomdist;
     let tempzoom;

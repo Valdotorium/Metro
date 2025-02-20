@@ -20,6 +20,13 @@ export function generateTilemap(game){
     //create a tilemap layer with the generated tilemap array and the tileset, and place it at (100,100) on the screen, with a scale of 4
     const layer = game.tileMap.createLayer(0, tileset,0,0);
     layer.setScale(4);
+    game.tileMap.layer = layer
     game.cameras.main.setBounds(-600,-400, layer.width * layer.scale + 1200, layer.height * layer.scale + 800);
+    //make tilemap clickable
+    game.currentSelectedTile = {x: 0, y: 0}
+    game.input.on("pointerdown", function(pointer, gameObject)
+    {
+        game.currentSelectedTile = game.currentHoveredTile
+    })
 
 }
