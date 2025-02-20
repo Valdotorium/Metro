@@ -14,7 +14,7 @@ export function setupCurrentTileMarker(game){
 export function getHoveredTile(game){
 
     // Rounds down to nearest tile
-    if(game.mouse.worldPoint.x < 0){game.mouse.worldPoint.x = 0}
+    if(game.mouse.worldPoint.x < 0){game.mouse.worldPoint.x = 0} 
     if(game.mouse.worldPoint.y < 0){game.mouse.worldPoint.y = 0}
     const pointerTileX = game.tileMap.worldToTileX(game.mouse.worldPoint.x);
     const pointerTileY = game.tileMap.worldToTileY(game.mouse.worldPoint.y);
