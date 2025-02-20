@@ -1,11 +1,11 @@
 List of Todos in the near future.
 
 TODO:
--Implementing a simple terrain generator (not before the tilemap is redesigned)
+-implement city generation in the terrain generator @Igros10/@JoEragon/@Valdotorium
 
 -design the game data array, holding populations and all that stuff @Valdotorium
 
--Implemeting touch support with pointers @JoEragon
+-Enable users to change tilemaps @Valdotorium
 
 -Acessing local file system with neutralino, test @Valdotorium
 
@@ -18,6 +18,10 @@ TODO:
 -chill sounds
 
 DONE:
+
+-Implementing a simple terrain generator (not before the tilemap is redesigned)
+
+-Implemeting touch support with pointers @JoEragon
 
 -Rebuilding moving the map with the pointer  @JoEragon
 
