@@ -3,8 +3,12 @@ export function loadAssets(game){
         //load tilemap data from JSON file
         game.load.json("tilemap", "assets/json/world.json");
     }
+    game.tilesets = []
     //testing loading a tileset
-    game.load.image("tileset", "assets/images/reallyNewTiles.png");
+    game.tilesets.push({name: "MapTileset", image: game.load.image("MapTileset", "assets/images/mapTiles.png") })
+    game.tilesets.push({name: "SatelliteTileset", image: game.load.image("SatelliteTileset", "assets/images/reallyNewTiles.png") })
+    game.tilesets.push({name: "HybridTileset", image: game.load.image("HybridTileset", "assets/images/hybridMapTiles.png") })
+
 
 }
 

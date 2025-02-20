@@ -4,6 +4,7 @@ export function debugText(game) {
         `mouseX: ${gameScene.mouse.worldPoint.x}, ${gameScene.mouse.worldPoint.y}`,
         `duration: ${gameScene.mouse.getDuration()}`,
         `selected Tile: ${gameScene.currentSelectedTile.x}, ${gameScene.currentSelectedTile.y}`,
+        `current Tileset: ${gameScene.tilesets[gameScene.currentTileset].name}`,
         `zoom: ${gameScene.cameras.main.zoom}`
     ])
 }

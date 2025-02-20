@@ -7,12 +7,14 @@ import { getHoveredTile,setupCurrentTileMarker} from "./selectTiles.mjs"
 
 
 let handleClickTest = function handleClickTest(game){
-    game.cameras.main.scrollX = 0
-    game.cameras.main.scrollY = 0
+    game.currentTileset++
+    if(game.currentTileset >= game.tilesets.length){game.currentTileset = 0}
+    const newTileset = game.sys.textures.get(game.tilesets[game.currentTileset].name)
+    game.currentTilesetImage.setImage(newTileset)
     //temporary, replace with your own logic when you have it
 }
 export function setupUI(ui){
-    ui.testButton = new standardButton(ui, 200, 300, 30,"RESET CAMERA", handleClickTest) //temporary
+    ui.testButton = new standardButton(ui, 200, 300, 30,"SWITCH TILESET", handleClickTest) //temporary
 }
 export function setupControls(game){
     mousewheelzoom(game)
