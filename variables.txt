@@ -1,0 +1,19 @@
+-UI-
+
+game.currentHoveredTile - the tile currently hovered by the active pointer
+game.currentHoveredTileIndexes - {x:int, y:int} - position of the current hovered tile
+game.currentSelectedTile - the tile currently selected by the active pointer
+game.mouse - {x: int, y: int, isDown: boolean} - the active pointer wrapped cuz why not
+
+-TILEMAP-
+
+game.curentTileset - the index of the currently selected tileset in game.tilesets
+game.tilesets - {name: str, "image": image} - list of loaded tilesets
+game.tileMap - the games main tilemap
+game.tileMapOptions - {"option": value} - settings for the tilemap
+game.generatedTilemap - the generated tilemap holding tile data
+
+
+-SIMULATION-
+
+game.tileData - [][]{population: int} - the VERY IMPORTANT 2d array holding tile data

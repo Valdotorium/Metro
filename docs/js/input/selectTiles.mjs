@@ -23,7 +23,7 @@ export function getHoveredTile(game){
     if(pointerTileX > game.tileMapOptions.get("size") -1){pointerTileX = game.tileMapOptions.get("size") -1}
     if(pointerTileY > game.tileMapOptions.get("size") -1){pointerTileY = game.tileMapOptions.get("size") -1}
     //store the tile that is currently hovered
-    
+    game.currentHoveredTileIndexes = {x: pointerTileX, y: pointerTileY}
     game.currentHoveredTile = game.tileMap.getTileAt(pointerTileX, pointerTileY);
     // Snap to tile coordinates, but in world space
     game.currentTileMarker.x = game.tileMap.tileToWorldX(pointerTileX);

@@ -20,8 +20,8 @@ export function configureGame(game){
     game.options.set("debug", true)
 
     game.tileMapOptions = new Map();
-    //future ops: tiny: 25, small: 40, default: 75, large: 150, giant: 250
-    game.tileMapOptions.set("size", 75)
+    //future ops: tiny: 25, small: 50, default: 85, large: 175, giant: 300
+    game.tileMapOptions.set("size", 85)
 
     game.frame = 0
     game.cameras.main.zoom = 2

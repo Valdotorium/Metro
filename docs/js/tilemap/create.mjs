@@ -2,8 +2,8 @@ import { Tilemap } from "../generator/generate.mjs"
 export function generateTilemap(game){
     //get the tilemap size
     let mapSize = game.tileMapOptions.get("size")
-    //if (mapSize < 10){ mapSize = 10 }
-    //if (mapSize > 250){ mapSize = 250 }
+    if (mapSize < 10){ mapSize = 10 }
+    if (mapSize > 300){ mapSize = 300 }
 
     console.log("map size is: ", mapSize)
     //generate a tilemap array with values between 0 and 1
@@ -12,10 +12,12 @@ export function generateTilemap(game){
     //draw a blue rectangle behind the tilemap
     game.add.rectangle(4,4, mapSize * 24, mapSize * 24, 0xb4cee0).setOrigin(0,0).setDepth(-1);
 
-    
+    //switch rows and columns in game.generatedTilemap and store the rotated tilemap in game.RotatedGeneratedTilemap, because phaser stores the rows and colums differently
+    let rotatedGeneratedTilemap = game.generatedTilemap.map((row, col) => row.map((tile, index) => game.generatedTilemap[index][col]))
+    game.RotatedGeneratedTilemap = rotatedGeneratedTilemap
 
     //tiles sized 8x8 are placed in a 6x6 grid, allowed to overlap 1 px each side
-    game.tileMap = game.make.tilemap({ data: game.generatedTilemap, tileWidth: 6, tileHeight: 6, width: mapSize, height: mapSize}).setLayerTileSize(8,8)
+    game.tileMap = game.make.tilemap({ data: game.RotatedGeneratedTilemap, tileWidth: 6, tileHeight: 6, width: mapSize, height: mapSize}).setLayerTileSize(8,8)
     //loop through game.tilesets
 
     game.currentTilesetImage = game.tileMap.addTilesetImage(game.tilesets[0].name, game.tilesets[0].name, 8, 8)
@@ -32,5 +34,6 @@ export function generateTilemap(game){
     {
         game.currentSelectedTile = game.currentHoveredTile
     })
+
 
 }

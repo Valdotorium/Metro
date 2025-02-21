@@ -2,6 +2,7 @@ import { generateTilemap } from "./tilemap/create.mjs";
 import { configureGame, loadAssets } from "./fileManagement/load.mjs";
 import { updateControls, setupControls, setupKeyboard,setupUI } from "./input/input.mjs";
 import { debugText } from "./ui/debugText.mjs";
+import { setupTileData } from "./simulation/setupTileData.mjs";
 
 class GameScene extends Phaser.Scene{
     constructor()
@@ -21,6 +22,7 @@ class GameScene extends Phaser.Scene{
         this.graphics = this.add.graphics();
         setupKeyboard(this);
         generateTilemap(this)
+        this.tileData = setupTileData(this)
         this.input.addPointer(2)
         if (this.frame == 0){
             console.log(this.tileMap)
