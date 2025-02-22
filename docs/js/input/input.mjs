@@ -13,8 +13,16 @@ let handleClickTest = function handleClickTest(game){
     game.currentTilesetImage.setImage(newTileset)
     //temporary, replace with your own logic when you have it
 }
-export function setupUI(ui){
-    ui.testButton = new standardButton(ui, 200, 300, 30,"SWITCH TILESET", handleClickTest) //temporary
+
+let quitGame = function quitGame(game){
+    game.scene.stop("GameScene")
+    game.scene.stop("GameUIScene")
+    game.scene.start("StartMenuScene")
+}
+export function setupUI(game){
+    game.ingameUI = {}
+    game.ingameUI.testButton = new standardButton(game, 1000, 100, 32,"SWITCH TILESET", handleClickTest) //temporary
+    game.ingameUI.quitButton = new standardButton(game, 1000, 160, 32,"QUIT GAME", quitGame) //temporary
 }
 export function setupControls(game){
     mousewheelzoom(game)

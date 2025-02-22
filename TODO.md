@@ -1,6 +1,10 @@
 List of Todos in the near future.
 
 TODO:
+-make the game settings menu @Valdotorium/@JoEragon/@Igros10
+
+-Make statistical maps @Valdotorium
+
 -implement city generation in the terrain generator @Igros10/@JoEragon/@Valdotorium
 
 -design the game data array, holding populations and all that stuff @Valdotorium

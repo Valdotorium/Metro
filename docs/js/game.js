@@ -3,11 +3,12 @@ import { configureGame, loadAssets } from "./fileManagement/load.mjs";
 import { updateControls, setupControls, setupKeyboard,setupUI } from "./input/input.mjs";
 import { debugText } from "./ui/debugText.mjs";
 import { setupTileData } from "./simulation/setupTileData.mjs";
+import { setupStartMenu} from "./ui/startMenu.mjs";
 
 class GameScene extends Phaser.Scene{
     constructor()
     {
-        super({ key: 'GameScene' });
+        super({ key: 'GameScene' , active: false});
     }
     graphics;    
     tileMap;   
@@ -20,8 +21,8 @@ class GameScene extends Phaser.Scene{
     create ()
     {
         this.graphics = this.add.graphics();
-        setupKeyboard(this);
         generateTilemap(this)
+        //generating the tileData array (population, etc)
         this.tileData = setupTileData(this)
         this.input.addPointer(2)
         if (this.frame == 0){
@@ -42,18 +43,18 @@ class GameScene extends Phaser.Scene{
         this.frame++
 
         if (this.frame == 1){
-            this.scene.launch('UIScene');
+            this.scene.launch('GameUIScene');
         }
 
     }
 }
-class UIScene extends Phaser.Scene{
+class GameUIScene extends Phaser.Scene{
     constructor()
     {
-        super({ key: 'UIScene'});
+        super({ key: 'GameUIScene', active: false});
     }
     create(){
-        this.ui = setupUI(this)
+        this.ingameUI = setupUI(this)
         const gameScene = this.scene.get("GameScene")
         const textStyle = { fontFamily: 'Arial Black', fontSize: 28, color: '#888888'};
         this.text = this.add.text(20,20,"",textStyle).setScrollFactor(0);
@@ -68,13 +69,27 @@ class UIScene extends Phaser.Scene{
     }
 }
 
+class StartMenuScene extends Phaser.Scene {
+    constructor(){
+        super({ key: 'StartMenuScene', active: true});
+    }
+    create(){
+        setupKeyboard(this);
+        this.scene.stop("GameScene")
+        this.scene.stop("GameScene")
+        setupStartMenu(this)
+
+    }
+    update(){
+    }
+}
 var config = {
     type: Phaser.AUTO,
     pixelArt: true,
     inputTouch: true,
     backgroundColor: "#161616",
 
-    scene: [GameScene, UIScene],
+    scene: [StartMenuScene, GameScene, GameUIScene],
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
