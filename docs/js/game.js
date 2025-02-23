@@ -54,8 +54,10 @@ class GameUIScene extends Phaser.Scene{
         super({ key: 'GameUIScene', active: false});
     }
     create(){
-        this.ingameUI = setupUI(this)
+        //i do not know why i have to do this
         const gameScene = this.scene.get("GameScene")
+        setupUI(this)
+        
         const textStyle = { fontFamily: 'Arial Black', fontSize: 28, color: '#888888'};
         this.text = this.add.text(20,20,"",textStyle).setScrollFactor(0);
 
@@ -73,7 +75,10 @@ class StartMenuScene extends Phaser.Scene {
     constructor(){
         super({ key: 'StartMenuScene', active: true});
     }
+    preload(){
+    }
     create(){
+
         setupKeyboard(this);
         this.scene.stop("GameScene")
         this.scene.stop("GameScene")

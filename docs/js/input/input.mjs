@@ -1,16 +1,17 @@
 import {keyboardControls} from "./keybinds.mjs"
 import {dragCamera} from "./mouse.mjs"
-import {standardButton} from "./button.mjs"
+import {Button} from "./button.mjs"
 import {mousewheelzoom} from "./mouse.mjs"
 import {touchzoom} from "./mouse.mjs"
 import { getHoveredTile,setupCurrentTileMarker} from "./selectTiles.mjs"
 
 
 let handleClickTest = function handleClickTest(game){
-    game.currentTileset++
-    if(game.currentTileset >= game.tilesets.length){game.currentTileset = 0}
-    const newTileset = game.sys.textures.get(game.tilesets[game.currentTileset].name)
-    game.currentTilesetImage.setImage(newTileset)
+    let gameScene = game.scene.get("GameScene")
+    gameScene.currentTileset++
+    if(gameScene.currentTileset >= gameScene.tilesets.length){gameScene.currentTileset = 0}
+    const newTileset = game.sys.textures.get(gameScene.tilesets[gameScene.currentTileset].name)
+    gameScene.currentTilesetImage.setImage(newTileset)
     //temporary, replace with your own logic when you have it
 }
 
@@ -21,8 +22,9 @@ let quitGame = function quitGame(game){
 }
 export function setupUI(game){
     game.ingameUI = {}
-    game.ingameUI.testButton = new standardButton(game, 1000, 100, 32,"SWITCH TILESET", handleClickTest) //temporary
-    game.ingameUI.quitButton = new standardButton(game, 1000, 160, 32,"QUIT GAME", quitGame) //temporary
+    const textStyle = { fontFamily: 'Arial Black', fontSize: 28, color: '#BBBBBB'};
+    game.ingameUI.testButton = new Button(game, 1000, 100,"SWITCH TILESET",textStyle, handleClickTest) //temporary
+    game.ingameUI.quitButton = new Button(game, 1000, 160,"QUIT GAME",textStyle, quitGame) //temporary
 }
 export function setupControls(game){
     mousewheelzoom(game)

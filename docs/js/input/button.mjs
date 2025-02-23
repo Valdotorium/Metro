@@ -1,58 +1,36 @@
-export class standardButton{
 
-    constructor(parent, x, y,fontsize, text, clickFunction){
-        //simple button thats clickable and contains text
-        //standardButton parameters: the game object, x, y, text, the function thet is executed when clicking it
-        
-        this.x = x;
-        this.y = y;
-        this.text = text;
-        this.parent = parent;
-        this.isHovered = false;
-        this.clickFunction = clickFunction;
-        //create a text object with a fill color and a font style
-        this.textStyle = { fontFamily: 'Tahoma', fontSize: fontsize, color: '#eeeeee'};
-        this.textObj = parent.add.text(this.x, this.y, this.text, this.textStyle)
-        //create a rectangle with a fill color
-        //make it scale to the size of the text
-        this.rect = parent.add.rectangle(this.x, this.y , this.textObj.width + 10, this.textObj.height + 10, 0x333322)
-        this.textObj.destroy()
-        this.textObj = parent.add.text(this.x, this.y, this.text, this.textStyle)
 
-        this.textObj.setOrigin(0.5, 0.5);
+export class Button{
+    constructor(game, x, y, text, style, callback){
+        this.text = game.add.text(x, y, text, style)
+        //add a rect
+        this.rect = game.add.rectangle(x, y, this.text.width + 10, this.text.height + 10, 0x222222)
+        this.rect.setInteractive()
+        this.rect.setOrigin(0.5, 0.5)
+        //delete and readd the text
+        this.text.destroy()
+        this.text = game.add.text(x, y, text, style)
+        this.text.setOrigin(0.5, 0.5)
+        this.rect.on('pointerdown', () => {this.activate(), callback(game)})
+        this.rect.on('pointerup', () => this.deactivate())
+        this.rect.on("pointerover", () => this.hover())
+        this.rect.on("pointerout", () => this.out())
 
-        this.rect.setInteractive();
-        parent.input.on('gameobjectdown', (pointer, gameObject) =>
-            {
-                //executing the function when it is clicked.
-                //warning: this parameter must have only one parameter: the game object
-                this.clickFunction(this.parent.scene.get("GameScene"))
-                this.textObj.setColor("#eeeeee")
-            });
-        parent.input.on('gameobjectup', (pointer, gameObject) =>
-            {
-                this.textObj.setColor("#333322")
-            });
-        parent.input.on('pointerover', (pointer, gameObject) =>
-            {
-                this.hover()
-            });
-        parent.input.on('pointerout', (pointer, gameObject) =>
-            {
-                this.unhover()
-            });
-
-        
     }
-
+    activate(){
+        this.text.setColor("#333333")
+        this.rect.fillColor = 0xCCCCCC
+    }
+    deactivate(){
+        this.text.setColor("#BBBBBB")
+        this.rect.fillColor = 0x222222
+    }
     hover(){
-        console.log("hover")
-        this.textObj.setColor("#333322")
-        this.rect.fillColor=0xeeeeee
+        this.text.setColor("#333333")
+        this.rect.fillColor = 0xCCCCCC
     }
-    unhover(){
-        console.log("unhover")
-        this.textObj.setColor("#eeeeee")
-        this.rect.fillColor=0x222233
+    out(){
+        this.text.setColor("#BBBBBB")
+        this.rect.fillColor = 0x222222
     }
 }

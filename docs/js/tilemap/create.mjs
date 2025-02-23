@@ -34,6 +34,7 @@ export function generateTilemap(game){
     {
         game.currentSelectedTile = game.currentHoveredTile
     })
+    game.cameras.main.zoom = 2
 
 
 }
