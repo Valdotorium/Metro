@@ -1,9 +1,9 @@
 import { generateTilemap } from "./tilemap/create.mjs";
-import { configureGame, loadAssets } from "./fileManagement/load.mjs";
+import { configureGame, loadAssets, loadStartMenuAssets } from "./fileManagement/load.mjs";
 import { updateControls, setupControls, setupKeyboard,setupUI } from "./input/input.mjs";
 import { debugText } from "./ui/debugText.mjs";
 import { setupTileData } from "./simulation/setupTileData.mjs";
-import { setupStartMenu} from "./ui/startMenu.mjs";
+import { setupStartMenu, updateStartMenu} from "./ui/startMenu.mjs";
 
 class GameScene extends Phaser.Scene{
     constructor()
@@ -76,9 +76,10 @@ class StartMenuScene extends Phaser.Scene {
         super({ key: 'StartMenuScene', active: true});
     }
     preload(){
+        loadStartMenuAssets(this)
     }
     create(){
-
+        this.frame = 0
         setupKeyboard(this);
         this.scene.stop("GameScene")
         this.scene.stop("GameScene")
@@ -86,6 +87,8 @@ class StartMenuScene extends Phaser.Scene {
 
     }
     update(){
+        updateStartMenu(this)
+        this.frame++
     }
 }
 var config = {

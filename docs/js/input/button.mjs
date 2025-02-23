@@ -1,5 +1,4 @@
 
-
 export class Button{
     constructor(game, x, y, text, style, callback){
         this.text = game.add.text(x, y, text, style)

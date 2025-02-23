@@ -25,4 +25,9 @@ export function configureGame(game){
     game.frame = 0
 }
 
+export function loadStartMenuAssets(game){
+    //load assets for the start menu
+    game.load.image("startMenuBackground", "assets/images/startScreen.png")
+
+}
 
