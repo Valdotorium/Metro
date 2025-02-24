@@ -4,6 +4,7 @@ import { updateControls, setupControls, setupKeyboard,setupUI } from "./input/in
 import { debugText } from "./ui/debugText.mjs";
 import { setupTileData } from "./simulation/setupTileData.mjs";
 import { setupStartMenu, updateStartMenu} from "./ui/startMenu.mjs";
+import { setupGameSettings } from "./ui/gameSettings.mjs";
 
 class GameScene extends Phaser.Scene{
     constructor()
@@ -15,7 +16,9 @@ class GameScene extends Phaser.Scene{
     currentTileMarker;
     preload ()
     {
-        configureGame(this)
+        //load options
+        this.options = this.scene.get("StartMenuScene").options
+        this.tileMapOptions = this.scene.get("StartMenuScene").tileMapOptions
         loadAssets(this)
     }
     create ()
@@ -70,18 +73,37 @@ class GameUIScene extends Phaser.Scene{
         }
     }
 }
+class SettingsScene extends Phaser.Scene {
+    constructor(){
+        super({ key: 'SettingsScene', active: false});
+    }
+    preload(){
+        
+    }
+    create(){
+        this.frame = 0
+        setupKeyboard(this);
+        console.log(game.options)
+        this.scene.stop("GameScene")
+        setupGameSettings(this)
 
+    }
+    update(){
+        this.frame++
+    }
+}
 class StartMenuScene extends Phaser.Scene {
     constructor(){
         super({ key: 'StartMenuScene', active: true});
     }
     preload(){
+        configureGame(this)
         loadStartMenuAssets(this)
     }
     create(){
         this.frame = 0
         setupKeyboard(this);
-        this.scene.stop("GameScene")
+        console.log(this.options)
         this.scene.stop("GameScene")
         setupStartMenu(this)
 
@@ -97,7 +119,7 @@ var config = {
     inputTouch: true,
     backgroundColor: "#161616",
 
-    scene: [StartMenuScene, GameScene, GameUIScene],
+    scene: [StartMenuScene, GameScene, GameUIScene, SettingsScene],
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,

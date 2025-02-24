@@ -1,7 +1,7 @@
 import { Tilemap } from "../generator/generate.mjs"
 export function generateTilemap(game){
     //get the tilemap size
-    let mapSize = game.tileMapOptions.get("size")
+    let mapSize = game.tileMapOptions.size
     if (mapSize < 10){ mapSize = 10 }
     if (mapSize > 300){ mapSize = 300 }
 

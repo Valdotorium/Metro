@@ -7,6 +7,7 @@ game.mouse - {x: int, y: int, isDown: boolean} - the active pointer wrapped cuz 
 game.startMenuUI - {} - contains all the stuff for the game start screen (buttons, text, functions)
 game.ingameUI - {} - contains all the stuff for the ingame UI
 
+
 -TILEMAP-
 
 game.curentTileset - the index of the currently selected tileset in game.tilesets
