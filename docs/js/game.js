@@ -97,7 +97,6 @@ class StartMenuScene extends Phaser.Scene {
         super({ key: 'StartMenuScene', active: true});
     }
     preload(){
-        configureGame(this)
         loadStartMenuAssets(this)
     }
     create(){
@@ -113,13 +112,25 @@ class StartMenuScene extends Phaser.Scene {
         this.frame++
     }
 }
+class BootScene extends Phaser.Scene {
+    constructor(){
+        super({ key: 'FirstBoot', active: true});
+    }
+    preload(){
+        configureGame(this)
+        //transfer options and tileMapOptions to StartMenuScene
+        this.scene.get("StartMenuScene").options = this.options
+        this.scene.get("StartMenuScene").tileMapOptions = this.tileMapOptions
+    }
+
+}
 var config = {
     type: Phaser.AUTO,
     pixelArt: true,
     inputTouch: true,
     backgroundColor: "#161616",
 
-    scene: [StartMenuScene, GameScene, GameUIScene, SettingsScene],
+    scene: [BootScene, StartMenuScene, GameScene, GameUIScene, SettingsScene],
     scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
