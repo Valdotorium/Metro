@@ -35,6 +35,7 @@ class GameScene extends Phaser.Scene{
         }    
         setupControls(this)
         generateCity(this)
+        console.log(this.cities)
     }
     update ()
     {

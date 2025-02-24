@@ -17,8 +17,6 @@ export class city {
                 this.validnextdistricts.splice(randomIndex, 1);
             }
         }
-        console.log(this.districts)
-        console.log(this.validnextdistricts)
     }
     addDistrict(id, city, x, y, game) {
         let tempdist = new cityDistrict(id, city, x, y, game);
