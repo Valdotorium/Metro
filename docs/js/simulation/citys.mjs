@@ -14,6 +14,7 @@ export class city {
                 let randomIndex = Math.floor(Math.random() * this.validnextdistricts.length);
                 let [districtX, districtY] = this.validnextdistricts[randomIndex];
                 this.addDistrict(this.districts.length, this, districtX, districtY, game);
+                this.validnextdistricts.splice(randomIndex, 1);
             }
         }
         console.log(this.districts)
