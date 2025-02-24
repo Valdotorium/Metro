@@ -14,8 +14,11 @@ export function setupStartMenu(game){
     game.startMenuUI.startMenuBackground.setOrigin(0,0)
     let textStyle = { fontFamily: 'Arial Black', fontSize: 28, color: '#888888'};
     game.startMenuUI.startButton = new Button(game, 550, 400,"START GAME",textStyle, launchGame)
-    textStyle = { fontFamily: 'Arial Black', fontSize: 48, color: '#000000'};
-    game.startMenuUI.title = game.add.text(250, 100, "INCREDIBLY INNOVATIVE \nTITLE FOR A GAME ABOUT \nBUILDING TRANSPORT SYSTEMS", textStyle);
+    textStyle = { fontFamily: 'Arial Black', fontSize: 150, color: '#555555'};
+    game.startMenuUI.title = game.add.text(294, 94, game.name, textStyle);
+    textStyle = { fontFamily: 'Arial Black', fontSize: 150, color: '#FFFFFF'};
+    game.startMenuUI.title = game.add.text(300, 100, game.name, textStyle);
+
 }
 
 
