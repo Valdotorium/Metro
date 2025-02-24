@@ -7,12 +7,10 @@ export class cityDistrict {
         this.posx = posx;
         this.posy = posy;
         this.addNeighbourTiles(game, posx, posy);
-        game.generatedTilemap[posx][posy] = 2;
+        game.generatedTilemap[posx][posy] = 10;
     }
 
-    addNeighbourTiles(game) {
-        let posx = 7;
-        let posy = 7;
+    addNeighbourTiles(game, posx, posy) {
         if (0 <= game.generatedTilemap[posx+1][posy] && game.generatedTilemap[posx + 1][posy+0] < 4) {
             let neighbour = [posx + 1, posy];
             this.validNeighbours.push(neighbour);

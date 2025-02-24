@@ -5,6 +5,7 @@ import { debugText } from "./ui/debugText.mjs";
 import { setupTileData } from "./simulation/setupTileData.mjs";
 import { setupStartMenu, updateStartMenu} from "./ui/startMenu.mjs";
 import { setupGameSettings } from "./ui/gameSettings.mjs";
+import { generateCity } from "./simulation/citymanegment.mjs";
 
 class GameScene extends Phaser.Scene{
     constructor()
@@ -33,6 +34,7 @@ class GameScene extends Phaser.Scene{
             console.log(this.tileMap)
         }    
         setupControls(this)
+        generateCity(this)
     }
     update ()
     {
@@ -67,8 +69,7 @@ class GameUIScene extends Phaser.Scene{
 
     }
     update(){
-        const gameScene = this.scene.get("GameScene")
-        console.log(gameScene.options)        
+        const gameScene = this.scene.get("GameScene")       
         if (gameScene.options.debug){
             debugText(this)
         }
