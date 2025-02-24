@@ -8,6 +8,7 @@ export class cityDistrict {
         this.posy = posy;
         this.addNeighbourTiles(game, posx, posy);
         game.generatedTilemap[posx][posy] = 10;
+        game.tileMap.putTileAt(10, posx, posy)
     }
 
     addNeighbourTiles(game, posx, posy) {
