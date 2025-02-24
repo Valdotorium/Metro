@@ -27,6 +27,7 @@ class GameScene extends Phaser.Scene{
         generateTilemap(this)
         //generating the tileData array (population, etc)
         this.tileData = setupTileData(this)
+        this.frame = 0
         this.input.addPointer(2)
         if (this.frame == 0){
             console.log(this.tileMap)
@@ -67,8 +68,8 @@ class GameUIScene extends Phaser.Scene{
     }
     update(){
         const gameScene = this.scene.get("GameScene")
-
-        if (gameScene.options.get("debug")){
+        console.log(gameScene.options)        
+        if (gameScene.options.debug){
             debugText(this)
         }
     }
@@ -78,7 +79,6 @@ class SettingsScene extends Phaser.Scene {
         super({ key: 'SettingsScene', active: false});
     }
     preload(){
-        
     }
     create(){
         this.frame = 0

@@ -1,6 +1,6 @@
 import { generatePerlinNoise } from "../generator/noise.js"
 export function setupTileData(game){
-    let mapSize = game.tileMapOptions.get("size")
+    let mapSize = game.tileMapOptions.size
     //make a 2d array with size mapSize of objects with a population parameter 
     let tileData = []
     for(let i = 0; i < mapSize; i++){
@@ -19,7 +19,7 @@ export function setupTileData(game){
 
 function generatePopulations(game, tileData){
 
-    let mapSize = game.tileMapOptions.get("size")
+    let mapSize = game.tileMapOptions.size
     let detailFactor = 0.75 + 0.25 / (mapSize / 75)
     let populationNoise = generatePerlinNoise
     //generate the noise that roughly sets the coastline
