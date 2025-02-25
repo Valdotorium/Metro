@@ -6,7 +6,7 @@ export class city {
         this.validnextdistricts = []; 
         //the existing tiles that belong to this city
         this.districts = [];
-
+        this.population = 0;
         this.x = x;
         this.y = y;
         //the root district of the city
@@ -30,6 +30,7 @@ export class city {
         for (let i = 0; i < tempdist.validNeighbours.length; i++) {
             this.validnextdistricts.push(tempdist.validNeighbours[i]);
         }
+        this.population += tempdist.population;
         this.districts.push(tempdist)
     }
     }

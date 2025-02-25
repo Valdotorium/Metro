@@ -6,10 +6,11 @@ export class cityDistrict {
         this.validNeighbours = [];
         this.posx = posx;
         this.posy = posy;
+        this.city = city;
         //check for tiles that are valid for the next city district to be placed
         //1 city district = 1 city tile
         this.addNeighbourTiles(game, posx, posy);
-
+        this.population = game.tileData[posx][posy].population;
         //if the tile type is below 4, do not generate
         if (game.generatedTilemap[posx][posy] < 4) {
             game.generatedTilemap[posx][posy] = 10;

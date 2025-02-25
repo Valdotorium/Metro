@@ -38,16 +38,16 @@ export function generateCity(game) {
     game.cityNames = Array.from(game.cities.keys())
     console.log(game.cityCount)
 }
-export function CityGrowth(game) { 
-    if(Math.floor(Math.random() * 1000) < 100){
-        let randomCity = Math.floor(Math.random() * game.cityCount)
-        let growingcity = game.cityNames[randomCity]
+export function CityGrowth(game) {
+    let randomCity = Math.floor(Math.random() * game.cityCount)
+    let growingcity = game.cityNames[randomCity]
+    if(Math.floor(Math.random() * 1000) < (game.cities.get(growingcity).population*0.05+game.cities.get(growingcity).size*0.1)){
         if(game.cities.get(growingcity).validnextdistricts.length>0){
             let randomIndex = Math.floor(Math.random() * game.cities.get(growingcity).validnextdistricts.length);
             let [districtX, districtY] =  game.cities.get(growingcity).validnextdistricts[randomIndex];
             game.cities.get(growingcity).addDistrict(game.cities.get(growingcity).districts.length, game.cities.get(growingcity), districtX, districtY, game)
-            console.log(game.cities.get(growingcity).districts.length)
             game.cities.get(growingcity).size++
+            console.log(game.cities.get(growingcity).districts.length, growingcity)
             game.cities.get(growingcity).validnextdistricts.splice(randomIndex, 1);
         }
     }
