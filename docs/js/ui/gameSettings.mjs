@@ -1,4 +1,5 @@
 import { Button } from "../input/button.mjs"
+import { Slider } from "../input/slider.mjs"
 
 
 let quitSettings = function quitSettings(game){
@@ -9,8 +10,8 @@ let quitSettings = function quitSettings(game){
     game.scene.start("StartMenuScene")
 }
 
-let changeTileMapSizeTo25 = function changeTileMapSizeTo25(game){
-    game.tileMapOptions.size = 25
+let mapSizeSlider = function mapSizeSlider(game){
+    game.tileMapOptions.size = game.gameSettingsContents.sizeSlider.value
 }
 
 export function setupGameSettings(game){
@@ -20,9 +21,12 @@ export function setupGameSettings(game){
     game.gameSettingsContents = {} //pack hier die buttons rein
     // game.gameSettingsContents.exampleButton = new Button...
     //buttons to change variables
-    const exampleTextStyle = { fontFamily: 'Arial Black', fontSize: 28, color: '#888888'};
+    const exampleTextStyle = { fontFamily: 'Arial Black', fontSize: 32, color: '#BBBBBB'};
     game.gameSettingsContents.exampleButton = new Button(game, 500,500,"EXAMPLE", exampleTextStyle,quitSettings)
-    //button that sets game.tileMapOptions.size to 25
-    game.gameSettingsContents.size25Button = new Button(game, 500,550,"SIZE 25", exampleTextStyle, changeTileMapSizeTo25)
+    //add a slider for the map size
+    const sliderStyle = { fontFamily: 'Arial Black', fontSize: 32, color: '#BBBBBB'};
+    game.gameSettingsContents.sizeSlider = new Slider(game, 200, 600,25,275, "MAP SIZE", sliderStyle, mapSizeSlider)
+
+
 
 }
