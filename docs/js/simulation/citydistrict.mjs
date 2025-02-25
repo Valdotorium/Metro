@@ -20,19 +20,19 @@ export class cityDistrict {
 
     addNeighbourTiles(game, posx, posy) {
         //tiles are valid if their type is 0,1,2 or 3
-        if (0 <= game.generatedTilemap[posx+1][posy] && game.generatedTilemap[posx + 1][posy+0] < 4) {
+        if (0 <= game.generatedTilemap[posx+1][posy] && game.generatedTilemap[posx + 1][posy+0] <= 4) {
             let neighbour = [posx + 1, posy];
             this.validNeighbours.push(neighbour);
         }
-        if (0 <= game.generatedTilemap[posx][posy - 1] && game.generatedTilemap[posx][posy - 1] < 4) {
+        if (0 <= game.generatedTilemap[posx][posy - 1] && game.generatedTilemap[posx][posy - 1] <= 4) {
             let neighbour = [posx, posy - 1];
             this.validNeighbours.push(neighbour);
         }
-        if (0 <= game.generatedTilemap[posx - 1][posy] && game.generatedTilemap[posx - 1][posy] < 4) {
+        if (0 <= game.generatedTilemap[posx - 1][posy] && game.generatedTilemap[posx - 1][posy] <= 4) {
             let neighbour = [posx - 1, posy];
             this.validNeighbours.push(neighbour);
         }
-        if (0 <= game.generatedTilemap[posx][posy + 1] && game.generatedTilemap[posx][posy + 1] < 4) {
+        if (0 <= game.generatedTilemap[posx][posy + 1] && game.generatedTilemap[posx][posy + 1] <= 4) {
             let neighbour = [posx, posy + 1];
             this.validNeighbours.push(neighbour);
         }
