@@ -24,6 +24,7 @@ class GameScene extends Phaser.Scene{
     }
     create ()
     {
+        //setting up the game
         this.graphics = this.add.graphics();
         generateTilemap(this)
         //generating the tileData array (population, etc)
@@ -52,7 +53,6 @@ class GameScene extends Phaser.Scene{
         if (this.frame == 1){
             this.scene.launch('GameUIScene');
         }
-
     }
 }
 class GameUIScene extends Phaser.Scene{
@@ -64,10 +64,9 @@ class GameUIScene extends Phaser.Scene{
         //i do not know why i have to do this
         const gameScene = this.scene.get("GameScene")
         setupUI(this)
-        
+        //the debug text object
         const textStyle = { fontFamily: 'Arial Black', fontSize: 28, color: '#888888'};
         this.text = this.add.text(20,20,"",textStyle).setScrollFactor(0);
-
     }
     update(){
         const gameScene = this.scene.get("GameScene")       

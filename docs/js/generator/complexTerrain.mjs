@@ -5,6 +5,8 @@ export function generateComplexTilemap(size){
     //detail factor of the terrain, lower the higher the target size is
     let detailFactor = 0.5 + 0.5 / (size / 75)
     let islandNoise;
+
+    //very strong and upscaled noise for large maps
     if(size > 140){
         islandNoise = generatePerlinNoise(size, Math.round(50 / detailFactor))
     }
@@ -38,7 +40,7 @@ export function generateComplexTilemap(size){
         }
     }
 
-    //overly the noises, weighted
+    //overlay the noises, weighted
     let weightedNoise = [];
     for(let i = 0; i < size; i++){
         weightedNoise[i] = [];
@@ -54,7 +56,7 @@ export function generateComplexTilemap(size){
         } 
     }
 
-    //translate the values between 0 and 1 to tile types. see tilemapIndexxes.txt for more info
+    //translate the values between 0 and 1 to tile types. see tilemapIndexes.txt for more info
     for(let i = 0; i < size; i++){
         for(let j = 0; j < size; j++){
             if(weightedNoise[i][j] < 0.32){

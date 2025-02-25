@@ -1,5 +1,5 @@
 export function setupCurrentTileMarker(game){
-
+    //rectangle around the current hovered tile
     game.currentTileMarker = game.add.graphics()
     const color = 0x000000;
     const thickness = 2;
@@ -18,6 +18,7 @@ export function getHoveredTile(game){
     if(game.mouse.worldPoint.y < 0){game.mouse.worldPoint.y = 0}
     let pointerTileX = game.tileMap.worldToTileX(game.mouse.worldPoint.x);
     let pointerTileY = game.tileMap.worldToTileY(game.mouse.worldPoint.y);
+    //keeping the pointer tile within the tilemap
     if(pointerTileX <0){pointerTileX = 0}
     if(pointerTileY <0){pointerTileY = 0}
     if(pointerTileX > game.tileMapOptions.size -1){pointerTileX = game.tileMapOptions.size -1}

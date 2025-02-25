@@ -23,7 +23,6 @@ export function configureGame(game){
     game.options.debug = true
 
     game.tileMapOptions = {}
-    //future ops: tiny: 25, small: 50, default: 85, large: 175, giant: 300
     game.tileMapOptions.size = 85
 
     game.frame = 0

@@ -7,28 +7,29 @@ export class Slider{
         //console.log("X:", this.rect.x - this.width/2 ,", ", mouseX, " ,",this.rect.x + this.width/2)
         //console.log("Y:", this.rect.y - this.height/2 ,", ", mouseY, " ,",this.rect.y + this.height/2)
 
+        //check if the pointer is above the slider rectangle
         if( this.rect.x - this.width/2 - 10 <= mouseX <= this.rect.x + this.width/2 + 10 && this.rect.y - this.height/2 <= mouseY <= this.rect.y + this.height/2){
-            console.log("E")
             this.hover()
         }
     }
     constructor(game, x, y,min,max, text, style, callback){
-
         this.text = game.add.text(x, y, text+ " : "+ this.value, style)
         this.min = min 
         this.max = max
         this.range = max - min
         this.game = game
+
         //add a rect next to the text
         this.rect = game.add.rectangle(x +this.text.width - 15, y, this.text.width + 20, this.text.height + 10, 0x222222)
         this.rect.setInteractive()
         this.rect.setOrigin(0.5, 0.5)
 
-
         //some slider variables
         this.width = this.text.width + 20
         this.height = this.text.height + 10
         this.value = this.max
+
+        //function that is called if slider is activated
         this.callback = callback
 
         //delete and readd the text
@@ -60,13 +61,12 @@ export class Slider{
         //you can use this.rect.x and this.width to calculate this.value
         //this.value should be between 0 and 1
         let mouseX = this.game.input.activePointer.x
-
         this.value = Math.round(((mouseX - this.rect.x +this.width/2) / this.width) * this.range + this.min)
         if(this.value < this.min) this.value = this.min
         if(this.value > this.max) this.value = this.max
         this.updateValueText()
         this.updateSliderValueRect()
-        this.callback(this.game) //call the callback function with the current value of this slider
+        this.callback(this.game)
 
     }
     deactivate(){
@@ -75,7 +75,6 @@ export class Slider{
         this.rect.fillColor = 0x444444
         if (!this.game.input.activePointer.noButtonDown()){
             this.activate()
-
         }
 
     }
