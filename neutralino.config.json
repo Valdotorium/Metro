@@ -2,22 +2,23 @@
   "$schema": "https://raw.githubusercontent.com/neutralinojs/neutralinojs/main/schemas/neutralino.config.schema.json",
   "applicationId": "js.neutralino.minimetroripoff",
   "version": "1.0.0",
-  "defaultMode": "window",
+  "defaultMode": "browser",
   "port": 0,
   "documentRoot": "/docs/",
   "url": "/",
   "enableServer": true,
   "enableNativeAPI": true,
+
   "singlePageServe": true,
   "tokenSecurity": "one-time",
   "logging": {
     "enabled": false,
-    "writeToLogFile": false
+    "writeToLogFile": true
   },
   "nativeAllowList": [
     "app.*",
-    "os.*",
-    "debug.log"
+    "window.*",
+    "os.*"
   ],
   "globalVariables": {
     "TEST1": "Hello",
@@ -42,11 +43,12 @@
       "fullScreen": false,
       "alwaysOnTop": false,
       "icon": "/newIcon.icns",
-      "enableInspector": false,
+      "enableInspector": true,
       "borderless": false,
       "hidden": false,
       "resizable": true,
-      "exitProcessOnClose": true
+      "exitProcessOnClose": true,
+      "injectClientLibrary": true
     },
     "browser": {
       "globalVariables": {

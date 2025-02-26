@@ -1,8 +1,13 @@
+
+
 export async function loadJSONFile(game){
+
     var link = document.createElement("input");
     link.type = "file";
     document.body.appendChild(link);
     link.click();
+
+
     //pause game scene
     
     //wait until the user submits a file
