@@ -1,5 +1,6 @@
 import { Tilemap } from "../generator/generate.mjs"
-export function generateTilemap(game){
+import { setupTileData } from "../simulation/setupTileData.mjs"
+export function setupTilemap(game){
     //get the tilemap size
     let mapSize = game.tileMapOptions.size
     console.log(mapSize)
@@ -8,8 +9,11 @@ export function generateTilemap(game){
 
     console.log("map size is: ", mapSize)
     //generate a tilemap array with values between 0 and 1
-    
-    game.generatedTilemap = Tilemap("complex",mapSize)
+    if (!game.options.loadMap){
+        game.generatedTilemap =Tilemap("complex",mapSize)
+    } else {
+        game.generatedTilemap = game.loadedGameData.tileMap
+    }
     //draw a blue rectangle behind the tilemap
     game.add.rectangle(4,4, mapSize * 24, mapSize * 24, 0xb4cee0).setOrigin(0,0).setDepth(-1);
 
@@ -37,4 +41,10 @@ export function generateTilemap(game){
     game.cameras.main.zoom = 2
 
 
+    if (!game.options.loadMap){
+        //generating the tileData array (population, etc)
+        game.tileData = setupTileData(this)      
+    } else {
+        game.tileData = game.loadedGameData.tileData
+    }
 }

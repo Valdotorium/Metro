@@ -1,8 +1,7 @@
-import { generateTilemap } from "./tilemap/create.mjs";
+import { setupTilemap } from "./tilemap/create.mjs";
 import { configureGame, loadAssets, loadStartMenuAssets } from "./fileManagement/load.mjs";
 import { updateControls, setupControls, setupKeyboard,setupUI } from "./input/input.mjs";
 import { debugText } from "./ui/debugText.mjs";
-import { setupTileData } from "./simulation/setupTileData.mjs";
 import { setupStartMenu, updateStartMenu} from "./ui/startMenu.mjs";
 import { setupGameSettings } from "./ui/gameSettings.mjs";
 import { generateCity } from "./simulation/citymanegment.mjs";
@@ -27,9 +26,10 @@ class GameScene extends Phaser.Scene{
     {
         //setting up the game
         this.graphics = this.add.graphics();
-        generateTilemap(this)
-        //generating the tileData array (population, etc)
-        this.tileData = setupTileData(this)
+        
+        setupTilemap(this)
+
+
         this.frame = 0
         this.input.addPointer(2)
         if (this.frame == 0){
@@ -41,6 +41,7 @@ class GameScene extends Phaser.Scene{
     }
     update ()
     {
+        
         //get current window dimensions
         this.windowWidth = window.innerWidth;
         this.windowHeight = window.innerHeight;

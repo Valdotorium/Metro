@@ -4,6 +4,7 @@ import {Button} from "./button.mjs"
 import {mousewheelzoom} from "./mouse.mjs"
 import {touchzoom} from "./mouse.mjs"
 import { getHoveredTile,setupCurrentTileMarker} from "./selectTiles.mjs"
+import { saveGame } from "../fileManagement/gameDataToJSON.mjs"
 
 
 let handleClickTest = function handleClickTest(game){
@@ -20,11 +21,25 @@ let quitGame = function quitGame(game){
     game.scene.stop("GameUIScene")
     game.scene.start("StartMenuScene")
 }
+
+let downloadSaveGame = function downloadSaveGame(game){
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:json/plain;charset=utf-8,' + saveGame(game.scene.get("GameScene")));
+    element.setAttribute('download', "savegame.json");
+  
+    element.style.display = 'none';
+    document.body.appendChild(element);
+  
+    element.click();
+  
+    document.body.removeChild(element);
+}
 export function setupUI(game){
     game.ingameUI = {}
     const textStyle = { fontFamily: 'Arial Black', fontSize: 28, color: '#BBBBBB'};
     game.ingameUI.testButton = new Button(game, 1000, 100,"SWITCH TILESET",textStyle, handleClickTest) //temporary
     game.ingameUI.quitButton = new Button(game, 1000, 160,"QUIT GAME",textStyle, quitGame) //temporary
+    game.ingameUI.saveButton = new Button(game, 1000, 220,"SAVE GAME", textStyle, downloadSaveGame) //temporary
 }
 export function setupControls(game){
     mousewheelzoom(game)

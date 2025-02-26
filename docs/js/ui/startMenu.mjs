@@ -1,4 +1,5 @@
 import { Button } from "../input/button.mjs"
+import { loadClientSaveGame } from "../fileManagement/loadSaveGame.mjs"
 
 
 let launchGame = function launchGame(game) {
@@ -12,6 +13,12 @@ let launchSettings = function launchSettings(game){
     game.scene.stop("StartMenuScene")
 }
 
+let loadSaveGame = async function loadSaveGame(game){
+    game.options.loadMap = true
+    game.loadedGameData = await loadClientSaveGame(game)
+    
+}
+
 export function setupStartMenu(game){
     //menu background image
     game.startMenuUI = {}
@@ -22,11 +29,13 @@ export function setupStartMenu(game){
     game.startMenuUI.startButton = new Button(game, 600, 420,"START GAME",textStyle, launchGame)
     //settings button
     game.startMenuUI.settingsButton = new Button(game, 600, 500,"SETTINGS",textStyle, launchSettings)
+    //load save game button
+    game.startMenuUI.loadSaveGameButton = new Button(game, 600, 580,"LOAD SAVE GAME", textStyle, loadSaveGame)
     //game title with text effects
     textStyle = { fontFamily: 'Arial Black', fontSize: 150, color: '#555555'};
-    game.startMenuUI.title = game.add.text(294, 94, game.name, textStyle);
+    game.startMenuUI.title = game.add.text(297, 97, game.name, textStyle);
     textStyle = { fontFamily: 'Arial Black', fontSize: 150, color: '#FFFFFF'};
-    game.startMenuUI.title = game.add.text(306, 106, game.name, textStyle);
+    game.startMenuUI.title = game.add.text(303, 103, game.name, textStyle);
     textStyle = { fontFamily: 'Arial Black', fontSize: 150, color: '#BBBBBB'};
     game.startMenuUI.title = game.add.text(300, 100, game.name, textStyle);
 

@@ -1,9 +1,5 @@
 //runs when the GAME SCENE loaded
 export function loadAssets(game){
-    if(game.options.loadMap == true){
-        //load tilemap data from JSON file
-        game.load.json("tilemap", "assets/json/world.json");
-    }
     game.tilesets = []
     //testing loading a tileset
     game.tilesets.push({name: "MapTileset", image: game.load.image("MapTileset", "assets/images/mapTiles.png")})
