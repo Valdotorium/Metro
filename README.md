@@ -1,51 +1,15 @@
- **Neutralino-Phaser-Project**
+# neutralinojs-minimal
 
- *Concept*
+The default template for a Neutralinojs app. It's possible to use your favorite frontend framework by using [these steps](https://neutralino.js.org/docs/getting-started/using-frontend-libraries).
 
-This game is inspired by MiniMetro
-The player has a tilemap (generated), with a small city on it. As the player builds good transport infrastructure,
-the city grows and surrounding cities appear. Later, there will also be maps based on real cities.
-It should be more complex and have a slower pace than mini metro.
+## Contributors
 
+[![Contributors](https://contrib.rocks/image?repo=neutralinojs/neutralinojs-minimal)](https://github.com/neutralinojs/neutralinojs-minimal/graphs/contributors)
 
- *Ideas*
+## License
 
-Core:
--Implementing Colour Corrections
+[MIT](LICENSE)
 
--Money System
+## Icon credits
 
--Highways and Railways (Metro and Surface)
-
--Dynamic assets (custom tilesets)
-
--Passengers, Pathfinding, Cities growing
-
-
-
-Additional:
-
--Weather and Accidents
-
--Seasons
-
--Modding Support
-
--City Maps, Map builder
-
-
-
- *Implementting*
-
-
-
- *Structure*
- 
- in the directory containing game.js (the games main script), there are many folder with javascript files and one text file that
- describes what kind of scripts belong in this folder.
- 
- Naming of vars:
- 
- CONSTANTS
- 
- nonConstantVariables
+- `trayIcon.png` - Made by [Freepik](https://www.freepik.com) and downloaded from [Flaticon](https://www.flaticon.com)

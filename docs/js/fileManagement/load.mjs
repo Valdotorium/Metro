@@ -16,7 +16,7 @@ export function configureGame(game){
     game.options = {}
     //manually setting game constants
     game.options.loadMap = false
-    game.options.isDesktopBuild = false
+    game.options.isDesktopBuild = true
     game.options.debug = true
 
     game.tileMapOptions = {}
