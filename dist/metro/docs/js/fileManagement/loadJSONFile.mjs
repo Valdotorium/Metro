@@ -1,6 +1,6 @@
 
 
-export async function loadJSONFile(game){
+export async function loadJSONFileWeb(game){
 
 
     var link = document.createElement("input");
@@ -32,4 +32,27 @@ export async function loadJSONFile(game){
     console.log(data);
     return data
 
+}
+export async function loadJSONFileDesktop(game){
+    let entries = await Neutralino.os.showOpenDialog('Open a diagram', {
+        defaultPath: '/',
+        filters: [
+          {name: 'All files', extensions: ['*']}
+        ]
+      });
+      console.log('You have selected:', entries);
+
+    //show a dialog box showing entries[0]
+    await Neutralino.os.showMessageBox("information", "You have selected: " + entries[0]);
+    let data;
+    try{data = await Neutralino.filesystem.readFile(entries[0]);} catch(e){
+        await Neutralino.os.showMessageBox("information", "COULD NOT GET:  " + entries[0] + e.message)
+    }
+    //parse the JSON
+    game.scene.get("GameScene").loadedGameData = JSON.parse(data);
+    //and then start the game scene
+    game.scene.start("GameScene")
+    game.scene.stop("StartMenuScene")
+
+    return data
 }

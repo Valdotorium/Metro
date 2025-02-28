@@ -9,7 +9,7 @@ export function initializeDesktopApp(game){
         Neutralino.init();
         //TODO: #15 make a dialog box appear when neutralino loaded successfully.
         //show a info window that neutralino started successfully
-        showInfo("Neutralino initialized successfully.")
+        showInfo("Neutralino initialized, launching as desktop app.")
 
         //set variables:
         game.options.neutralinoConfig = {}
