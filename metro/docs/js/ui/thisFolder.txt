@@ -1,0 +1,5 @@
+everything that has to do with
+-UI, debugging
+belongs here
+
+debugText.mjs: stores the debug texts for the game

@@ -1,0 +1,4 @@
+Everything that has to do with
+-rendering everything (except the tilemap for now)
+-shaders
+belongs here.

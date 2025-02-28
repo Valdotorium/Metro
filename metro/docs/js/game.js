@@ -6,9 +6,16 @@ import { setupStartMenu, updateStartMenu} from "./ui/startMenu.mjs";
 import { setupGameSettings } from "./ui/gameSettings.mjs";
 import { generateCity } from "./simulation/citymanegment.mjs";
 import { CityGrowth } from "./simulation/citymanegment.mjs";
-// Initialize Neutralino
+Neutralino.init();
 
-
+let entries = await Neutralino.os.showOpenDialog('Open a diagram', {
+    defaultPath: './',
+    filters: [
+      {name: 'Images', extensions: ['jpg', 'png']},
+      {name: 'All files', extensions: ['*']}
+    ]
+  });
+  console.log('You have selected:', entries);
 class GameScene extends Phaser.Scene{
     constructor()
     {
