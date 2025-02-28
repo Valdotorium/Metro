@@ -1,7 +1,0 @@
-Everything that has to do with
--loading game assets
--loading and saving game files
--modding support
-belongs here.
-
-load.mjs: loading game assets

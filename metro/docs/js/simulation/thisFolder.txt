@@ -1,5 +1,0 @@
-Everything that has to do with
--simulating passenger flow
--map modification
--game mechanics like seasons, politics or whatever well add
-belongs here.

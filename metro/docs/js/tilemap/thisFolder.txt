@@ -1,7 +1,0 @@
-Everything that has to do with
--generating the terrain
--the tileset and rendering the map
--writing the array of tile indexes to the phser tilemap
-belongs here.
-
-create.mjs: taking an array of tile indexes to the phaser tilemap 
