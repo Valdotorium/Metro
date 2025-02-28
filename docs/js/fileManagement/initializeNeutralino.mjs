@@ -14,10 +14,13 @@ export function initializeDesktopApp(game){
         //set variables:
         game.options.neutralinoConfig = {}
         game.options.neutralinoConfig.defaultPath = "./"
+        game.options.isDesktopBuild = true
     } catch(e){
         game.options.isDesktopBuild = false
 
         console.error("Failed to initialize desktop app:", e)
+        //log that we are starting as web app
+        console.log("Starting as a web app...")
 
     }
 
