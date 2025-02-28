@@ -2,14 +2,14 @@
   "$schema": "https://raw.githubusercontent.com/neutralinojs/neutralinojs/main/schemas/neutralino.config.schema.json",
   "applicationId": "js.neutralino.minimetroripoff",
   "version": "1.0.0",
-  "defaultMode": "browser",
+  "defaultMode": "window",
   "port": 0,
   "documentRoot": "/docs/",
   "url": "/",
   "enableServer": true,
   "enableNativeAPI": true,
 
-  "singlePageServe": true,
+  "singlePageServe": false,
   "tokenSecurity": "one-time",
   "logging": {
     "enabled": false,
@@ -78,7 +78,7 @@
     "binaryName": "Neutralino-Phaser",
     "resourcesPath": "/docs/",
     "extensionsPath": "/extensions/",
-    "clientLibrary": "/docs/js/neutralino.js",
+    "clientLibrary": "/docs/js/neutralinoOriginal.js",
     "binaryVersion": "5.6.0",
     "clientVersion": "5.6.0"
   },
