@@ -2,6 +2,7 @@ import { Tilemap } from "../generator/generate.mjs"
 import { setupTileData } from "../simulation/setupTileData.mjs"
 export function setupTilemap(game){
     //get the tilemap size
+
     let mapSize = game.tileMapOptions.size
     console.log(mapSize)
     if (mapSize < 10){ mapSize = 10 }
@@ -43,7 +44,7 @@ export function setupTilemap(game){
 
     if (!game.options.loadMap){
         //generating the tileData array (population, etc)
-        game.tileData = setupTileData(this)      
+        game.tileData = setupTileData(game)      
     } else {
         game.tileData = game.loadedGameData.tileData
     }

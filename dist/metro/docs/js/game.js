@@ -64,6 +64,9 @@ class GameUIScene extends Phaser.Scene{
         super({ key: 'GameUIScene', active: false});
     }
     create(){
+        //load options
+        this.options = this.scene.get("StartMenuScene").options
+        this.tileMapOptions = this.scene.get("StartMenuScene").tileMapOptions
         //i do not know why i have to do this
         const gameScene = this.scene.get("GameScene")
         setupUI(this)

@@ -4,7 +4,7 @@ import {Button} from "./button.mjs"
 import {mousewheelzoom} from "./mouse.mjs"
 import {touchzoom} from "./mouse.mjs"
 import { getHoveredTile,setupCurrentTileMarker} from "./selectTiles.mjs"
-import { saveGame } from "../fileManagement/gameDataToJSON.mjs"
+import { downloadFileWeb, saveFileDesktop } from "../fileManagement/downloadFile.mjs"
 
 
 let handleClickTest = function handleClickTest(game){
@@ -23,16 +23,12 @@ let quitGame = function quitGame(game){
 }
 
 let downloadSaveGame = function downloadSaveGame(game){
-    var element = document.createElement('a');
-    element.setAttribute('href', 'data:json/plain;charset=utf-8,' + saveGame(game.scene.get("GameScene")));
-    element.setAttribute('download', "savegame.json");
-  
-    element.style.display = 'none';
-    document.body.appendChild(element);
-  
-    element.click();
-  
-    document.body.removeChild(element);
+    if (!game.options.isDesktopBuild) {
+        downloadFileWeb(game)
+    } else {
+        saveFileDesktop(game)
+    }
+    
 }
 export function setupUI(game){
     game.ingameUI = {}

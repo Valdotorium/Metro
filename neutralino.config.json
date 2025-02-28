@@ -85,8 +85,8 @@
     "mac": {
       "architecture": ["arm64", "universal"],
       "minimumOS": "10.13.0",
-      "appName": "Neutralinotest",
-      "appBundleName": "Neutralinotest",
+      "appName": "Metro",
+      "appBundleName": "Metro",
       "appIdentifier": "com.valdotorium.neutralinotest",
       "appIcon":  "newIcon.icns"
     },

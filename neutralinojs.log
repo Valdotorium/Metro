@@ -21,3 +21,5 @@ INFO 2025-02-28 19:21:25,555 Auth info was exported to ./.tmp/auth_info.json api
 INFO 2025-02-28 19:29:01,497 Auth info was exported to ./.tmp/auth_info.json api/debug/debug.cpp:17 valentinliedtke@unknown-host
 INFO 2025-02-28 19:31:16,457 Auth info was exported to ./.tmp/auth_info.json api/debug/debug.cpp:17 valentinliedtke@unknown-host
 INFO 2025-02-28 22:01:57,996 Auth info was exported to ./.tmp/auth_info.json api/debug/debug.cpp:17 valentinliedtke@unknown-host
+INFO 2025-02-28 22:33:14,148 Auth info was exported to ./.tmp/auth_info.json api/debug/debug.cpp:17 valentinliedtke@unknown-host
+INFO 2025-02-28 22:33:38,810 Reloading the application... api/debug/debug.cpp:17 valentinliedtke@unknown-host

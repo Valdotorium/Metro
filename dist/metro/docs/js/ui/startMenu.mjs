@@ -22,6 +22,7 @@ let loadSaveGame = async function loadSaveGame(game){
 export function setupStartMenu(game){
     //menu background image
     game.startMenuUI = {}
+    game.options.loadMap = false
     game.startMenuUI.startMenuBackground = game.add.image(0,0, "startMenuBackground").setScale(1.2)
     game.startMenuUI.startMenuBackground.setOrigin(0,0)
     //start game button
