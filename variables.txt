@@ -20,3 +20,7 @@ game.generatedTilemap - the generated tilemap holding tile data
 -SIMULATION-
 
 game.tileData - [][]{population: int} - the VERY IMPORTANT 2d array holding tile data
+
+-CORE FUNCTIONALITIES-
+game.options: stores all options/settings/configs for the game
+game.options.isDesktopBuild: determines whether the game should currently be copatible with web or desktop

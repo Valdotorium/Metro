@@ -1,3 +1,5 @@
+import { initializeDesktopApp } from "./initializeNeutralino.mjs"
+
 //runs when the GAME SCENE loaded
 export function loadAssets(game){
     game.tilesets = []
@@ -23,6 +25,10 @@ export function configureGame(game){
     game.tileMapOptions.size = 85
 
     game.frame = 0
+
+    if (game.options.isDesktopBuild){
+        initializeDesktopApp(game)
+    }
 }
 
 export function loadStartMenuAssets(game){
