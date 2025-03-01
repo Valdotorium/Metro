@@ -11,14 +11,6 @@ export function saveGame(game){
         tileMap: game.generatedTilemap,
         tileData: game.tileData,
         cities: cityObj
-    },function(key, val) {
-        if (val != null && typeof val == "object") {
-             if (seen.indexOf(val) >= 0) {
-                 return;
-             }
-             seen.push(val);
-         }
-         return val;
-     })
+    })
 
 }

@@ -4,14 +4,12 @@ import { initializeDesktopApp } from "./initializeNeutralino.mjs"
 export function loadAssets(game){
     game.tilesets = []
     //testing loading a tileset
-    game.tilesets.push({name: "MapTileset", image: game.load.image("MapTileset", "assets/images/mapTiles.png")})
     game.tilesets.push({name: "SatelliteTileset", image: game.load.image("SatelliteTileset", "assets/images/reallyNewTilesExtruded.png")})
+    game.tilesets.push({name: "MapTileset", image: game.load.image("MapTileset", "assets/images/mapTiles.png")})
     game.tilesets.push({name: "HybridTileset", image: game.load.image("HybridTileset", "assets/images/hybridMapTiles.png")})
 
     console.log("loaded assets!")
 }
-
-
 //runs when the game opens
 export function configureGame(game){
 

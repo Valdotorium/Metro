@@ -1,8 +1,8 @@
 import { Tilemap } from "../generator/generate.mjs"
 import { setupTileData } from "../simulation/setupTileData.mjs"
+import { generateCities, assignCityClasses } from "../simulation/citymanegment.mjs"
 export function setupTilemap(game){
     //get the tilemap size
-
     let mapSize = game.tileMapOptions.size
     console.log(mapSize)
     if (mapSize < 10){ mapSize = 10 }
@@ -41,11 +41,21 @@ export function setupTilemap(game){
     game.cameras.main.setBounds(-600,-400, layer.width * layer.scale + 1200, layer.height * layer.scale + 800);
     game.cameras.main.zoom = 2
 
-
     if (!game.options.loadMap){
         //generating the tileData array (population, etc)
         game.tileData = setupTileData(game)      
     } else {
         game.tileData = game.loadedGameData.tileData
+    }
+    if (!game.options.loadMap){
+        //generating the tileData array (population, etc)
+        generateCities(game)      
+    } else {
+        game.cities = new Map(Object.entries(game.loadedGameData.cities))
+        //assign all values in cities to city class
+        assignCityClasses(game)
+        
+        console.log(game.cities)
+        game.cityNames = Array.from(game.cities.keys())
     }
 }

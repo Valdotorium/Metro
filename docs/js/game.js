@@ -4,7 +4,6 @@ import { updateControls, setupControls, setupKeyboard,setupUI } from "./input/in
 import { debugText } from "./ui/debugText.mjs";
 import { setupStartMenu, updateStartMenu} from "./ui/startMenu.mjs";
 import { setupGameSettings } from "./ui/gameSettings.mjs";
-import { generateCity } from "./simulation/citymanegment.mjs";
 import { CityGrowth } from "./simulation/citymanegment.mjs";
 
 class GameScene extends Phaser.Scene{
@@ -29,19 +28,15 @@ class GameScene extends Phaser.Scene{
         
         setupTilemap(this)
 
-
         this.frame = 0
         this.input.addPointer(2)
         if (this.frame == 0){
             console.log(this.tileMap)
         }    
         setupControls(this)
-        generateCity(this)
-        console.log(this.cities)
     }
     update ()
     {
-        
         //get current window dimensions
         this.windowWidth = window.innerWidth;
         this.windowHeight = window.innerHeight;

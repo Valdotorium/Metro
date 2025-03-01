@@ -6,7 +6,7 @@ export class cityDistrict {
         this.validNeighbours = [];
         this.posx = posx;
         this.posy = posy;
-        this.city = city;
+        //this.city = city;
         //check for tiles that are valid for the next city district to be placed
         //1 city district = 1 city tile
         this.addNeighbourTiles(game, posx, posy);

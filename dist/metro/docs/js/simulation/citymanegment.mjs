@@ -1,5 +1,5 @@
 import { city } from "./citys.mjs";
-export function generateCity(game) {
+export function generateCities(game) {
 
     //map that stores a city object with the cities name
     game.cities = new Map()
@@ -16,7 +16,6 @@ export function generateCity(game) {
     //TODO: #10 delete city again if its root tile is not valid
     try{
     for (let i = 0; i < game.cityCount - 1; i++) {
-        console.log("mm");
         let randomIndex = Math.floor(Math.random() * cityNames.length);
         let randomCityName = cityNames[randomIndex];
         let cityX = Math.floor(Math.random() * (mapSize - 10)) + 5
@@ -39,8 +38,9 @@ export function generateCity(game) {
     console.log(game.cityCount)
 }
 export function CityGrowth(game) {
+    let cityNames = ["New York", "Los Angeles", "Boston", "San Francisco", "Chicago", "Dallas", "Miami", "Houston", "Philadelphia", "Atlanta", "Washington", "San Diego", "San Jose", "Seattle", "Portland", "Hamburg", "Baltimore", "Aalen", "Cleveland", "Minneapolis", "Denver", "Pittsburgh", "New Orleans", "Charlotte", "Tampa", "Austin", "San Antonio", "Jacksonville", "Indianapolis", "St. Louis", "Memphis", "Boston", "Paris", "Nashville", "Berlin", "Jacksonville", "Washington", "Baltimore", "Detroit"]
     let randomCity = Math.floor(Math.random() * game.cityCount)
-    let growingcity = game.cityNames[randomCity]
+    let growingcity = cityNames[randomCity]
     if(Math.floor(Math.random() * 1000) < (game.cities.get(growingcity).population*0.05+game.cities.get(growingcity).size*0.1)){
         if(game.cities.get(growingcity).validnextdistricts.length>0){
             let randomIndex = Math.floor(Math.random() * game.cities.get(growingcity).validnextdistricts.length);
@@ -51,6 +51,5 @@ export function CityGrowth(game) {
             game.cities.get(growingcity).validnextdistricts.splice(randomIndex, 1);
         }
     }
-    
 }
 
