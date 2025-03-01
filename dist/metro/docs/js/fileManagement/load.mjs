@@ -10,8 +10,6 @@ export function loadAssets(game){
 
     console.log("loaded assets!")
 }
-
-
 //runs when the game opens
 export function configureGame(game){
 

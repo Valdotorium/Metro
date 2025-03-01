@@ -28,7 +28,6 @@ class GameScene extends Phaser.Scene{
         
         setupTilemap(this)
 
-
         this.frame = 0
         this.input.addPointer(2)
         if (this.frame == 0){
@@ -38,7 +37,6 @@ class GameScene extends Phaser.Scene{
     }
     update ()
     {
-        
         //get current window dimensions
         this.windowWidth = window.innerWidth;
         this.windowHeight = window.innerHeight;

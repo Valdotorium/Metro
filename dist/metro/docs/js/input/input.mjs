@@ -17,6 +17,7 @@ let handleClickTest = function handleClickTest(game){
 }
 
 let quitGame = function quitGame(game){
+    game.options.loadMap = false
     game.scene.stop("GameScene")
     game.scene.stop("GameUIScene")
     game.scene.start("StartMenuScene")

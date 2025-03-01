@@ -1,5 +1,3 @@
-
-
 export async function loadJSONFileWeb(game){
 
 
@@ -26,6 +24,7 @@ export async function loadJSONFileWeb(game){
         game.scene.stop("StartMenuScene")
         // remove the file input element
         document.body.removeChild(link);
+        return data;
     }
     //wait until the user submits a file
     let data = await checkFlag();
