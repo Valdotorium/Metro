@@ -5,6 +5,7 @@ import { debugText } from "./ui/debugText.mjs";
 import { setupStartMenu, updateStartMenu} from "./ui/startMenu.mjs";
 import { setupGameSettings } from "./ui/gameSettings.mjs";
 import { CityGrowth } from "./simulation/citymanegment.mjs";
+import { setupSimulation, simulate } from "./simulation/simulation.mjs";
 
 class GameScene extends Phaser.Scene{
     constructor()
@@ -27,6 +28,7 @@ class GameScene extends Phaser.Scene{
         this.graphics = this.add.graphics();
         
         setupTilemap(this)
+        setupSimulation(this)
 
         this.frame = 0
         this.input.addPointer(2)
@@ -43,6 +45,7 @@ class GameScene extends Phaser.Scene{
 
         //  Update the controls
         updateControls(this);
+        simulate(this)
 
         //draw a tilemap
         this.frame++
@@ -50,7 +53,6 @@ class GameScene extends Phaser.Scene{
         if (this.frame == 1){
             this.scene.launch('GameUIScene');
         }
-        CityGrowth(this)
     }
 }
 class GameUIScene extends Phaser.Scene{
