@@ -1,5 +1,5 @@
 
-export class Button{
+export class TextButton{
     constructor(game, x, y, text, style, callback){
         this.text = game.add.text(x, y, text, style)
         //add a rect

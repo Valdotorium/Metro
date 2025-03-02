@@ -1,4 +1,4 @@
-import { Button } from "../input/button.mjs"
+import { TextButton } from "../input/TextButton.mjs"
 import { Slider } from "../input/slider.mjs"
 
 
@@ -19,11 +19,11 @@ export function setupGameSettings(game){
     game.options = game.scene.get("StartMenuScene").options
     game.tileMapOptions = game.scene.get("StartMenuScene").tileMapOptions
 
-    game.gameSettingsContents = {} //pack hier die buttons rein
-    // game.gameSettingsContents.exampleButton = new Button...
-    //buttons to change variables
+    game.gameSettingsContents = {} //pack hier die TextButtons rein
+    // game.gameSettingsContents.exampleTextButton = new TextButton...
+    //TextButtons to change variables
     const exampleTextStyle = { fontFamily: 'Arial Black', fontSize: 40, color: '#BBBBBB'};
-    game.gameSettingsContents.exampleButton = new Button(game, 600,100,"BACK", exampleTextStyle,quitSettings)
+    game.gameSettingsContents.exampleTextButton = new TextButton(game, 600,100,"BACK", exampleTextStyle,quitSettings)
     //slider to adjust mapSize
     const sliderStyle = { fontFamily: 'Arial Black', fontSize: 32, color: '#BBBBBB'};
     game.gameSettingsContents.sizeSlider = new Slider(game, 320, 600,20,200, "MAP SIZE", sliderStyle, mapSizeSlider)

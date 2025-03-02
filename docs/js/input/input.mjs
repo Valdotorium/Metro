@@ -1,10 +1,11 @@
 import {keyboardControls} from "./keybinds.mjs"
 import {dragCamera} from "./mouse.mjs"
-import {Button} from "./button.mjs"
+import {TextButton} from "./TextButton.mjs"
 import {mousewheelzoom} from "./mouse.mjs"
 import {touchzoom} from "./mouse.mjs"
 import { getHoveredTile,setupCurrentTileMarker} from "./selectTiles.mjs"
 import { downloadFileWeb, saveFileDesktop } from "../fileManagement/downloadFile.mjs"
+import { ImageButton } from "./ImageButton.mjs"
 
 
 let handleClickTest = function handleClickTest(game){
@@ -31,12 +32,19 @@ let downloadSaveGame = function downloadSaveGame(game){
     }
     
 }
+
+let forward = function forward(game){
+    console.log("forward")
+}
 export function setupUI(game){
     game.ingameUI = {}
     const textStyle = { fontFamily: 'Arial Black', fontSize: 28, color: '#BBBBBB'};
-    game.ingameUI.testButton = new Button(game, 1000, 100,"SWITCH TILESET",textStyle, handleClickTest) //temporary
-    game.ingameUI.quitButton = new Button(game, 1000, 160,"QUIT GAME",textStyle, quitGame) //temporary
-    game.ingameUI.saveButton = new Button(game, 1000, 220,"SAVE GAME", textStyle, downloadSaveGame) //temporary
+    game.ingameUI.testTextButton = new TextButton(game, 1000, 100,"SWITCH TILESET",textStyle, handleClickTest) //temporary
+    game.ingameUI.quitTextButton = new TextButton(game, 1000, 160,"QUIT GAME",textStyle, quitGame) //temporary
+    game.ingameUI.saveTextButton = new TextButton(game, 1000, 220,"SAVE GAME", textStyle, downloadSaveGame) //temporary
+    game.ingameUI.forwardButton = new ImageButton(game, 1100,280, "ForwardIcon", 90, 70, forward)
+    game.ingameUI.backwardButton = new ImageButton(game, 880,280, "BackwardIcon", 90, 70, forward)
+    game.add.image(990, 280, "ClockIcon").setScale(0.5,0.5)
 }
 export function setupControls(game){
     mousewheelzoom(game)
