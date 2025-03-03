@@ -6,7 +6,7 @@ export function loadAssets(scene){
     //testing loading a tileset
     scene.tilesets.push({name: "SatelliteTileset", image: scene.load.image("SatelliteTileset", "assets/images/reallyNewTilesExtruded.png")})
     scene.tilesets.push({name: "MapTileset", image: scene.load.image("MapTileset", "assets/images/mapTiles.png")})
-    scene.tilesets.push({name: "HybridTileset", image: scene.load.image("HybridTileset", "assets/images/hybridMapTiles.png")})
+    //scene.tilesets.push({name: "HybridTileset", image: scene.load.image("HybridTileset", "assets/images/hybridMapTiles.png")})
     scene.tilesets.push({name: "DarkTileset", image: scene.load.image("DarkTileset", "assets/images/darkTiles.png")})
 
     scene.load.image("ForwardIcon", "assets/images/icons/forward.png")
