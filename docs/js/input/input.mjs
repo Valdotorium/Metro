@@ -7,77 +7,101 @@ import { getHoveredTile,setupCurrentTileMarker} from "./selectTiles.mjs"
 import { downloadFileWeb, saveFileDesktop } from "../fileManagement/downloadFile.mjs"
 import { ImageButton } from "./ImageButton.mjs"
 
+function updateTimeText(scene){
+    let gameScene = scene.scene.get("GameScene")
+    scene.inGameUI.timeText.setText(`Time: ${gameScene.simulation.time.year}-${gameScene.simulation.time.month}-${gameScene.simulation.time.day} ${gameScene.simulation.time.hour}:${Math.round(gameScene.simulation.time.minute)}`)
 
-let handleClickTest = function handleClickTest(game){
-    let gameScene = game.scene.get("GameScene")
+}
+let handleClickTest = function handleClickTest(scene){
+    let gameScene = scene.scene.get("GameScene")
     gameScene.currentTileset++
     if(gameScene.currentTileset >= gameScene.tilesets.length){gameScene.currentTileset = 0}
-    const newTileset = game.sys.textures.get(gameScene.tilesets[gameScene.currentTileset].name)
+    const newTileset = scene.sys.textures.get(gameScene.tilesets[gameScene.currentTileset].name)
     gameScene.currentTilesetImage.setImage(newTileset)
     //temporary, replace with your own logic when you have it
 }
 
-let quitGame = function quitGame(game){
-    game.options.loadMap = false
-    game.scene.stop("GameScene")
-    game.scene.stop("GameUIScene")
-    game.scene.start("StartMenuScene")
+let quitGame = function quitGame(scene){
+    scene.options.loadMap = false
+    scene.scene.stop("GameScene")
+    scene.scene.stop("GameUIScene")
+    scene.scene.start("StartMenuScene")
 }
 
-let downloadSaveGame = function downloadSaveGame(game){
-    if (!game.options.isDesktopBuild) {
-        downloadFileWeb(game)
+let downloadSavescene = function downloadSavescene(scene){
+    if (!scene.options.isDesktopBuild) {
+        downloadFileWeb(scene)
     } else {
-        saveFileDesktop(game)
+        saveFileDesktop(scene)
     }
     
 }
 
-let forward = function forward(game){
-    console.log("forward")
+let speedUp = function speedUp(scene){
+    scene = scene.scene.get("GameScene")
+
+    if (scene.simulation.speed < 4){
+        scene.simulation.speed *= 2
+    }
 }
-export function setupUI(game){
-    game.ingameUI = {}
-    const textStyle = { fontFamily: 'Arial Black', fontSize: 28, color: '#BBBBBB'};
-    game.ingameUI.testTextButton = new TextButton(game, 1000, 100,"SWITCH TILESET",textStyle, handleClickTest) //temporary
-    game.ingameUI.quitTextButton = new TextButton(game, 1000, 160,"QUIT GAME",textStyle, quitGame) //temporary
-    game.ingameUI.saveTextButton = new TextButton(game, 1000, 220,"SAVE GAME", textStyle, downloadSaveGame) //temporary
-    game.ingameUI.forwardButton = new ImageButton(game, 1100,280, "ForwardIcon", 90, 70, forward)
-    game.ingameUI.backwardButton = new ImageButton(game, 880,280, "BackwardIcon", 90, 70, forward)
-    game.add.image(990, 280, "ClockIcon").setScale(0.5,0.5)
+let slowDown = function slowDown(scene){
+    scene = scene.scene.get("GameScene")
+    if (scene.simulation.speed > 0.5){
+        scene.simulation.speed /= 2
+    }
 }
-export function setupControls(game){
-    mousewheelzoom(game)
-    setupKeyboard(game)
-    setupCurrentTileMarker(game)
+export function setupUI(scene){
+    scene.inGameUI = {}
+    let textStyle = { fontFamily: 'Arial Black', fontSize: 28, color: '#BBBBBB'};
+    //the buttons
+    scene.inGameUI.testTextButton = new TextButton(scene, 1000, 160,"SWITCH TILESET",textStyle, handleClickTest) //temporary
+    scene.inGameUI.quitTextButton = new TextButton(scene, 1000, 220,"QUIT GAME",textStyle, quitGame) //temporary
+    scene.inGameUI.saveTextButton = new TextButton(scene, 1000, 280,"SAVE GAME", textStyle, downloadSavescene) //temporary
+    scene.inGameUI.forwardButton = new ImageButton(scene, 1100,50, "ForwardIcon", 90, 70, speedUp)
+    scene.inGameUI.backwardButton = new ImageButton(scene, 880,50, "BackwardIcon", 90, 70, slowDown)
+    scene.add.image(990, 50, "ClockIcon").setScale(0.6,0.6)
+    //text displaying current time
+    let gameScene = scene.scene.get("GameScene")
+    textStyle = { fontFamily: 'Arial Black', fontSize: 28, color: '#444444'};
+    scene.inGameUI.timeText = scene.add.text(840, 90, gameScene.simulation.time.year + "/" + gameScene.simulation.time.month + "/" + gameScene.simulation.time.day + " - " + gameScene.simulation.time.hour + ":" + gameScene.simulation.time.minute, textStyle)
+
+}
+export function setupControls(scene){
+    mousewheelzoom(scene)
+    setupKeyboard(scene)
+    setupCurrentTileMarker(scene)
 }
 
-export function updateControls (game) {
-    keyboardControls(game)
-    dragCamera(game)
-    game.mouse.worldPoint = game.input.activePointer.positionToCamera(game.cameras.main);
-    getHoveredTile(game)
-    touchzoom(game)
+export function updateControls (scene) {
+    keyboardControls(scene)
+    dragCamera(scene)
+    scene.mouse.worldPoint = scene.input.activePointer.positionToCamera(scene.cameras.main);
+    getHoveredTile(scene)
+    touchzoom(scene)
 }
 
-//sets up all the keyboard keybinds that are relevant to the game using keycodes
-export function setupKeyboard(game){
-    game.keys = new Map()
+export function updateUI(scene){
+    updateTimeText(scene)
+}
+
+//sets up all the keyboard keybinds that are relevant to the scene using keycodes
+export function setupKeyboard(scene){
+    scene.keys = new Map()
     //for all keys
     for(let i = 65; i <= 90; i++){
-        game.keys.set(String.fromCharCode(i), game.input.keyboard.addKey(i));
+        scene.keys.set(String.fromCharCode(i), scene.input.keyboard.addKey(i));
     }
     //for number keys
     for(let i = 48; i <= 57; i++){
-        game.keys.set(String.fromCharCode(i), game.input.keyboard.addKey(i));
+        scene.keys.set(String.fromCharCode(i), scene.input.keyboard.addKey(i));
     }
     //for special keys
-    game.keys.set("SPACE", game.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE));
-    game.keys.set("ENTER", game.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER));
-    game.keys.set("ESC", game.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC));
-    game.keys.set("SHIFT", game.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT));
-    game.keys.set("UP", game.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP));
-    game.keys.set("DOWN", game.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN));
-    game.keys.set("LEFT", game.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT));
-    game.keys.set("RIGHT", game.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT));
+    scene.keys.set("SPACE", scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE));
+    scene.keys.set("ENTER", scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER));
+    scene.keys.set("ESC", scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC));
+    scene.keys.set("SHIFT", scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SHIFT));
+    scene.keys.set("UP", scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP));
+    scene.keys.set("DOWN", scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN));
+    scene.keys.set("LEFT", scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT));
+    scene.keys.set("RIGHT", scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT));
 }

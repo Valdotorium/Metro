@@ -1,12 +1,12 @@
 
 export class ImageButton{
-    constructor(game, x, y, image, sizeX, sizeY, callback){
+    constructor(scene, x, y, image, sizeX, sizeY, callback){
         //instead of text, display a clickable image
 
-        this.text = game.add.image(x, y, image)
+        this.text = scene.add.image(x, y, image)
         this.text.setScale(sizeX / this.text.width, sizeY / this.text.height)
         this.text.setInteractive()
-        this.text.on('pointerdown', () => {this.activate(), callback(game)})
+        this.text.on('pointerdown', () => {this.activate(), callback(scene)})
         this.text.on('pointerup', () => this.deactivate())
         this.text.on("pointerover", () => this.hover())
         this.text.on("pointerout", () => this.out())
