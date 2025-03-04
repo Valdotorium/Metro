@@ -26,7 +26,7 @@ export function generateCities(game) {
         let cityY = Math.floor(Math.random() * (mapSize - 10)) + 5
         // Check if the root tile is valid
         if (0 <= game.generatedTilemap[cityX][cityY] && game.generatedTilemap[cityX][cityY] < 4) {
-            let newCity = new city(game, cityX, cityY, randomCityName, Math.floor(Math.random() * 5) + 3);
+            let newCity = new city(game, cityX, cityY, randomCityName, Math.floor(Math.random() * 7) + 2);
             newCity.createCity(game);
             game.cities.set(randomCityName, newCity);
             cityNames.splice(randomIndex, 1);
@@ -48,7 +48,7 @@ export function generateCities(game) {
 export function CityGrowth(game) {
     let randomCity = Math.floor(Math.random() * game.cityNames.length)
     let growingcity = game.cityNames[randomCity]
-    if(Math.floor(Math.random() * (1000 / game.simulation.speed)) < (game.cities.get(growingcity).population*0.05+game.cities.get(growingcity).size*0.1)){
+    if(Math.floor(Math.random() * (1500 / game.simulation.speed)) < (game.cities.get(growingcity).population*0.05+game.cities.get(growingcity).size*0.1)){
         if(game.cities.get(growingcity).validnextdistricts.length>0){
             let randomIndex = Math.floor(Math.random() * game.cities.get(growingcity).validnextdistricts.length);
             let [districtX, districtY] =  game.cities.get(growingcity).validnextdistricts[randomIndex];

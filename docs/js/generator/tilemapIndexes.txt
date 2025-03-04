@@ -27,6 +27,6 @@ order:
 18 - residentialLow
 19 - residentialHigh
 20 - parkingLot
-21 - errorPlaceholder
+21 - borealForest
 22 - air
 23 - [unused]
