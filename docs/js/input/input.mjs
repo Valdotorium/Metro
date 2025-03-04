@@ -43,12 +43,19 @@ let speedUp = function speedUp(scene){
     if (scene.simulation.speed < 4){
         scene.simulation.speed *= 2
     }
+    if (scene.simulation.speed == 0.0){
+        scene.simulation.speed = 0.5
+    }
 }
 let slowDown = function slowDown(scene){
     scene = scene.scene.get("GameScene")
+    if (scene.simulation.speed == 0.5){
+        scene.simulation.speed = 0.0
+    }
     if (scene.simulation.speed > 0.5){
         scene.simulation.speed /= 2
     }
+    
 }
 export function setupUI(scene){
     scene.inGameUI = {}
