@@ -48,7 +48,7 @@ export class city {
         x = game.tileMap.tileToWorldX(x)
         y = game.tileMap.tileToWorldY(y)
         // future features and additional information can be added here like happiness, wealth, etc.
-        this.cityinfo = game.add.text(x, y, `City: ${this.name} \n Population: ${this.population} \n Size: ${this.size}`, { fontSize: '16px', fill: '#000' });
+        this.cityinfo = game.add.text(x, y, `City: ${this.name} \n Population: ${this.population+1} \n Size: ${this.size}`, { fontSize: '16px', fill: '#000' });
         this.cityinfo.setOrigin(0.5, 0.5);
         }
     }

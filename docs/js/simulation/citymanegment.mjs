@@ -9,7 +9,7 @@ export function generateCities(game) {
     //add predefined cities
     let firstCity = new city(game, 5,5, "Fallford", 15)
     firstCity.createCity(game)
-    game.cities.set("Fallford", firstCity)
+    //game.cities.set("Fallford", firstCity)
 
     console.log(game.cityCount)
     //generate cities at random positions with random names selected from a city names array
@@ -54,7 +54,7 @@ export function CityGrowth(game) {
             game.cities.get(growingcity).size++
             console.log(game.cities.get(growingcity).districts.length, growingcity)
             game.cities.get(growingcity).validnextdistricts.splice(randomIndex, 1);
-            game.cities.get(growingcity).cityinfo.setText(`City: ${growingcity} \n Population: ${game.cities.get(growingcity).population} \n Size: ${game.cities.get(growingcity).size}`)
+            game.cities.get(growingcity).cityinfo.setText(`City: ${growingcity} \n Population: ${game.cities.get(growingcity).population+1} \n Size: ${game.cities.get(growingcity).size}`)
         }
     }
 }
