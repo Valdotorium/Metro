@@ -7,8 +7,8 @@ export function generateCities(game) {
     let mapSize = game.tileMapOptions.size
     game.cityCount = Math.round(mapSize / 8)
     //add predefined cities
-    let firstCity = new city(game, 5,5, "Fallford", 15)
-    firstCity.createCity(game)
+    //let firstCity = new city(game, 5,5, "Fallford", 15)
+    //firstCity.createCity(game)
     //game.cities.set("Fallford", firstCity)
 
     console.log(game.cityCount)
