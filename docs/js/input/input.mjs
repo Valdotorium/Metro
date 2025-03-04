@@ -6,6 +6,11 @@ import {touchzoom} from "./mouse.mjs"
 import { getHoveredTile,setupCurrentTileMarker} from "./selectTiles.mjs"
 import { downloadFileWeb, saveFileDesktop } from "../fileManagement/downloadFile.mjs"
 import { ImageButton } from "./ImageButton.mjs"
+import { setPopulationTileMap } from "../tilemap/statisticalTileMap.mjs"
+
+let populationMap = function populationMap(scene){
+    setPopulationTileMap(scene)
+}
 
 function updateTimeText(scene){
     let gameScene = scene.scene.get("GameScene")
@@ -59,6 +64,7 @@ export function setupUI(scene){
     scene.inGameUI.saveTextButton = new TextButton(scene, 1000, 280,"SAVE GAME", textStyle, downloadSavescene) //temporary
     scene.inGameUI.forwardButton = new ImageButton(scene, 1100,50, "ForwardIcon", 90, 70, speedUp)
     scene.inGameUI.backwardButton = new ImageButton(scene, 880,50, "BackwardIcon", 90, 70, slowDown)
+    scene.ingameUI.populationMapButton = new TextButton(scene, 1000,340, "POP. MAP", textStyle, populationMap) //temporary
     scene.add.image(990, 50, "ClockIcon").setScale(0.6,0.6)
     //text displaying current time
     let gameScene = scene.scene.get("GameScene")
