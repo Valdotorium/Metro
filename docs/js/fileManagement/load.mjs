@@ -1,16 +1,17 @@
 import { initializeDesktopApp } from "./initializeNeutralino.mjs"
 
-//runs when the scene SCENE loaded
+//runs when the game SCENE loaded
 export function loadAssets(scene){
     scene.tilesets = []
     scene.statisticalTilesets = []
+    scene.statisticalTilemapIsEnabled = false
     //testing loading a tileset
     scene.tilesets.push({name: "SatelliteTileset", image: scene.load.image("SatelliteTileset", "assets/images/reallyNewTilesExtruded.png")})
     scene.tilesets.push({name: "MapTileset", image: scene.load.image("MapTileset", "assets/images/mapTiles.png")})
     //scene.tilesets.push({name: "HybridTileset", image: scene.load.image("HybridTileset", "assets/images/hybridMapTiles.png")})
     scene.tilesets.push({name: "DarkTileset", image: scene.load.image("DarkTileset", "assets/images/darkTiles.png")})
 
-    scene.statisticalTilesets.push({name: "PopulationTileset", image: scene.load.image("PopulationTileset", "assets/images/reallyNewTilesExtruded.png")})
+    scene.statisticalTilesets.push({name: "PopulationTileset", image: scene.load.image("PopulationTileset", "assets/images/populationTileset.png")})
 
     scene.load.image("ForwardIcon", "assets/images/icons/forward.png")
     scene.load.image("BackwardIcon", "assets/images/icons/backward.png")

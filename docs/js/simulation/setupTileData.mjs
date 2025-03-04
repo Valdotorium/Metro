@@ -45,19 +45,19 @@ function generatePopulations(game, tileData){
         for(let j = 0; j < mapSize; j++){
             if(weightedNoise[i][j] > 0.3 && game.generatedTilemap[i][j] == 0){
                 //populating plains
-                tileData[i][j].population = Math.round(weightedNoise[i][j] * 6) - 1
+                tileData[i][j].population = Math.round(weightedNoise[i][j] * 3)
             } else if(weightedNoise[i][j] > 0.5 && game.generatedTilemap[i][j] == 1){
                 //populating fields
-                tileData[i][j].population = Math.round(weightedNoise[i][j] * 11) - 1
+                tileData[i][j].population = Math.round(weightedNoise[i][j] * 6) - 1
             } else if(weightedNoise[i][j] > 0.3 && game.generatedTilemap[i][j] == 2){
                 //populating beaches
-                tileData[i][j].population = Math.round(weightedNoise[i][j] * 6) - 1
-            } else if(weightedNoise[i][j] > 0.7 && game.generatedTilemap[i][j] == 6){
+                tileData[i][j].population = Math.round(weightedNoise[i][j] * 3)
+            } else if(weightedNoise[i][j] > 0.65 && game.generatedTilemap[i][j] == 6){
                 //populating forests
-                tileData[i][j].population = Math.round(weightedNoise[i][j] * 7) - 4
+                tileData[i][j].population = Math.round(weightedNoise[i][j] * 5) - 2
             } else if(weightedNoise[i][j] > 0.5 && game.generatedTilemap[i][j] == 8){
                 //populating wetlands
-                tileData[i][j].population = Math.round(weightedNoise[i][j] * 6) - 2
+                tileData[i][j].population = Math.round(weightedNoise[i][j] * 5) - 1
             } else {
                 //populating mountains
                 tileData[i][j].population = 0

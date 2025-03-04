@@ -15,6 +15,7 @@ export class cityDistrict {
         if (game.generatedTilemap[this.posx][this.posy] < 4) {
             game.generatedTilemap[this.posx][this.posy] = 10;
             game.tileMap.putTileAt(10, this.posx, this.posy)
+            game.tileData[this.posx][this.posy].population = Math.round(game.tileData[this.posx][this.posy].population * 1.25 + 8)
         }
         this.population = game.tileData[this.posx][this.posy].population;
     }

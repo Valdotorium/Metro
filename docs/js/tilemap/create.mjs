@@ -13,7 +13,7 @@ export function setupTilemap(scene){
     if (!scene.options.loadMap){
         scene.generatedTilemap =Tilemap("complex",mapSize)
     } else {
-        scene.generatedTilemap = scene.loadedsceneData.tileMap
+        scene.generatedTilemap = scene.loadedGameData.tileMap
     }
     //draw a blue rectangle behind the tilemap
     scene.add.rectangle(4,4, mapSize * 24, mapSize * 24, 0xb4cee0).setOrigin(0,0).setDepth(-1);
@@ -45,17 +45,24 @@ export function setupTilemap(scene){
         //generating the tileData array (population, etc)
         scene.tileData = setupTileData(scene)      
     } else {
-        scene.tileData = scene.loadedsceneData.tileData
+        scene.tileData = scene.loadedGameData.tileData
     }
     if (!scene.options.loadMap){
         //generating the tileData array (population, etc)
         generateCities(scene)      
     } else {
-        scene.cities = new Map(Object.entries(scene.loadedsceneData.cities))
+        scene.cities = new Map(Object.entries(scene.loadedGameData.cities))
+
         //assign all values in cities to city class
         assignCityClasses(scene)
         
         console.log(scene.cities)
         scene.cityNames = Array.from(scene.cities.keys())
+        //call the textInfo function for each city object in the map scene.cities
+        //TODO: support creating new cities
+        scene.cityNames.forEach(cityName => {
+            let city = scene.cities.get(cityName)
+            city.textInfo(scene, city.x, city.y)
+        })
     }
 }

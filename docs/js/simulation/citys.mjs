@@ -13,14 +13,15 @@ export class city {
 
         this.name = name;
         this.size = size;
-        this.textInfo(game, x, y);
+        
 
     }
     //actually creating it
     createCity(game){
         //the root district of the city
         this.citycenter = this.addDistrict(0, this, this.x, this.y, game);
-        for (let i = 0; i < this.size; i++) {
+        //size -1, because one district has already been created
+        for (let i = 0; i < this.size - 1; i++) {
             if(this.validnextdistricts.length>0){
                 //generate one of the districts on a valid tile
                 let randomIndex = Math.floor(Math.random() * this.validnextdistricts.length);
@@ -30,6 +31,7 @@ export class city {
                 this.validnextdistricts.splice(randomIndex, 1);
             }
         }
+        this.textInfo(game, this.x, this.y);
     }
     addDistrict(id, city, x, y, game) {
         let tempdist = new cityDistrict(id, city, x, y, game);
@@ -48,7 +50,7 @@ export class city {
         x = game.tileMap.tileToWorldX(x)
         y = game.tileMap.tileToWorldY(y)
         // future features and additional information can be added here like happiness, wealth, etc.
-        this.cityinfo = game.add.text(x, y, `City: ${this.name} \n Population: ${this.population} \n Size: ${this.size+1}`, { fontSize: '16px', fill: '#000' });
+        this.cityinfo = game.add.text(x, y, `City: ${this.name} \n Population: ${this.population} \n Size: ${this.size}`, { fontSize: '16px', fill: '#000' });
         this.cityinfo.setOrigin(0.5, 0.5);
         }
     }

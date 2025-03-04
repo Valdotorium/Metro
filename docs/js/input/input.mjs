@@ -6,10 +6,15 @@ import {touchzoom} from "./mouse.mjs"
 import { getHoveredTile,setupCurrentTileMarker} from "./selectTiles.mjs"
 import { downloadFileWeb, saveFileDesktop } from "../fileManagement/downloadFile.mjs"
 import { ImageButton } from "./ImageButton.mjs"
-import { setPopulationTileMap } from "../tilemap/statisticalTileMap.mjs"
+import { setPopulationTileMap, setNormalTilemap } from "../tilemap/statisticalTileMap.mjs"
 
 let populationMap = function populationMap(scene){
-    setPopulationTileMap(scene)
+    let gameScene = scene.scene.get("GameScene")
+    if (gameScene.statisticalTilemapIsEnabled){
+        setNormalTilemap(scene)
+    }else{
+        setPopulationTileMap(scene)
+    }
 }
 
 function updateTimeText(scene){
@@ -19,11 +24,13 @@ function updateTimeText(scene){
 }
 let handleClickTest = function handleClickTest(scene){
     let gameScene = scene.scene.get("GameScene")
-    gameScene.currentTileset++
-    if(gameScene.currentTileset >= gameScene.tilesets.length){gameScene.currentTileset = 0}
-    const newTileset = scene.sys.textures.get(gameScene.tilesets[gameScene.currentTileset].name)
-    gameScene.currentTilesetImage.setImage(newTileset)
-    //temporary, replace with your own logic when you have i
+    if(!gameScene.statisticalTilemapIsEnabled){
+        gameScene.currentTileset++
+        if(gameScene.currentTileset >= gameScene.tilesets.length){gameScene.currentTileset = 0}
+        const newTileset = scene.sys.textures.get(gameScene.tilesets[gameScene.currentTileset].name)
+        gameScene.currentTilesetImage.setImage(newTileset)
+        //temporary, replace with your own logic when you have i
+    }
 }
 
 let quitGame = function quitGame(scene){
