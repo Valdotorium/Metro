@@ -10,9 +10,10 @@ export function setupSimulation(scene){
 
 
 export function simulate(scene){
-
-    simulateTime(scene)
-    //TODO: make time simulation
-    CityGrowth(scene)
+    if (scene.simulation.speed > 0){
+        simulateTime(scene)
+        //TODO: make time simulation
+        CityGrowth(scene)
+    }
     
 }
