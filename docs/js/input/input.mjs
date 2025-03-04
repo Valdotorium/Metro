@@ -45,7 +45,7 @@ let downloadSavescene = function downloadSavescene(scene){
 let speedUp = function speedUp(scene){
     scene = scene.scene.get("GameScene")
 
-    if (scene.simulation.speed < 4){
+    if (scene.simulation.speed < 16){
         scene.simulation.speed *= 2
     }
     if (scene.simulation.speed == 0.0){
