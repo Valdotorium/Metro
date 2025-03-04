@@ -13,6 +13,7 @@ export class city {
 
         this.name = name;
         this.size = size;
+        this.textInfo(game, x, y);
 
     }
     //actually creating it
@@ -42,6 +43,13 @@ export class city {
         this.districts.push(tempdist)
         return [x, y]
     }
+    
+    textInfo(game, x, y) {
+        x = game.tileMap.tileToWorldX(x)
+        y = game.tileMap.tileToWorldY(y)
+        this.cityinfo = game.add.text(x, y, `City: ${this.name} \n Population: ${this.population} \n Size: ${this.size}`, { fontSize: '16px', fill: '#000' });
+        this.cityinfo.setOrigin(0.5, 0.5);
+        }
     }
 
 

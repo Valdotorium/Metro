@@ -18,7 +18,7 @@ let handleClickTest = function handleClickTest(scene){
     if(gameScene.currentTileset >= gameScene.tilesets.length){gameScene.currentTileset = 0}
     const newTileset = scene.sys.textures.get(gameScene.tilesets[gameScene.currentTileset].name)
     gameScene.currentTilesetImage.setImage(newTileset)
-    //temporary, replace with your own logic when you have it
+    //temporary, replace with your own logic when you have i
 }
 
 let quitGame = function quitGame(scene){

@@ -54,6 +54,7 @@ export function CityGrowth(game) {
             game.cities.get(growingcity).size++
             console.log(game.cities.get(growingcity).districts.length, growingcity)
             game.cities.get(growingcity).validnextdistricts.splice(randomIndex, 1);
+            game.cities.get(growingcity).cityinfo.setText(`City: ${growingcity} \n Population: ${game.cities.get(growingcity).population} \n Size: ${game.cities.get(growingcity).size}`)
         }
     }
 }
@@ -77,3 +78,4 @@ export function assignCityClasses(game){
     console.log(game.cities)
     
 }
+
