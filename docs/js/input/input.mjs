@@ -50,22 +50,32 @@ let downloadSavescene = function downloadSavescene(scene){
 }
 
 let speedUp = function speedUp(scene){
-    scene = scene.scene.get("GameScene")
+    let game = scene.scene.get("GameScene")
 
-    if (scene.simulation.speed < 16){
-        scene.simulation.speed *= 2
+    if (game.simulation.speed < 16){
+        game.simulation.speed *= 2
+        scene.inGameUI.backwardButton.text.setAlpha(1)
+        if(game.simulation.speed == 16){
+            scene.inGameUI.forwardButton.text.setAlpha(0.5)
+        }
     }
-    if (scene.simulation.speed == 0.0){
-        scene.simulation.speed = 0.5
+    if (game.simulation.speed == 0.0){
+        game.simulation.speed = 0.5
+        scene.inGameUI.clockIcon.setAlpha(1)
     }
 }
 let slowDown = function slowDown(scene){
-    scene = scene.scene.get("GameScene")
-    if (scene.simulation.speed == 0.5){
-        scene.simulation.speed = 0.0
+    let game = scene.scene.get("GameScene")
+    if (game.simulation.speed == 0.5){
+        game.simulation.speed = 0.0
+        scene.inGameUI.clockIcon.setAlpha(0.5)
     }
-    if (scene.simulation.speed > 0.5){
-        scene.simulation.speed /= 2
+    if (game.simulation.speed > 0.5){
+        scene.inGameUI.forwardButton.text.setAlpha(1)
+        game.simulation.speed /= 2
+        if(game.simulation.speed == 0.5){
+            scene.inGameUI.backwardButton.text.setAlpha(0.5)
+        }
     }
     
 }
@@ -79,7 +89,7 @@ export function setupUI(scene){
     scene.inGameUI.forwardButton = new ImageButton(scene, 1100,50, "ForwardIcon", 90, 70, speedUp)
     scene.inGameUI.backwardButton = new ImageButton(scene, 880,50, "BackwardIcon", 90, 70, slowDown)
     scene.inGameUI.populationMapButton = new TextButton(scene, 1000,340, "POP. MAP", textStyle, populationMap) //temporary
-    scene.add.image(990, 50, "ClockIcon").setScale(0.6,0.6)
+    scene.inGameUI.clockIcon = scene.add.image(990, 50, "ClockIcon").setScale(0.6,0.6)
     //text displaying current time
     let gameScene = scene.scene.get("GameScene")
     textStyle = { fontFamily: 'Arial Black', fontSize: 28, color: '#444444'};

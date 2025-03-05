@@ -11,7 +11,7 @@ export function loadAssets(scene){
     //scene.tilesets.push({name: "HybridTileset", image: scene.load.image("HybridTileset", "assets/images/hybridMapTiles.png")})
     scene.tilesets.push({name: "DarkTileset", image: scene.load.image("DarkTileset", "assets/images/darkTiles.png")})
 
-    scene.statisticalTilesets.push({name: "PopulationTileset", image: scene.load.image("PopulationTileset", "assets/images/populationTileset.png")})
+    scene.statisticalTilesets.push({name: "PopulationTileset", image: scene.load.image("PopulationTileset", "assets/images/gradientTiles.png")})
 
     scene.load.image("ForwardIcon", "assets/images/icons/forward.png")
     scene.load.image("BackwardIcon", "assets/images/icons/backward.png")
