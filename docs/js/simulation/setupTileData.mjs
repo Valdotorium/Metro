@@ -1,4 +1,5 @@
 import { generatePerlinNoise } from "../generator/noise.js"
+import { makeEmptyTileMap } from "../tilemap/makeEmptyTilemap.mjs"
 export function setupTileData(game){
     let mapSize = game.tileMapOptions.size
     //make a 2d array with size mapSize of objects with a population parameter 
@@ -10,9 +11,8 @@ export function setupTileData(game){
         }
     }
     //populate tile data with data
-
     tileData = generatePopulations(game, tileData)
-
+    tileData = generateHighways(game, tileData)
     return tileData
 }
 
@@ -65,5 +65,10 @@ function generatePopulations(game, tileData){
         } 
     }
     return tileData
+
+}
+function generateHighways(game, tileData){
+    //TODO: #16 design highway data and rendering structures @Valdotorium
+    return tileData;
 
 }

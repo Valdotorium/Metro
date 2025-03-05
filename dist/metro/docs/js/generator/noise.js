@@ -33,8 +33,6 @@ export function generatePerlinNoise(targetSize, smoothness){
             zoominNoise[i][j] = noiseValue;
         } 
     }
-    console.log(baseNoise)
-    console.log(zoominNoise)
     return zoominNoise;
 
 

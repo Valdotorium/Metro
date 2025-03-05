@@ -1,61 +1,71 @@
 import { Tilemap } from "../generator/generate.mjs"
 import { setupTileData } from "../simulation/setupTileData.mjs"
-import { generateCities, assignCityClasses } from "../simulation/citymanegment.mjs"
-export function setupTilemap(game){
+import { generateCities, assignCityClasses, loadCityTextInfos } from "../simulation/citymanegment.mjs"
+import { makeEmptyTileMap } from "./makeEmptyTilemap.mjs"
+
+function setupMainTileMap(scene){
     //get the tilemap size
-    let mapSize = game.tileMapOptions.size
+    let mapSize = scene.tileMapOptions.size
     console.log(mapSize)
     if (mapSize < 10){ mapSize = 10 }
     if (mapSize > 300){ mapSize = 300 }
 
     console.log("map size is: ", mapSize)
     //generate a tilemap array with values between 0 and 1
-    if (!game.options.loadMap){
-        game.generatedTilemap =Tilemap("complex",mapSize)
+    if (!scene.options.loadMap){
+        scene.generatedTilemap =Tilemap(scene.options.terrainGenerator,mapSize)
     } else {
-        game.generatedTilemap = game.loadedGameData.tileMap
+        scene.generatedTilemap = scene.loadedGameData.tileMap
     }
     //draw a blue rectangle behind the tilemap
-    game.add.rectangle(4,4, mapSize * 24, mapSize * 24, 0xb4cee0).setOrigin(0,0).setDepth(-1);
+    scene.add.rectangle(4,4, mapSize * 24, mapSize * 24, 0xb4cee0).setOrigin(0,0).setDepth(-1);
 
-    //switch rows and columns in game.generatedTilemap and store the rotated tilemap in game.RotatedGeneratedTilemap, because phaser stores the rows and colums differently
-    let rotatedGeneratedTilemap = game.generatedTilemap.map((row, col) => row.map((tile, index) => game.generatedTilemap[index][col]))
-    game.RotatedGeneratedTilemap = rotatedGeneratedTilemap
+    //switch rows and columns in scene.generatedTilemap and store the rotated tilemap in scene.RotatedGeneratedTilemap, because phaser stores the rows and colums differently
+    scene.RotatedGeneratedTilemap = scene.generatedTilemap.map((row, col) => row.map((tile, index) => scene.generatedTilemap[index][col]))
 
     //tiles sized 8x8 are placed in a 6x6 grid, allowed to overlap 1 px each side
-    game.tileMap = game.make.tilemap({ data: game.RotatedGeneratedTilemap, tileWidth: 6, tileHeight: 6, width: mapSize, height: mapSize}).setLayerTileSize(8,8)
-    game.currentTilesetImage = game.tileMap.addTilesetImage(game.tilesets[0].name, game.tilesets[0].name, 8, 8)
-
-    game.currentTileset = 0
-    const layer = game.tileMap.createLayer(0, game.tileMap.tilesets[0],0,0);
+    scene.tileMap = scene.make.tilemap({ data: scene.RotatedGeneratedTilemap, tileWidth: 6, tileHeight: 6, width: mapSize, height: mapSize}).setLayerTileSize(8,8)
+    scene.currentTilesetImage = scene.tileMap.addTilesetImage(scene.tilesets[0].name, scene.tilesets[0].name, 8, 8)
+    scene.currentTileset = 0
+    const layer = scene.tileMap.createLayer(0, scene.tileMap.tilesets[0],0,0);
     layer.setScale(4);
-    game.tileMap.layer = layer
+    scene.tileMap.layer = layer
 
     //make tilemap interactive
-    game.currentSelectedTile = {x: 0, y: 0}
-    game.input.on("pointerdown", function(pointer, gameObject)
+    scene.currentSelectedTile = {x: 0, y: 0}
+    scene.input.on("pointerdown", function(pointer, sceneObject)
     {
-        game.currentSelectedTile = game.currentHoveredTile
+        scene.currentSelectedTile = scene.currentHoveredTile
     })
     //configure the camera
-    game.cameras.main.setBounds(-600,-400, layer.width * layer.scale + 1200, layer.height * layer.scale + 800);
-    game.cameras.main.zoom = 2
+    scene.cameras.main.setBounds(-600,-400, layer.width * layer.scale + 1200, layer.height * layer.scale + 800);
+    scene.cameras.main.zoom = 2
 
-    if (!game.options.loadMap){
+}
+function setupOtherTilemaps(scene){
+    //get the tilemap size
+    if (!scene.options.loadMap){
         //generating the tileData array (population, etc)
-        game.tileData = setupTileData(game)      
+        scene.tileData = setupTileData(scene)      
     } else {
-        game.tileData = game.loadedGameData.tileData
+        scene.tileData = scene.loadedGameData.tileData
     }
-    if (!game.options.loadMap){
+    if (!scene.options.loadMap){
         //generating the tileData array (population, etc)
-        generateCities(game)      
+        generateCities(scene)      
     } else {
-        game.cities = new Map(Object.entries(game.loadedGameData.cities))
+        scene.cities = new Map(Object.entries(scene.loadedGameData.cities))
         //assign all values in cities to city class
-        assignCityClasses(game)
+        assignCityClasses(scene)
+        //load city text info
+        loadCityTextInfos(scene)
         
-        console.log(game.cities)
-        game.cityNames = Array.from(game.cities.keys())
+        console.log(scene.cities)
+
     }
+}
+export function setupTilemaps(scene){
+    setupMainTileMap(scene)
+    
+    setupOtherTilemaps(scene)
 }

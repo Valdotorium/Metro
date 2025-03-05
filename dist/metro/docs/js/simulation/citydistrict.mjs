@@ -15,29 +15,33 @@ export class cityDistrict {
         if (game.generatedTilemap[this.posx][this.posy] < 4) {
             game.generatedTilemap[this.posx][this.posy] = 10;
             game.tileMap.putTileAt(10, this.posx, this.posy)
+            game.tileData[this.posx][this.posy].population = Math.round(game.tileData[this.posx][this.posy].population * 1.25 + 8)
         }
         this.population = game.tileData[this.posx][this.posy].population;
     }
 
     addNeighbourTiles(game) {
-        let posx = this.posx;
-        let posy = this.posy;
-        //tiles are valid if their type is 0,1,2 or 3
-        if (0 <= game.generatedTilemap[posx+1][posy] && game.generatedTilemap[posx + 1][posy+0] <= 4) {
-            let neighbour = [posx + 1, posy];
-            this.validNeighbours.push(neighbour);
-        }
-        if (0 <= game.generatedTilemap[posx][posy - 1] && game.generatedTilemap[posx][posy - 1] <= 4) {
-            let neighbour = [posx, posy - 1];
-            this.validNeighbours.push(neighbour);
-        }
-        if (0 <= game.generatedTilemap[posx - 1][posy] && game.generatedTilemap[posx - 1][posy] <= 4) {
-            let neighbour = [posx - 1, posy];
-            this.validNeighbours.push(neighbour);
-        }
-        if (0 <= game.generatedTilemap[posx][posy + 1] && game.generatedTilemap[posx][posy + 1] <= 4) {
-            let neighbour = [posx, posy + 1];
-            this.validNeighbours.push(neighbour);
+        //only do that if the coordinates are within mapSize
+        if(0 < this.posx < game.tileMapOptions.size - 1 && 0 < this.posy < game.tileMapOptions.size - 1){
+            let posx = this.posx;
+            let posy = this.posy;
+            //tiles are valid if their type is 0,1,2 or 3
+            if (0 <= game.generatedTilemap[posx+1][posy] && game.generatedTilemap[posx + 1][posy+0] <= 4) {
+                let neighbour = [posx + 1, posy];
+                this.validNeighbours.push(neighbour);
+            }
+            if (0 <= game.generatedTilemap[posx][posy - 1] && game.generatedTilemap[posx][posy - 1] <= 4) {
+                let neighbour = [posx, posy - 1];
+                this.validNeighbours.push(neighbour);
+            }
+            if (0 <= game.generatedTilemap[posx - 1][posy] && game.generatedTilemap[posx - 1][posy] <= 4) {
+                let neighbour = [posx - 1, posy];
+                this.validNeighbours.push(neighbour);
+            }
+            if (0 <= game.generatedTilemap[posx][posy + 1] && game.generatedTilemap[posx][posy + 1] <= 4) {
+                let neighbour = [posx, posy + 1];
+                this.validNeighbours.push(neighbour);
+            }
         }
     }
 }

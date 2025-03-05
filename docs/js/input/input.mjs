@@ -8,6 +8,7 @@ import { getHoveredTile,setupCurrentTileMarker} from "./selectTiles.mjs"
 import { downloadFileWeb, saveFileDesktop } from "../fileManagement/downloadFile.mjs"
 import { ImageButton } from "./ImageButton.mjs"
 import { setPopulationTileMap, setNormalTilemap } from "../tilemap/statisticalTileMap.mjs"
+import { placeHighway } from "./highwayConstruction.mjs"
 
 let populationMap = function populationMap(scene){
     if ( scene.inGameUI.populationMapButton.state == false){
@@ -112,6 +113,8 @@ export function setupControls(scene){
     mousewheelzoom(scene)
     setupKeyboard(scene)
     setupCurrentTileMarker(scene)
+    scene.mouse = {}
+    scene.mouse.wasDown = false
 }
 
 export function updateControls (scene) {
@@ -123,7 +126,7 @@ export function updateControls (scene) {
         if (UIscene.inGameUI.currentActiveTool== "none"){
             dragCamera(scene)
         } else if (UIscene.inGameUI.currentActiveTool == "construction"){
-            //add construction logic here
+            placeHighway(scene)
         }
         scene.mouse.worldPoint = scene.input.activePointer.positionToCamera(scene.cameras.main);
         getHoveredTile(scene)

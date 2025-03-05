@@ -3,16 +3,22 @@ let cameraDragStartX;
 let cameraDragStartY;
 export function updateMouse(game){
     if(!game.input.pointer2.isDown){
-    const camera = game.cameras.main;
-    let pointer = game.input.activePointer;
+        const camera = game.cameras.main;
+        let pointer = game.input.activePointer;
 
-    //temporary
-    game.mouse = game.input.activePointer 
-    game.mouse.x = pointer.x
-    game.mouse.y = pointer.y
+        //temporary
+
+        game.mouse = game.input.activePointer 
+        game.mouse.x = pointer.x
+        game.mouse.y = pointer.y
+        game.mouse.justDown = pointer.isDown && !game.mouse.wasDown;
+        if (game.mouse.isDown){
+            game.mouse.wasDown = true
+        } else {
+            game.mouse.wasDown = false
+        }
+
     }
-
-
 }
 export function dragCamera(game){
     const camera = game.cameras.main;

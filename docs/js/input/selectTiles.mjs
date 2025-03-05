@@ -8,8 +8,8 @@ export function setupCurrentTileMarker(scene){
     scene.currentTileMarker.lineStyle(thickness, color, alpha);
 
     scene.currentTileMarker.strokeRect(4,4, scene.tileMap.tileWidth * 2* scene.cameras.main.zoom, scene.tileMap.tileHeight * 2* scene.cameras.main.zoom);
+} 
 
-}
 export function getHoveredTile(scene){
     //get the tile the mouse currently is over
 

@@ -1,4 +1,4 @@
-import { setupTilemap } from "./tilemap/create.mjs";
+import { setupTilemaps } from "./tilemap/create.mjs";
 import { configureGame, loadAssets, loadStartMenuAssets } from "./fileManagement/load.mjs";
 import { updateControls, setupControls, setupKeyboard,setupUI, updateUI } from "./input/input.mjs";
 import { debugText } from "./ui/debugText.mjs";
@@ -23,7 +23,7 @@ class GameScene extends Phaser.Scene{
     {
         //setting up the game
         this.graphics = this.add.graphics();
-        setupTilemap(this)
+        setupTilemaps(this)
         setupSimulation(this)
         this.frame = 0
         this.input.addPointer(2)
@@ -60,13 +60,14 @@ class GameUIScene extends Phaser.Scene{
         this.tileMapOptions = this.scene.get("StartMenuScene").tileMapOptions
         setupUI(this)
         //the debug text object
-        const textStyle = { fontFamily: 'Arial Black', fontSize: 24, color: '#444444'};
-        this.text = this.add.text(20,20,"",textStyle).setScrollFactor(0);
+        if(this.options.debug ){
+            const textStyle = { fontFamily: 'Arial Black', fontSize: 24, color: '#444444'};
+            this.text = this.add.text(20,20,"",textStyle).setScrollFactor(0);
+        }
     }
     update(){
-        const gameScene = this.scene.get("GameScene")  
         updateUI(this)     
-        if (gameScene.options.debug){
+        if (this.options.debug){
             debugText(this)
         }
     }

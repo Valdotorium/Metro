@@ -22,7 +22,7 @@ export class cityDistrict {
 
     addNeighbourTiles(game) {
         //only do that if the coordinates are within mapSize
-        if(0 < this.posx < game.tileMapOptions.size && 0 < this.posy < game.tileMapOptions.size){
+        if(0 < this.posx < game.tileMapOptions.size - 1 && 0 < this.posy < game.tileMapOptions.size - 1){
             let posx = this.posx;
             let posy = this.posy;
             //tiles are valid if their type is 0,1,2 or 3

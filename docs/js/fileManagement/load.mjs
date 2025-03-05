@@ -28,6 +28,7 @@ export function configureGame(scene){
     scene.options = {}
     //manually setting scene constants
     scene.options.loadMap = false
+    scene.options.terrainGenerator = "complexBiomes"
     scene.options.debug = true
 
     scene.tileMapOptions = {}

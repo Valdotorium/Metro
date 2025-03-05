@@ -1,6 +1,7 @@
 import { saveGame } from "./gameDataToJSON.mjs";
 
 export function downloadFileWeb(game) {
+  //make a invisible link and automatically click it to download a file
     var element = document.createElement('a');
     element.setAttribute('href', 'data:json/plain;charset=utf-8,' + saveGame(game.scene.get("GameScene")));
     element.setAttribute('download', "savegame.json");
@@ -14,7 +15,7 @@ export function downloadFileWeb(game) {
   }
 
 export async function saveFileDesktop(game) {
-
+  //make a json array out of necessary data, then open a file dialog
   let data = saveGame(game.scene.get("GameScene"))
   
   Neutralino.init();

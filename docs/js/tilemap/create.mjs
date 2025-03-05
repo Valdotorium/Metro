@@ -1,7 +1,9 @@
 import { Tilemap } from "../generator/generate.mjs"
 import { setupTileData } from "../simulation/setupTileData.mjs"
 import { generateCities, assignCityClasses, loadCityTextInfos } from "../simulation/citymanegment.mjs"
-export function setupTilemap(scene){
+import { makeEmptyTileMap } from "./makeEmptyTilemap.mjs"
+
+function setupMainTileMap(scene){
     //get the tilemap size
     let mapSize = scene.tileMapOptions.size
     console.log(mapSize)
@@ -11,7 +13,7 @@ export function setupTilemap(scene){
     console.log("map size is: ", mapSize)
     //generate a tilemap array with values between 0 and 1
     if (!scene.options.loadMap){
-        scene.generatedTilemap =Tilemap("complex",mapSize)
+        scene.generatedTilemap =Tilemap(scene.options.terrainGenerator,mapSize)
     } else {
         scene.generatedTilemap = scene.loadedGameData.tileMap
     }
@@ -39,6 +41,9 @@ export function setupTilemap(scene){
     scene.cameras.main.setBounds(-600,-400, layer.width * layer.scale + 1200, layer.height * layer.scale + 800);
     scene.cameras.main.zoom = 2
 
+}
+function setupOtherTilemaps(scene){
+    //get the tilemap size
     if (!scene.options.loadMap){
         //generating the tileData array (population, etc)
         scene.tileData = setupTileData(scene)      
@@ -58,4 +63,9 @@ export function setupTilemap(scene){
         console.log(scene.cities)
 
     }
+}
+export function setupTilemaps(scene){
+    setupMainTileMap(scene)
+    
+    setupOtherTilemaps(scene)
 }

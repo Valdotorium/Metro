@@ -1,17 +1,28 @@
-
 let counter = 0;
 let cameraDragStartX;
 let cameraDragStartY;
-export function dragCamera(game){
+export function updateMouse(game){
     if(!game.input.pointer2.isDown){
+        const camera = game.cameras.main;
+        let pointer = game.input.activePointer;
+
+        //temporary
+
+        game.mouse = game.input.activePointer 
+        game.mouse.x = pointer.x
+        game.mouse.y = pointer.y
+        game.mouse.justDown = pointer.isDown && !game.mouse.wasDown;
+        if (game.mouse.isDown){
+            game.mouse.wasDown = true
+        } else {
+            game.mouse.wasDown = false
+        }
+
+    }
+}
+export function dragCamera(game){
     const camera = game.cameras.main;
     let pointer = game.input.activePointer;
-
-    //temporary
-    game.mouse = game.input.activePointer 
-    game.mouse.x = pointer.x
-    game.mouse.y = pointer.y
-
     if (pointer.isDown&&counter==1) {
         camera.scrollX = camera.scrollX + ((cameraDragStartX - pointer.x)/camera.zoom*2)
         camera.scrollY = camera.scrollY + ((cameraDragStartY - pointer.y)/camera.zoom*2)
@@ -22,8 +33,7 @@ export function dragCamera(game){
         counter++
     }else{
         counter = 0
-    }}
-
+    }
 }
 export function mousewheelzoom(game){
     game.input.on('wheel', (pointer, gameObjects, deltaX, deltaY, deltaZ) => {
