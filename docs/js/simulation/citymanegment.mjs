@@ -81,3 +81,13 @@ export function assignCityClasses(game){
     
 }
 
+export function loadCityTextInfos(scene){
+    scene.cityNames = Array.from(scene.cities.keys())
+    //call the textInfo function for each city object in the map scene.cities
+    //TODO: support creating new cities
+    scene.cityNames.forEach(cityName => {
+        let city = scene.cities.get(cityName)
+        city.textInfo(scene, city.x, city.y)
+    })
+}
+

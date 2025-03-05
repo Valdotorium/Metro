@@ -1,6 +1,5 @@
 export async function loadJSONFileWeb(game){
-
-
+    //create a input element and automatically click 
     var link = document.createElement("input");
     link.type = "file";
     document.body.appendChild(link);

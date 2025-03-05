@@ -12,9 +12,6 @@ class GameScene extends Phaser.Scene{
     {
         super({ key: 'GameScene' , active: false});
     }
-    graphics;    
-    tileMap;   
-    currentTileMarker;
     preload ()
     {
         //load options
@@ -26,10 +23,8 @@ class GameScene extends Phaser.Scene{
     {
         //setting up the game
         this.graphics = this.add.graphics();
-        
         setupTilemap(this)
         setupSimulation(this)
-
         this.frame = 0
         this.input.addPointer(2)
         if (this.frame == 0){
@@ -49,7 +44,7 @@ class GameScene extends Phaser.Scene{
         if (this.frame == 1){
             this.scene.launch('GameUIScene');
         }
-        //  Update the controls
+        //  Update the controls and simulation
         updateControls(this);
         simulate(this)
     }
@@ -64,7 +59,6 @@ class GameUIScene extends Phaser.Scene{
         this.options = this.scene.get("StartMenuScene").options
         this.tileMapOptions = this.scene.get("StartMenuScene").tileMapOptions
         setupUI(this)
-        console.log(this.inGameUI)
         //the debug text object
         const textStyle = { fontFamily: 'Arial Black', fontSize: 24, color: '#444444'};
         this.text = this.add.text(20,20,"",textStyle).setScrollFactor(0);
@@ -89,7 +83,6 @@ class SettingsScene extends Phaser.Scene {
         console.log(game.options)
         this.scene.stop("GameScene")
         setupGameSettings(this)
-
     }
     update(){
         this.frame++

@@ -115,6 +115,7 @@ export function setupControls(scene){
 }
 
 export function updateControls (scene) {
+    //this fuction is called from the GAME scene
     try{
         let UIscene = scene.scene.get("GameUIScene")
         updateMouse(scene)
@@ -128,6 +129,7 @@ export function updateControls (scene) {
         getHoveredTile(scene)
         touchzoom(scene)
     } catch {
+        //if getting UIscene.inGameUI.currentActiveTool fails
         updateMouse(scene)
         keyboardControls(scene)
         dragCamera(scene)
@@ -144,6 +146,7 @@ export function updateUI(scene){
 
 //sets up all the keyboard keybinds that are relevant to the scene using keycodes
 export function setupKeyboard(scene){
+    //this fuction is called from the GAME scene
     scene.keys = new Map()
     //for all keys
     for(let i = 65; i <= 90; i++){

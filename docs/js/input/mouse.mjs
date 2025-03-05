@@ -1,4 +1,3 @@
-
 let counter = 0;
 let cameraDragStartX;
 let cameraDragStartY;

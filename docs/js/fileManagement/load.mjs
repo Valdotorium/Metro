@@ -2,6 +2,8 @@ import { initializeDesktopApp } from "./initializeNeutralino.mjs"
 
 //runs when the game SCENE loaded
 export function loadAssets(scene){
+    //loading all game scene assets
+    
     scene.tilesets = []
     scene.statisticalTilesets = []
     scene.statisticalTilemapIsEnabled = false

@@ -1,6 +1,6 @@
 import { Tilemap } from "../generator/generate.mjs"
 import { setupTileData } from "../simulation/setupTileData.mjs"
-import { generateCities, assignCityClasses } from "../simulation/citymanegment.mjs"
+import { generateCities, assignCityClasses, loadCityTextInfos } from "../simulation/citymanegment.mjs"
 export function setupTilemap(scene){
     //get the tilemap size
     let mapSize = scene.tileMapOptions.size
@@ -19,13 +19,11 @@ export function setupTilemap(scene){
     scene.add.rectangle(4,4, mapSize * 24, mapSize * 24, 0xb4cee0).setOrigin(0,0).setDepth(-1);
 
     //switch rows and columns in scene.generatedTilemap and store the rotated tilemap in scene.RotatedGeneratedTilemap, because phaser stores the rows and colums differently
-    let rotatedGeneratedTilemap = scene.generatedTilemap.map((row, col) => row.map((tile, index) => scene.generatedTilemap[index][col]))
-    scene.RotatedGeneratedTilemap = rotatedGeneratedTilemap
+    scene.RotatedGeneratedTilemap = scene.generatedTilemap.map((row, col) => row.map((tile, index) => scene.generatedTilemap[index][col]))
 
     //tiles sized 8x8 are placed in a 6x6 grid, allowed to overlap 1 px each side
     scene.tileMap = scene.make.tilemap({ data: scene.RotatedGeneratedTilemap, tileWidth: 6, tileHeight: 6, width: mapSize, height: mapSize}).setLayerTileSize(8,8)
     scene.currentTilesetImage = scene.tileMap.addTilesetImage(scene.tilesets[0].name, scene.tilesets[0].name, 8, 8)
-
     scene.currentTileset = 0
     const layer = scene.tileMap.createLayer(0, scene.tileMap.tilesets[0],0,0);
     layer.setScale(4);
@@ -52,17 +50,12 @@ export function setupTilemap(scene){
         generateCities(scene)      
     } else {
         scene.cities = new Map(Object.entries(scene.loadedGameData.cities))
-
         //assign all values in cities to city class
         assignCityClasses(scene)
+        //load city text info
+        loadCityTextInfos(scene)
         
         console.log(scene.cities)
-        scene.cityNames = Array.from(scene.cities.keys())
-        //call the textInfo function for each city object in the map scene.cities
-        //TODO: support creating new cities
-        scene.cityNames.forEach(cityName => {
-            let city = scene.cities.get(cityName)
-            city.textInfo(scene, city.x, city.y)
-        })
+
     }
 }
