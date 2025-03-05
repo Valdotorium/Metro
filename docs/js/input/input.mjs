@@ -1,6 +1,7 @@
 import {keyboardControls} from "./keybinds.mjs"
 import {dragCamera, updateMouse} from "./mouse.mjs"
 import {TextButton} from "./TextButton.mjs"
+import {Checkbox} from "./Checkbox.mjs"
 import {mousewheelzoom} from "./mouse.mjs"
 import {touchzoom} from "./mouse.mjs"
 import { getHoveredTile,setupCurrentTileMarker} from "./selectTiles.mjs"
@@ -9,8 +10,7 @@ import { ImageButton } from "./ImageButton.mjs"
 import { setPopulationTileMap, setNormalTilemap } from "../tilemap/statisticalTileMap.mjs"
 
 let populationMap = function populationMap(scene){
-    let gameScene = scene.scene.get("GameScene")
-    if (gameScene.statisticalTilemapIsEnabled){
+    if ( scene.inGameUI.populationMapButton.state == false){
         setNormalTilemap(scene)
     }else{
         setPopulationTileMap(scene)
@@ -99,7 +99,7 @@ export function setupUI(scene){
     scene.inGameUI.saveTextButton = new TextButton(scene, 1000, 280,"SAVE GAME", textStyle, downloadSavescene) //temporary
     scene.inGameUI.forwardButton = new ImageButton(scene, 1100,50, "ForwardIcon", 90, 70, speedUp)
     scene.inGameUI.backwardButton = new ImageButton(scene, 880,50, "BackwardIcon", 90, 70, slowDown)
-    scene.inGameUI.populationMapButton = new TextButton(scene, 1000,340, "POP. MAP", textStyle, populationMap) //temporary
+    scene.inGameUI.populationMapButton = new Checkbox(scene, 1000,340, "POP. MAP", textStyle, populationMap, false) //temporary
     scene.inGameUI.constructionButton = new TextButton(scene, 1000, 400, "BUILD TOOL", textStyle, setConstructionTool) //temporary
     scene.inGameUI.clockIcon = scene.add.image(990, 50, "ClockIcon").setScale(0.6,0.6)
     //text displaying current time
