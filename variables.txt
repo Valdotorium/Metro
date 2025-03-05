@@ -5,7 +5,8 @@ game.currentHoveredTileIndexes - {x:int, y:int} - position of the current hovere
 game.currentSelectedTile - the tile currently selected by the active pointer
 game.mouse - {x: int, y: int, isDown: boolean} - the active pointer wrapped cuz why not
 game.startMenuUI - {} - contains all the stuff for the game start screen (buttons, text, functions)
-game.ingameUI - {} - contains all the stuff for the ingame UI
+game.inGameUI - {} - contains all the stuff for the ingame UI
+game.inGameUI.curentActiveTool - the current activated tool , either "none" or "buildHighway"
 
 
 -TILEMAP-

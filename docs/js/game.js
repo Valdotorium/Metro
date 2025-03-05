@@ -43,16 +43,15 @@ class GameScene extends Phaser.Scene{
         this.windowWidth = window.innerWidth;
         this.windowHeight = window.innerHeight;
 
-        //  Update the controls
-        updateControls(this);
-        simulate(this)
-
         //draw a tilemap
         this.frame++
 
         if (this.frame == 1){
             this.scene.launch('GameUIScene');
         }
+        //  Update the controls
+        updateControls(this);
+        simulate(this)
     }
 }
 class GameUIScene extends Phaser.Scene{
@@ -64,9 +63,8 @@ class GameUIScene extends Phaser.Scene{
         //load options
         this.options = this.scene.get("StartMenuScene").options
         this.tileMapOptions = this.scene.get("StartMenuScene").tileMapOptions
-        //i do not know why i have to do this
-        const gameScene = this.scene.get("GameScene")
         setupUI(this)
+        console.log(this.inGameUI)
         //the debug text object
         const textStyle = { fontFamily: 'Arial Black', fontSize: 24, color: '#444444'};
         this.text = this.add.text(20,20,"",textStyle).setScrollFactor(0);

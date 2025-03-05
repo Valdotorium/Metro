@@ -1,5 +1,5 @@
 import {keyboardControls} from "./keybinds.mjs"
-import {dragCamera} from "./mouse.mjs"
+import {dragCamera, updateMouse} from "./mouse.mjs"
 import {TextButton} from "./TextButton.mjs"
 import {mousewheelzoom} from "./mouse.mjs"
 import {touchzoom} from "./mouse.mjs"
@@ -79,8 +79,19 @@ let slowDown = function slowDown(scene){
     }
     
 }
+
+let setConstructionTool = function setConstructionTool(scene){
+    if(scene.inGameUI.currentActiveTool == "construction"){
+        scene.inGameUI.currentActiveTool = "none"
+    } else {
+        scene.inGameUI.currentActiveTool = "construction"
+    }
+    let game = scene.scene.get("GameScene")
+    console.log(scene.inGameUI.currentActiveTool)
+}
 export function setupUI(scene){
     scene.inGameUI = {}
+    scene.inGameUI.currentActiveTool = "none"
     let textStyle = { fontFamily: 'Arial Black', fontSize: 28, color: '#BBBBBB'};
     //the buttons
     scene.inGameUI.testTextButton = new TextButton(scene, 1000, 160,"SWITCH TILESET",textStyle, handleClickTest) //temporary
@@ -89,6 +100,7 @@ export function setupUI(scene){
     scene.inGameUI.forwardButton = new ImageButton(scene, 1100,50, "ForwardIcon", 90, 70, speedUp)
     scene.inGameUI.backwardButton = new ImageButton(scene, 880,50, "BackwardIcon", 90, 70, slowDown)
     scene.inGameUI.populationMapButton = new TextButton(scene, 1000,340, "POP. MAP", textStyle, populationMap) //temporary
+    scene.inGameUI.constructionButton = new TextButton(scene, 1000, 400, "BUILD TOOL", textStyle, setConstructionTool) //temporary
     scene.inGameUI.clockIcon = scene.add.image(990, 50, "ClockIcon").setScale(0.6,0.6)
     //text displaying current time
     let gameScene = scene.scene.get("GameScene")
@@ -103,11 +115,27 @@ export function setupControls(scene){
 }
 
 export function updateControls (scene) {
-    keyboardControls(scene)
-    dragCamera(scene)
-    scene.mouse.worldPoint = scene.input.activePointer.positionToCamera(scene.cameras.main);
-    getHoveredTile(scene)
-    touchzoom(scene)
+    try{
+        let UIscene = scene.scene.get("GameUIScene")
+        updateMouse(scene)
+        keyboardControls(scene)
+        if (UIscene.inGameUI.currentActiveTool== "none"){
+            dragCamera(scene)
+        } else if (UIscene.inGameUI.currentActiveTool == "construction"){
+            //add construction logic here
+        }
+        scene.mouse.worldPoint = scene.input.activePointer.positionToCamera(scene.cameras.main);
+        getHoveredTile(scene)
+        touchzoom(scene)
+    } catch {
+        updateMouse(scene)
+        keyboardControls(scene)
+        dragCamera(scene)
+        scene.mouse.worldPoint = scene.input.activePointer.positionToCamera(scene.cameras.main);
+        getHoveredTile(scene)
+        touchzoom(scene)
+    }
+
 }
 
 export function updateUI(scene){
