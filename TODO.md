@@ -2,7 +2,7 @@ List of Todos in the near future.
 
 TODO:
 
--UI Interactive Elements: select from List (like this:LABEL: < [ELEMENT]>) @Igros10
+-some new terrain generators @Igros10?
 
 -UI containers
 
@@ -10,9 +10,9 @@ TODO:
 
 -passenger class @Valdotorium
 
--transit stations, highways 
+-transit stations, railway lines
 
--highway data structure @Valdotorium
+-railway + train data structure @Valdotorium
 
 -city degeneration and densification
 
