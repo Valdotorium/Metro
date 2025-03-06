@@ -3,3 +3,5 @@ everything that has to do with
 belongs here
 
 debugText.mjs: stores the debug texts for the game
+startMenu.mjs - the start screen of the game
+gameSettings.mjs - the settings menu

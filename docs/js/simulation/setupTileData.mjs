@@ -22,7 +22,7 @@ function generatePopulations(game, tileData){
     let mapSize = game.tileMapOptions.size
     let detailFactor = 0.75 + 0.25 / (mapSize / 75)
     let populationNoise = generatePerlinNoise
-    //generate the noise that roughly sets the coastline
+    //generate the noise that controls natural population density at the game start
     let baseNoise = generatePerlinNoise(mapSize,Math.round(20 / detailFactor))
 
     //generate more complex noise

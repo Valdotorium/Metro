@@ -1,6 +1,6 @@
 
 import { generatePerlinNoise } from "./noise.js";
-
+//default terrain, either with biomes or without
 export function generateComplexTilemapWithBiomes(size){
     //detail factor of the terrain, lower the higher the target size is
     let detailFactor = 0.5 + 0.5 / (size / 75)

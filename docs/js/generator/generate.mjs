@@ -1,8 +1,8 @@
 import { generateSimpleTilemap } from "./simpleTerrain.mjs"
 import { generateComplexTilemap, generateComplexTilemapWithBiomes } from "./complexTerrain.mjs"
 
-
 export function Tilemap(generator, size){
+    //generating a tilemap with the given generator and size
     let map;
     if(generator == "simple"){
         map = generateSimpleTilemap(size, 10)
@@ -15,5 +15,4 @@ export function Tilemap(generator, size){
         map = generateComplexTilemap(size)
     }
     return map
-
 }

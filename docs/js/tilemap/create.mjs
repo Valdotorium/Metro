@@ -43,7 +43,7 @@ function setupMainTileMap(scene){
 
 }
 function setupOtherTilemaps(scene){
-    //get the tilemap size
+    //setup the tileData array
     if (!scene.options.loadMap){
         //generating the tileData array (population, etc)
         scene.tileData = setupTileData(scene)      

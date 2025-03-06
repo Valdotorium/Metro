@@ -2,48 +2,48 @@ import { TextButton } from "../input/TextButton.mjs"
 import { loadClientSaveGame } from "../fileManagement/loadSaveGame.mjs"
 
 
-let launchGame = function launchGame(game) {
+let launchscene = function launchscene(scene) {
     //temporary, replace with your own logic when you have it
-    game.scene.start("GameScene")
-    game.scene.stop("StartMenuScene")
+    scene.scene.start("sceneScene")
+    scene.scene.stop("StartMenuScene")
 }
 
-let launchSettings = function launchSettings(game){
-    game.scene.start("SettingsScene")
-    game.scene.stop("StartMenuScene")
+let launchSettings = function launchSettings(scene){
+    scene.scene.start("SettingsScene")
+    scene.scene.stop("StartMenuScene")
 }
 
-let loadSaveGame = async function loadSaveGame(game){
-    game.options.loadMap = true
-    game.loadedGameData = await loadClientSaveGame(game)
+let loadSaveGame = async function loadSaveGame(scene){
+    scene.options.loadMap = true
+    scene.loadedsceneData = await loadClientSaveGame(scene)
     
 }
 
-export function setupStartMenu(game){
+export function setupStartMenu(scene){
     //menu background image
-    game.startMenuUI = {}
-    game.options.loadMap = false
-    game.startMenuUI.startMenuBackground = game.add.image(0,0, "startMenuBackground").setScale(1.2)
-    game.startMenuUI.startMenuBackground.setOrigin(0,0)
-    //start game TextButton
+    scene.startMenuUI = {}
+    scene.options.loadMap = false
+    scene.startMenuUI.startMenuBackground = scene.add.image(0,0, "startMenuBackground").setScale(1.2)
+    scene.startMenuUI.startMenuBackground.setOrigin(0,0)
+    //start scene TextButton
     let textStyle = { fontFamily: 'Arial Black', fontSize: 40, color: '#888888'};
-    game.startMenuUI.startTextButton = new TextButton(game, 600, 420,"START GAME",textStyle, launchGame)
+    scene.startMenuUI.startTextButton = new TextButton(scene, 600, 420,"START GAME",textStyle, launchscene)
     //settings TextButton
-    game.startMenuUI.settingsTextButton = new TextButton(game, 600, 500,"SETTINGS",textStyle, launchSettings)
-    //load save game TextButton
-    game.startMenuUI.loadSaveGameTextButton = new TextButton(game, 600, 580,"LOAD SAVE GAME", textStyle, loadSaveGame)
-    //game title with text effects
+    scene.startMenuUI.settingsTextButton = new TextButton(scene, 600, 500,"SETTINGS",textStyle, launchSettings)
+    //load save scene TextButton
+    scene.startMenuUI.loadSavesceneTextButton = new TextButton(scene, 600, 580,"LOAD SAVE GAME", textStyle, loadSaveGame)
+    //scene title with text effects
     textStyle = { fontFamily: 'Arial Black', fontSize: 150, color: '#555555'};
-    game.startMenuUI.title = game.add.text(297, 97, game.name, textStyle);
+    scene.startMenuUI.title = scene.add.text(297, 97, scene.name, textStyle);
     textStyle = { fontFamily: 'Arial Black', fontSize: 150, color: '#FFFFFF'};
-    game.startMenuUI.title = game.add.text(303, 103, game.name, textStyle);
+    scene.startMenuUI.title = scene.add.text(303, 103, scene.name, textStyle);
     textStyle = { fontFamily: 'Arial Black', fontSize: 150, color: '#BBBBBB'};
-    game.startMenuUI.title = game.add.text(300, 100, game.name, textStyle);
+    scene.startMenuUI.title = scene.add.text(300, 100, scene.name, textStyle);
 
 }
 
 
-export function updateStartMenu(game){
+export function updateStartMenu(scene){
     //slow circular motion of background image
-    game.startMenuUI.startMenuBackground.setOrigin(0.2+Math.sin(game.frame * 0.001)/6,0.2+Math.cos(game.frame * 0.001)/6)
+    scene.startMenuUI.startMenuBackground.setOrigin(0.2+Math.sin(scene.frame * 0.001)/6,0.2+Math.cos(scene.frame * 0.001)/6)
 }

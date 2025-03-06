@@ -10,9 +10,6 @@ export function setPopulationTileMap(scene){
             statisticalTilemap[i][j] = Phaser.Math.Clamp(Math.round(game.tileData[i][j].population), 0,24)
         }
     }
-    //flip rows and colums in statisticalTilemap
-    let rotatedStatisticalTilemap = statisticalTilemap.map((row, col) => row.map((tile, index) => statisticalTilemap[index][col]))
-
     game.currentTilesetImage.tileWidth = 1
     game.currentTilesetImage.tileHeight = 1
     let ts = scene.sys.textures.get("PopulationTileset")

@@ -14,6 +14,7 @@ export function generateRandomNoise(size){
 export function generatePerlinNoise(targetSize, smoothness){
 
     //perlin noise function used for generating terrain
+    //zoominNoise = perlin noise
     let baseNoise = generateRandomNoise((targetSize / smoothness) + 3);
     let zoominNoise = [];
     for(let i = 0; i < targetSize; i++){

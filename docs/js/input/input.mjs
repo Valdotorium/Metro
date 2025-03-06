@@ -10,6 +10,9 @@ import { ImageButton } from "./ImageButton.mjs"
 import { setPopulationTileMap, setNormalTilemap } from "../tilemap/statisticalTileMap.mjs"
 import { placeHighway } from "./highwayConstruction.mjs"
 
+
+
+//CALLBACK FUNCTION SECTION
 let populationMap = function populationMap(scene){
     if ( scene.inGameUI.populationMapButton.state == false){
         setNormalTilemap(scene)
@@ -18,11 +21,6 @@ let populationMap = function populationMap(scene){
     }
 }
 
-function updateTimeText(scene){
-    let gameScene = scene.scene.get("GameScene")
-    scene.inGameUI.timeText.setText(`Time: ${gameScene.simulation.time.year}-${gameScene.simulation.time.month}-${gameScene.simulation.time.day} ${gameScene.simulation.time.hour}:${Math.round(gameScene.simulation.time.minute)}`)
-
-}
 let handleClickTest = function handleClickTest(scene){
     let gameScene = scene.scene.get("GameScene")
     if(!gameScene.statisticalTilemapIsEnabled){
@@ -90,6 +88,11 @@ let setConstructionTool = function setConstructionTool(scene){
     let game = scene.scene.get("GameScene")
     console.log(scene.inGameUI.currentActiveTool)
 }
+
+//CALLBACK FUNCTION SECTION END
+
+// DEFINING THE INGAME UI AND GAME CONTROLS
+//NOTE: game UI is in the GameUIScene, controls in the GameScene
 export function setupUI(scene){
     scene.inGameUI = {}
     scene.inGameUI.currentActiveTool = "none"
@@ -116,7 +119,8 @@ export function setupControls(scene){
     scene.mouse = {}
     scene.mouse.wasDown = false
 }
-
+ 
+//UPDATING GAME UI AND CONTROLS
 export function updateControls (scene) {
     //this fuction is called from the GAME scene
     try{
@@ -140,6 +144,13 @@ export function updateControls (scene) {
         getHoveredTile(scene)
         touchzoom(scene)
     }
+
+}
+
+
+function updateTimeText(scene){
+    let gameScene = scene.scene.get("GameScene")
+    scene.inGameUI.timeText.setText(`Time: ${gameScene.simulation.time.year}-${gameScene.simulation.time.month}-${gameScene.simulation.time.day} ${gameScene.simulation.time.hour}:${Math.round(gameScene.simulation.time.minute)}`)
 
 }
 

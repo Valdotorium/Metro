@@ -14,6 +14,7 @@ export function initializeDesktopApp(game){
         game.options.neutralinoConfig.defaultPath = "./"
         game.options.isDesktopBuild = true
     } catch(e){
+        //if neutralino isnt found (aka we are in web mode)
         game.options.isDesktopBuild = false
 
         console.error("Failed to initialize desktop app:", e)

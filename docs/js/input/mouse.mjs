@@ -6,8 +6,7 @@ export function updateMouse(game){
         const camera = game.cameras.main;
         let pointer = game.input.activePointer;
 
-        //temporary
-
+        //creating the universal game.mouse object with important state variables
         game.mouse = game.input.activePointer 
         game.mouse.x = pointer.x
         game.mouse.y = pointer.y
@@ -17,7 +16,6 @@ export function updateMouse(game){
         } else {
             game.mouse.wasDown = false
         }
-
     }
 }
 export function dragCamera(game){
