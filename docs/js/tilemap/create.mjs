@@ -28,7 +28,8 @@ function setupMainTileMap(scene){
     scene.currentTilesetImage = scene.tileMap.addTilesetImage(scene.tilesets[0].name, scene.tilesets[0].name, 8, 8)
     scene.currentTileset = 0
     const layer = scene.tileMap.createLayer(0, scene.tileMap.tilesets[0],0,0);
-    layer.setScale(4);
+    scene.scale = 4
+    layer.setScale(scene.scale);
     scene.tileMap.layer = layer
 
     //make tilemap interactive
@@ -63,9 +64,15 @@ function setupOtherTilemaps(scene){
         console.log(scene.cities)
 
     }
+    //setup the tileData array
+    if (!scene.options.loadMap){
+        //generating the tileData array (population, etc)
+        scene.railwayLines = []    
+    } else {
+        scene.railwayLines = scene.loadedGameData.railwayLines
+    }
 }
 export function setupTilemaps(scene){
     setupMainTileMap(scene)
-    
     setupOtherTilemaps(scene)
 }

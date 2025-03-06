@@ -12,7 +12,8 @@ export function setupTileData(game){
     }
     //populate tile data with data
     tileData = generatePopulations(game, tileData)
-    tileData = generateHighways(game, tileData)
+    tileData = generateRailways(game, tileData)
+    tileData = generateRailwayStations(game, tileData)
     return tileData
 }
 
@@ -67,8 +68,26 @@ function generatePopulations(game, tileData){
     return tileData
 
 }
-function generateHighways(game, tileData){
-    //TODO: #16 design highway data and rendering structures @Valdotorium
+function generateRailways(game, tileData){
+    let mapSize = game.tileMapOptions.size
+    //save the data of the 2d array to the railwayLines attribute of each tile in tileData
+    for(let i = 0; i < mapSize; i++){
+        for(let j = 0; j < mapSize; j++){
+            tileData[i][j].railwayLines = []
+        } 
+    }
+    return tileData;
+}
+
+function generateRailwayStations(game, tileData){
+    let mapSize = game.tileMapOptions.size
+    //save the data of the 2d array to the railwayLines attribute of each tile in tileData
+    for(let i = 0; i < mapSize; i++){
+        for(let j = 0; j < mapSize; j++){
+
+            tileData[i][j].railwayStation = null
+        } 
+    }
     return tileData;
 
 }

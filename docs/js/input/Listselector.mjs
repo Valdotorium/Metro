@@ -23,7 +23,7 @@ export class Listselector{
         this.text.destroy()
         this.text = scene.add.text(x, y, this.options[this.state], style)
         this.text.setOrigin(0.5, 0.5)
-        this.label = scene.add.text(x - this.text.width - 80, y, text, style)
+        this.label = scene.add.text(x, y - 50, text, style)
         this.label.setOrigin(0.5, 0.5)
         this.nextarrow.on('pointerdown', () => {this.activatenext(), callback(scene, this.state)})
         this.nextarrow.on('pointerup', () => this.deactivatenext())

@@ -15,9 +15,10 @@ export function loadAssets(scene){
 
     scene.statisticalTilesets.push({name: "PopulationTileset", image: scene.load.image("PopulationTileset", "assets/images/gradientTiles.png")})
 
-    scene.load.image("ForwardIcon", "assets/images/icons/forward.png")
-    scene.load.image("BackwardIcon", "assets/images/icons/backward.png")
-    scene.load.image("ClockIcon", "assets/images/icons/clock.png")
+    scene.load.image("ForwardIcon", "assets/images/static/forward.png")
+    scene.load.image("BackwardIcon", "assets/images/static/backward.png")
+    scene.load.image("ClockIcon", "assets/images/static/clock.png")
+    scene.load.image("Station", "assets/images/static/station.png")
 
 
     console.log("loaded assets!")

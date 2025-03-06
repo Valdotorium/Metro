@@ -9,7 +9,8 @@ export function saveGame(game){
         size: game.generatedTilemap[0].length,
         tileMap: game.generatedTilemap,
         tileData: game.tileData,
-        cities: Object.fromEntries(game.cities)
+        cities: Object.fromEntries(game.cities),
+        railwayLines: game.railwayLines
     })
 
 }

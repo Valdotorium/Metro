@@ -8,7 +8,7 @@ import { getHoveredTile,setupCurrentTileMarker} from "./selectTiles.mjs"
 import { downloadFileWeb, saveFileDesktop } from "../fileManagement/downloadFile.mjs"
 import { ImageButton } from "./ImageButton.mjs"
 import { setPopulationTileMap, setNormalTilemap } from "../tilemap/statisticalTileMap.mjs"
-import { placeHighway } from "./highwayConstruction.mjs"
+import { railwayLineConstruction } from "./railwayConstruction.mjs"
 import {Listselector} from "./Listselector.mjs"
 
 
@@ -99,13 +99,13 @@ export function setupUI(scene){
     var tilesetnames = [];
     for (var i=0; i < gameScene.tilesets.length ; ++i)
         tilesetnames.push(gameScene.tilesets[i]["name"]);
-    scene.inGameUI.testTextButton = new Listselector(scene, 1000, 160,"SWITCH TILESET",textStyle, handleClickTest, tilesetnames, 0) //temporary
-    scene.inGameUI.quitTextButton = new TextButton(scene, 1000, 220,"QUIT GAME",textStyle, quitGame) //temporary
-    scene.inGameUI.saveTextButton = new TextButton(scene, 1000, 280,"SAVE GAME", textStyle, downloadSavescene) //temporary
+    scene.inGameUI.testTextButton = new Listselector(scene, 1000, 220,"SWITCH TILESET",textStyle, handleClickTest, tilesetnames, 0) //temporary
+    scene.inGameUI.quitTextButton = new TextButton(scene, 1000, 280,"QUIT GAME",textStyle, quitGame) //temporary
+    scene.inGameUI.saveTextButton = new TextButton(scene, 1000, 340,"SAVE GAME", textStyle, downloadSavescene) //temporary
     scene.inGameUI.forwardButton = new ImageButton(scene, 1100,50, "ForwardIcon", 90, 70, speedUp)
     scene.inGameUI.backwardButton = new ImageButton(scene, 880,50, "BackwardIcon", 90, 70, slowDown)
-    scene.inGameUI.populationMapButton = new Checkbox(scene, 1000,340, "POP. MAP", textStyle, populationMap, false) //temporary
-    scene.inGameUI.constructionButton = new TextButton(scene, 1000, 400, "BUILD TOOL", textStyle, setConstructionTool) //temporary
+    scene.inGameUI.populationMapButton = new Checkbox(scene, 1000,400, "POP. MAP", textStyle, populationMap, false) //temporary
+    scene.inGameUI.constructionButton = new TextButton(scene, 1000, 460, "BUILD TOOL", textStyle, setConstructionTool) //temporary
     scene.inGameUI.clockIcon = scene.add.image(990, 50, "ClockIcon").setScale(0.6,0.6)
     //text displaying current time
     textStyle = { fontFamily: 'Arial Black', fontSize: 28, color: '#444444'};
@@ -123,19 +123,19 @@ export function setupControls(scene){
 //UPDATING GAME UI AND CONTROLS
 export function updateControls (scene) {
     //this fuction is called from the GAME scene
-    try{
+    if(scene.frame>3){
         let UIscene = scene.scene.get("GameUIScene")
         updateMouse(scene)
         keyboardControls(scene)
         if (UIscene.inGameUI.currentActiveTool== "none"){
             dragCamera(scene)
         } else if (UIscene.inGameUI.currentActiveTool == "construction"){
-            placeHighway(scene)
+            railwayLineConstruction(scene)
         }
         scene.mouse.worldPoint = scene.input.activePointer.positionToCamera(scene.cameras.main);
         getHoveredTile(scene)
         touchzoom(scene)
-    } catch {
+    } else{
         //if getting UIscene.inGameUI.currentActiveTool fails
         updateMouse(scene)
         keyboardControls(scene)
