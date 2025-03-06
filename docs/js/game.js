@@ -126,6 +126,7 @@ var config = {
     pixelArt: true,
     inputTouch: true,
     backgroundColor: "#161616",
+    powerPreference:"high-performance",
 
     scene: [BootScene, StartMenuScene, GameScene, GameUIScene, SettingsScene],
     scale: {
