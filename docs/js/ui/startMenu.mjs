@@ -4,7 +4,7 @@ import { loadClientSaveGame } from "../fileManagement/loadSaveGame.mjs"
 
 let launchscene = function launchscene(scene) {
     //temporary, replace with your own logic when you have it
-    scene.scene.start("sceneScene")
+    scene.scene.start("GameScene")
     scene.scene.stop("StartMenuScene")
 }
 
