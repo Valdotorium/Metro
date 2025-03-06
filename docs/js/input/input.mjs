@@ -9,6 +9,7 @@ import { downloadFileWeb, saveFileDesktop } from "../fileManagement/downloadFile
 import { ImageButton } from "./ImageButton.mjs"
 import { setPopulationTileMap, setNormalTilemap } from "../tilemap/statisticalTileMap.mjs"
 import { placeHighway } from "./highwayConstruction.mjs"
+import {Listselector} from "./Listselector.mjs"
 
 
 
@@ -21,15 +22,11 @@ let populationMap = function populationMap(scene){
     }
 }
 
-let handleClickTest = function handleClickTest(scene){
+let handleClickTest = function handleClickTest(scene, index){
     let gameScene = scene.scene.get("GameScene")
-    if(!gameScene.statisticalTilemapIsEnabled){
-        gameScene.currentTileset++
-        if(gameScene.currentTileset >= gameScene.tilesets.length){gameScene.currentTileset = 0}
-        const newTileset = scene.sys.textures.get(gameScene.tilesets[gameScene.currentTileset].name)
-        gameScene.currentTilesetImage.setImage(newTileset)
+    const newTileset = scene.sys.textures.get(gameScene.tilesets[index].name)
+    gameScene.currentTilesetImage.setImage(newTileset)
         //temporary, replace with your own logic when you have i
-    }
 }
 
 let quitGame = function quitGame(scene){
@@ -94,11 +91,15 @@ let setConstructionTool = function setConstructionTool(scene){
 // DEFINING THE INGAME UI AND GAME CONTROLS
 //NOTE: game UI is in the GameUIScene, controls in the GameScene
 export function setupUI(scene){
+    let gameScene = scene.scene.get("GameScene")
     scene.inGameUI = {}
     scene.inGameUI.currentActiveTool = "none"
     let textStyle = { fontFamily: 'Arial Black', fontSize: 28, color: '#BBBBBB'};
     //the buttons
-    scene.inGameUI.testTextButton = new TextButton(scene, 1000, 160,"SWITCH TILESET",textStyle, handleClickTest) //temporary
+    var tilesetnames = [];
+    for (var i=0; i < gameScene.tilesets.length ; ++i)
+        tilesetnames.push(gameScene.tilesets[i]["name"]);
+    scene.inGameUI.testTextButton = new Listselector(scene, 1000, 160,"SWITCH TILESET",textStyle, handleClickTest, tilesetnames, 0) //temporary
     scene.inGameUI.quitTextButton = new TextButton(scene, 1000, 220,"QUIT GAME",textStyle, quitGame) //temporary
     scene.inGameUI.saveTextButton = new TextButton(scene, 1000, 280,"SAVE GAME", textStyle, downloadSavescene) //temporary
     scene.inGameUI.forwardButton = new ImageButton(scene, 1100,50, "ForwardIcon", 90, 70, speedUp)
@@ -107,7 +108,6 @@ export function setupUI(scene){
     scene.inGameUI.constructionButton = new TextButton(scene, 1000, 400, "BUILD TOOL", textStyle, setConstructionTool) //temporary
     scene.inGameUI.clockIcon = scene.add.image(990, 50, "ClockIcon").setScale(0.6,0.6)
     //text displaying current time
-    let gameScene = scene.scene.get("GameScene")
     textStyle = { fontFamily: 'Arial Black', fontSize: 28, color: '#444444'};
     scene.inGameUI.timeText = scene.add.text(840, 90, gameScene.simulation.time.year + "/" + gameScene.simulation.time.month + "/" + gameScene.simulation.time.day + " - " + gameScene.simulation.time.hour + ":" + gameScene.simulation.time.minute, textStyle)
 
