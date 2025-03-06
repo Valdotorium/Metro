@@ -8,8 +8,8 @@ function placeRailway(game, tilePosition, line){
 
 }
 export function railwayLineConstruction(game){
-    console.log(game.mouse.justDown)
-    if (game.mouse.justDown){
+    console.log(game.isTilemapClicked)
+    if (game.mouse.justDown && game.isTilemapClicked){
         placeRailwayStation(game)
     }
 

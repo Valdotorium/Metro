@@ -34,10 +34,19 @@ function setupMainTileMap(scene){
 
     //make tilemap interactive
     scene.currentSelectedTile = {x: 0, y: 0}
+    scene.isTilemapClicked = false
     scene.input.on("pointerdown", function(pointer, sceneObject)
     {
         scene.currentSelectedTile = scene.currentHoveredTile
+        scene.isTilemapClicked = true
+        
     })
+    scene.input.on("pointerup", function(pointer, sceneObject)
+    {
+        scene.isTilemapClicked = false
+        
+    })
+
     //configure the camera
     scene.cameras.main.setBounds(-600,-400, layer.width * layer.scale + 1200, layer.height * layer.scale + 800);
     scene.cameras.main.zoom = 2
