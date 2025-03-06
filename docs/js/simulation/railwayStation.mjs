@@ -9,12 +9,10 @@ export function placeRailwayStation(game){
     let mousePosition = game.currentHoveredTileIndexes
     let station = game.tileData[mousePosition.x][mousePosition.y].railwayStation
     if(station == null){
-        station= {}
+        station = {}
         station.passengers = 0
         station.lines = []
         station.image = game.add.image(mousePosition.x * 6 * game.scale, mousePosition.y * 6 * game.scale, "Station").setScale(game.scale).setOrigin(-0.5,-0.5)
-
-
+        game.tileData[mousePosition.x][mousePosition.y].railwayStation = station
     }
-
 }

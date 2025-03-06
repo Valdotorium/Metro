@@ -43,6 +43,24 @@ function setupMainTileMap(scene){
     scene.cameras.main.zoom = 2
 
 }
+function assignImageTypes(scene){
+    //loading cities from savegames
+    for(let tileArray of scene.tileData){
+        //same for all citydistricts
+        let i
+        let j
+        for(let tile of tileArray){
+            i++
+            j = 0
+            if(tile.railwayStation != null){
+                j++
+                let imgData = tile.railwayStation.image
+                tile.railwayStation.image = scene.add.image(imgData.x, imgData.y, "Station").setScale(imgData.scale.x).setOrigin(imgData.origin.x)
+            }
+        }
+
+    }
+}
 function setupOtherTilemaps(scene){
     //setup the tileData array
     if (!scene.options.loadMap){
@@ -50,6 +68,8 @@ function setupOtherTilemaps(scene){
         scene.tileData = setupTileData(scene)      
     } else {
         scene.tileData = scene.loadedGameData.tileData
+
+        assignImageTypes(scene)
     }
     if (!scene.options.loadMap){
         //generating the tileData array (population, etc)
