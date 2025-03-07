@@ -8,7 +8,7 @@ import { getHoveredTile,setupCurrentTileMarker} from "./selectTiles.mjs"
 import { downloadFileWeb, saveFileDesktop } from "../fileManagement/downloadFile.mjs"
 import { ImageButton } from "./ImageButton.mjs"
 import { setPopulationTileMap, setNormalTilemap } from "../tilemap/statisticalTileMap.mjs"
-import { railwayLineConstruction } from "./railwayConstruction.mjs"
+import { railwayLineConstruction, railwayStationConstruction } from "./railwayConstruction.mjs"
 import {Listselector} from "./Listselector.mjs"
 
 
@@ -88,7 +88,7 @@ let setConstructionTool = function setConstructionTool(scene, state){
 export function setupUI(scene){
     let gameScene = scene.scene.get("GameScene")
     scene.inGameUI = {}
-    scene.inGameUI.currentActiveTool = "none"
+    scene.inGameUI.currentActiveTool = "NONE"
     let textStyle = { fontFamily: 'Arial Black', fontSize: 28, color: '#BBBBBB'};
     //the buttons
     var tilesetnames = [];
@@ -125,6 +125,8 @@ export function updateControls (scene) {
         if (UIscene.inGameUI.currentActiveTool== "NONE"){
             dragCamera(scene)
         } else if (UIscene.inGameUI.currentActiveTool == "STATION"){
+            railwayStationConstruction(scene)
+        } else if (UIscene.inGameUI.currentActiveTool == "RAILWAYS"){
             railwayLineConstruction(scene)
         }
         scene.mouse.worldPoint = scene.input.activePointer.positionToCamera(scene.cameras.main);

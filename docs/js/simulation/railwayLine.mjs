@@ -7,8 +7,9 @@ export class railwayLine{
         
         this.color = color
         this.id = id
-        this.tiles = []
-        this.trainCapacity = 1 + Math.floor(this.tiles.length / 5)
+        this.stations = []
+        this.segments = []
+        this.trainCapacity = 1 + Math.floor(this.segments.length)
         this.trains = []
     }
 }
