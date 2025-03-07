@@ -76,14 +76,9 @@ let slowDown = function slowDown(scene){
     
 }
 
-let setConstructionTool = function setConstructionTool(scene){
-    if(scene.inGameUI.currentActiveTool == "construction"){
-        scene.inGameUI.currentActiveTool = "none"
-    } else {
-        scene.inGameUI.currentActiveTool = "construction"
-    }
-    let game = scene.scene.get("GameScene")
-    console.log(scene.inGameUI.currentActiveTool)
+let setConstructionTool = function setConstructionTool(scene, state){
+    let tools = ["NONE", "STATION", "RAILWAYS"]
+    scene.inGameUI.currentActiveTool = tools[state]
 }
 
 //CALLBACK FUNCTION SECTION END
@@ -105,7 +100,7 @@ export function setupUI(scene){
     scene.inGameUI.forwardButton = new ImageButton(scene, 1100,50, "ForwardIcon", 90, 70, speedUp)
     scene.inGameUI.backwardButton = new ImageButton(scene, 880,50, "BackwardIcon", 90, 70, slowDown)
     scene.inGameUI.populationMapButton = new Checkbox(scene, 1000,400, "POP. MAP", textStyle, populationMap, false) //temporary
-    scene.inGameUI.constructionButton = new TextButton(scene, 1000, 460, "BUILD TOOL", textStyle, setConstructionTool) //temporary
+    scene.inGameUI.toolSelector = new Listselector(scene, 1000, 500, "TOOL", textStyle, setConstructionTool, ["NONE", "STATION", "RAILWAYS"],0) //temporary
     scene.inGameUI.clockIcon = scene.add.image(990, 50, "ClockIcon").setScale(0.6,0.6)
     //text displaying current time
     textStyle = { fontFamily: 'Arial Black', fontSize: 28, color: '#444444'};
@@ -127,9 +122,9 @@ export function updateControls (scene) {
         let UIscene = scene.scene.get("GameUIScene")
         updateMouse(scene)
         keyboardControls(scene)
-        if (UIscene.inGameUI.currentActiveTool== "none"){
+        if (UIscene.inGameUI.currentActiveTool== "NONE"){
             dragCamera(scene)
-        } else if (UIscene.inGameUI.currentActiveTool == "construction"){
+        } else if (UIscene.inGameUI.currentActiveTool == "STATION"){
             railwayLineConstruction(scene)
         }
         scene.mouse.worldPoint = scene.input.activePointer.positionToCamera(scene.cameras.main);

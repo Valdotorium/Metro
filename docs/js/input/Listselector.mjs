@@ -2,15 +2,17 @@ export class Listselector{
     constructor(scene, x, y, text, style, callback, options, state){
         this.options = options
         this.state = state
-        this.longestoption = this.options[0]
-        for (let i = 1; i < this.options.length; i++){
+        this.longestoption = 0
+        this.longestoptionwidth = 0
+        for (let i = 0; i < this.options.length; i++){
             this.testtext = scene.add.text(x, y, this.options[i], style)
-            if (this.testtext.width >= this.longestoption){
+            if (this.testtext.width >= this.longestoptionwidth){
                 this.longestoption = i
+                this.longestoptionwidth = this.testtext.width
             }
             this.testtext.destroy()
         }
-        this.text = scene.add.text(x, y, this.longestoption, style)
+        this.text = scene.add.text(x, y, this.options[this.longestoption], style)
         //add a rect
         this.rect = scene.add.rectangle(x, y, this.text.width + 100, this.text.height + 10, 0x222222)
         this.backarrow = scene.add.triangle(x - (this.text.width / 2) - 30, y, this.text.height, 0, 0, this.text.height / 2, this.text.height, this.text.height, 0xCCCCCC)

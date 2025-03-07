@@ -20,7 +20,4 @@ export function simulateTime(scene, deltaTime){
             }
         }
     }
-
-
-
 }
