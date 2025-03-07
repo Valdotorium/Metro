@@ -8,10 +8,10 @@ export function setupSimulation(scene){
     scene.simulation.time = {year: 2000, month: 1, day: 1, hour: 1, minute: 1}
 }
 
-export function simulate(scene){
+export function simulate(scene, deltaTime){
     if (scene.simulation.speed > 0){
         //call main simulation functions
-        simulateTime(scene)
+        simulateTime(scene, deltaTime)
         CityGrowth(scene)
     }
     

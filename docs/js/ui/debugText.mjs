@@ -5,7 +5,7 @@ export function debugText(scene) {
         `duration: ${gameScene.mouse.getDuration()}`,
         `selected Tile: ${gameScene.currentSelectedTile.x}, ${gameScene.currentSelectedTile.y}`,
         `type: ${gameScene.generatedTilemap[gameScene.currentSelectedTile.x][gameScene.currentSelectedTile.y]} population: ${gameScene.tileData[gameScene.currentSelectedTile.x][gameScene.currentSelectedTile.y].population}`,
-        `zoom: ${gameScene.cameras.main.zoom}`,
+        `fps ${gameScene.fps}`,
         `simulation speed: ${gameScene.simulation.speed}`
     ])
 }

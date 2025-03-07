@@ -32,7 +32,7 @@ class GameScene extends Phaser.Scene{
         }    
         setupControls(this)
     }
-    update ()
+    update (timestep, dt)
     {
         //get current window dimensions
         this.windowWidth = window.innerWidth;
@@ -40,13 +40,14 @@ class GameScene extends Phaser.Scene{
 
         //draw a tilemap
         this.frame++
+        this.fps = Math.round(1000/dt)
 
         if (this.frame == 1){
             this.scene.launch('GameUIScene');
         }
         //  Update the controls and simulation
         updateControls(this);
-        simulate(this)
+        simulate(this, dt)
     }
 }
 class GameUIScene extends Phaser.Scene{
@@ -138,7 +139,7 @@ var config = {
         resizeInterval: 50,
       },
     fps: {
-        target: 30 // 30x per second
+        target: 30
     }
 };
 
