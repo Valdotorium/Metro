@@ -18,15 +18,14 @@ function checkIfSegmentExists(line, firstStationPosition, secondStationPosition)
     //check if a segment with the same two positions exists already
     //TODO fix this
     for (let i = 0; i < line.segments.length; i++){
-        if (line.segments[i][0] == firstStationPosition && line.segments[i][1] == secondStationPosition){
+        if (JSON.stringify(line.segments[i][0]) == JSON.stringify(firstStationPosition) && JSON.stringify(line.segments[i][1]) == JSON.stringify(secondStationPosition)){
             return true
         }
-        else if (line.segments[i][1] == firstStationPosition && line.segments[i][0] == secondStationPosition){
+        else if (JSON.stringify(line.segments[i][1]) == JSON.stringify(firstStationPosition) && JSON.stringify(line.segments[i][0]) == JSON.stringify(secondStationPosition)){
             return true
-        } else {
-            return false
         }
     }
+    return false
 }
 function selectRailwayStation(game){
     //check if railway station does not exist at that position
@@ -38,25 +37,38 @@ function selectRailwayStation(game){
         return mousePosition
     }
 }
+
+function addLineGraphics(game, line, firstStationPosition, secondStationPosition){
+    let lineObj
+    let sceneFirstStationPosition = game.tileMap.tileToWorldXY(firstStationPosition.x, firstStationPosition.y)
+    let sceneSecondStationPosition = game.tileMap.tileToWorldXY(secondStationPosition.x, secondStationPosition.y)
+    // +3 to center the line in the tiles
+    lineObj = game.add.line(0,0, sceneFirstStationPosition.x + 18, sceneFirstStationPosition.y + 18, sceneSecondStationPosition.x + 18, sceneSecondStationPosition.y + 18,  line.color).setOrigin(0);
+    lineObj.setLineWidth(5);
+    
+
+}
 function placeLineSegment(game, firstStationPosition, secondStationPosition){
     if (game.railwayLines.length == 0){
-        game.railwayLines.push(new railwayLine("red", 0))
+        game.railwayLines.push(new railwayLine(0xff0000, 0))
     }
     let line = game.railwayLines[0]
     console.log(line)
-    if(checkIfSegmentExists(line, firstStationPosition, secondStationPosition) == false){
+    if(!checkIfSegmentExists(line, firstStationPosition, secondStationPosition)){
         line.segments.push([firstStationPosition, secondStationPosition])
         line.stations.push(firstStationPosition)
         line.stations.push(secondStationPosition)
         line.stations = deleteDuplicateStationPositions(line.stations)
-        console.log("created line sgment. line stations: " , line.stations)
+        console.log("created line segment. line stations: " , line.stations)
+        try{
+            addLineGraphics(game, line, firstStationPosition, secondStationPosition)
+        } catch (e){
+            console.log("error", e)
+        }
+
     } else {
-        console.log("segment already exists")
+        console.log("segment already exists", firstStationPosition, secondStationPosition)
     }
-
-
-
-
 }
 export function railwayStationConstruction(game){
 

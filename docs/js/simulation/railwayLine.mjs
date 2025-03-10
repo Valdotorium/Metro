@@ -9,6 +9,7 @@ export class railwayLine{
         this.id = id
         this.stations = []
         this.segments = []
+        this.lines = []
         this.trainCapacity = 1 + Math.floor(this.segments.length)
         this.trains = []
     }

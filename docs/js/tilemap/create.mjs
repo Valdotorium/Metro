@@ -64,7 +64,7 @@ function assignImageTypes(scene){
             if(tile.railwayStation != null){
                 j++
                 let imgData = tile.railwayStation.image
-                tile.railwayStation.image = scene.add.image(imgData.x, imgData.y, "Station").setScale(imgData.scale.x).setOrigin(imgData.origin.x)
+                tile.railwayStation.image = scene.add.image(imgData.x , imgData.y , "Station").setScale(imgData.scale.x).setOrigin(imgData.origin.x)
             }
         }
 
