@@ -22,7 +22,7 @@ TODO:
 
 -city degeneration and densification
 
--multiple tile types in cities @JoEragon
+-multiple tile types in cities @Jorandint
 
 -Algorithm for drawing railway lines on the tilemap
 
@@ -32,9 +32,9 @@ DONE:
 
 -Implementing a simple terrain generator (not before the tilemap is redesigned)
 
--Implemeting touch support with pointers @JoEragon
+-Implemeting touch support with pointers @Jorandint
 
--Rebuilding moving the map with the pointer  @JoEragon
+-Rebuilding moving the map with the pointer  @Jorandint
 
 -Implementing Buttons @Valdotorium
 
@@ -44,4 +44,4 @@ DONE:
 
 -Acessing local file system with neutralino, test @Valdotorium
 
--implement the game clock mechanic (simulation folder!), counting time in minutes,hours,days,months and years with a variable ticking speed @JoEragon / @Igros10 ?
+-implement the game clock mechanic (simulation folder!), counting time in minutes,hours,days,months and years with a variable ticking speed @Jorandint / @Igros10 ?
