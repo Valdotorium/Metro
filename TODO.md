@@ -8,6 +8,12 @@ TODO:
 
 -UI Dialog boxes
 
+-different city name lists selectable in the game options
+
+-river generation in terrain
+
+-island terrain generator?
+
 -passenger class @Valdotorium
 
 -transit stations, railway lines
