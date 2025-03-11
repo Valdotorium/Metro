@@ -34,6 +34,9 @@ class GameScene extends Phaser.Scene{
     }
     update (timestep, dt)
     {
+        //  Update the controls and simulation
+        updateControls(this);
+        simulate(this, dt)
         //get current window dimensions
         this.windowWidth = window.innerWidth;
         this.windowHeight = window.innerHeight;
@@ -45,9 +48,6 @@ class GameScene extends Phaser.Scene{
         if (this.frame == 1){
             this.scene.launch('GameUIScene');
         }
-        //  Update the controls and simulation
-        updateControls(this);
-        simulate(this, dt)
     }
 }
 class GameUIScene extends Phaser.Scene{
