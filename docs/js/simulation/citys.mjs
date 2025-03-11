@@ -42,6 +42,7 @@ export class city {
         }
         this.population += tempdist.population;
         this.districts.push(tempdist)
+        this.size = this.districts.length
         return [x, y]
     }
     
