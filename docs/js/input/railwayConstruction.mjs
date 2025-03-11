@@ -1,5 +1,6 @@
 import { placeRailwayStation } from "../simulation/railwayStation.mjs"
 import { railwayLine } from "../simulation/railwayLine.mjs"
+import { addRailwaySegmentGraphics, deleteRailwayConstructionGraphics, railwayLineDragging } from "../graphics/railwayLineGraphics.mjs"
 
 function deleteDuplicateStationPositions(stations){
     let uniqueStations = []
@@ -61,7 +62,7 @@ function placeLineSegment(game, firstStationPosition, secondStationPosition){
         line.stations = deleteDuplicateStationPositions(line.stations)
         console.log("created line segment. line stations: " , line.stations)
         try{
-            addLineGraphics(game, line, firstStationPosition, secondStationPosition)
+            addRailwaySegmentGraphics(game, line, firstStationPosition, secondStationPosition)
         } catch (e){
             console.log("error", e)
         }
@@ -84,13 +85,12 @@ export function railwayLineConstruction(game){
         if (firstStationPosition == null && selectRailwayStation(game) != null){
             firstStationPosition = selectRailwayStation(game)
             lineConstruction = true
-        } else {
-            if (lineConstruction == true && selectRailwayStation(game) != null){
+        } 
+        }else {
+            if (lineConstruction == true && selectRailwayStation(game) != null && JSON.stringify(selectRailwayStation(game)) != JSON.stringify(firstStationPosition)){
+                console.log(selectRailwayStation(game))
                 secondStationPosition = selectRailwayStation(game)
-            } else {
-                lineConstruction = false
-            }
-        }
+            } 
         if(firstStationPosition != null && secondStationPosition != null){
             placeLineSegment(game, firstStationPosition, secondStationPosition)
             secondStationPosition = null
@@ -98,5 +98,14 @@ export function railwayLineConstruction(game){
             lineConstruction = false
         }
     }
-    console.log(lineConstruction)
+    if(lineConstruction == true){
+        //make user hold mouse to drag
+        if(game.mouse.isDown){
+            railwayLineDragging(game, firstStationPosition)
+        }else{
+            deleteRailwayConstructionGraphics(game)
+            lineConstruction = false
+            firstStationPosition = null
+        }
+    }
 }
