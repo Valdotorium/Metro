@@ -76,22 +76,27 @@ export function railwayStationConstruction(game){
         placeRailwayStation(game)
     }
 }
-
+let lineConstruction = false
 let firstStationPosition = null
 let secondStationPosition = null
 export function railwayLineConstruction(game){
-
     if (game.mouse.justDown && game.isTilemapClicked){
-        if (firstStationPosition == null){
+        if (firstStationPosition == null && selectRailwayStation(game) != null){
             firstStationPosition = selectRailwayStation(game)
+            lineConstruction = true
         } else {
-            secondStationPosition = selectRailwayStation(game)
+            if (lineConstruction == true && selectRailwayStation(game) != null){
+                secondStationPosition = selectRailwayStation(game)
+            } else {
+                lineConstruction = false
+            }
         }
         if(firstStationPosition != null && secondStationPosition != null){
             placeLineSegment(game, firstStationPosition, secondStationPosition)
             secondStationPosition = null
             firstStationPosition = null
+            lineConstruction = false
         }
-
     }
+    console.log(lineConstruction)
 }
