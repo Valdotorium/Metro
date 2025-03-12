@@ -46,7 +46,7 @@ export function setupGameSettings(scene){
     scene.SettingsContents.sizeSlider = new Slider(scene, 320, 600,20,200, "MAP SIZE", sliderStyle, mapSizeSlider)
     scene.SettingsContents.generatorSelector = new Listselector(scene, 600, 450,"MAP GENERATOR:",sliderStyle, setGenerator, ["DEFAULT", "SIMPLE", "BIOMES", "COAST"], 0) //temporary
 
-    scene.SettingsContents.debugCheckbox = new Checkbox(scene, 520,540, "DEBUG MODE", sliderStyle, debug, true)
+    scene.SettingsContents.debugCheckbox = new Checkbox(scene, 520,540, "DEBUG MODE", sliderStyle, debug, false)
 
 
 
