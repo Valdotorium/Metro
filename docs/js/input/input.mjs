@@ -121,6 +121,7 @@ export function updateControls (scene) {
     //this fuction is called from the GAME scene
     if(scene.frame>3){
         let UIscene = scene.scene.get("GameUIScene")
+        scene.mouse.worldPoint = scene.input.activePointer.positionToCamera(scene.cameras.main);
         updateMouse(scene)
         getHoveredTile(scene)
         keyboardControls(scene)
@@ -133,7 +134,7 @@ export function updateControls (scene) {
         } else if (UIscene.inGameUI.currentActiveTool == "REMOVE"){
             clearTile(scene)
         }
-        scene.mouse.worldPoint = scene.input.activePointer.positionToCamera(scene.cameras.main);
+
         touchzoom(scene)
     } else{
         //if getting UIscene.inGameUI.currentActiveTool fails
