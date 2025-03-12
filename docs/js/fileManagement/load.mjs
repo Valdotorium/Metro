@@ -30,7 +30,7 @@ export function configureGame(scene){
     //manually setting scene constants
     scene.options.loadMap = false
     scene.options.terrainGenerator = "DEFAULT"
-    scene.options.debug = true
+    scene.options.debug = false
 
     scene.tileMapOptions = {}
     scene.tileMapOptions.size = 85
