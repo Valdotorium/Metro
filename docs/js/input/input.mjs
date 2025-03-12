@@ -82,6 +82,15 @@ let setConstructionTool = function setConstructionTool(scene, state){
     scene.inGameUI.currentActiveTool = tools[state]
 }
 
+let zoomIn = function zoomIn(scene){
+    let game = scene.scene.get("GameScene")
+    game.cameras.main.zoom += 0.01
+}
+let zoomOut = function zoomOut(scene){
+    let game = scene.scene.get("GameScene")
+    game.cameras.main.zoom -= 0.01
+}
+
 //CALLBACK FUNCTION SECTION END
 
 // DEFINING THE INGAME UI AND GAME CONTROLS
@@ -97,6 +106,8 @@ export function setupUI(scene){
         tilesetnames.push(gameScene.tilesets[i]["name"]);
     scene.inGameUI.testTextButton = new Listselector(scene, 1000, 220,"SWITCH TILESET",textStyle, handleClickTest, tilesetnames, 0) //temporary
     scene.inGameUI.quitTextButton = new TextButton(scene, 1000, 280,"QUIT GAME",textStyle, quitGame) //temporary
+    scene.inGameUI.zoomInButton = new TextButton(scene, 960, 750,"+",textStyle, zoomIn) //temporary
+    scene.inGameUI.zoomOutButton = new TextButton(scene, 1040, 750,"-",textStyle, zoomOut) //temporary
     scene.inGameUI.saveTextButton = new TextButton(scene, 1000, 340,"SAVE GAME", textStyle, downloadSavescene) //temporary
     scene.inGameUI.forwardButton = new ImageButton(scene, 1100,50, "ForwardIcon", 90, 70, speedUp)
     scene.inGameUI.backwardButton = new ImageButton(scene, 880,50, "BackwardIcon", 90, 70, slowDown)
