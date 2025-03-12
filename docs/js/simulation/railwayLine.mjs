@@ -4,7 +4,6 @@
 
 export class railwayLine{
     constructor(color, id){
-        
         this.color = color
         this.id = id
         this.stations = []
@@ -14,3 +13,4 @@ export class railwayLine{
         this.trains = []
     }
 }
+

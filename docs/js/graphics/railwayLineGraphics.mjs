@@ -68,4 +68,7 @@ export function addRailwaySegmentGraphics(game,line, firstStationPosition, secon
     lineObj.setLineWidth(5);
     line.lines.push(lineObj)
 
+    //line is a line segment
+    return line
+
 }

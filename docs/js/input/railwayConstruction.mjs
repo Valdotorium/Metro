@@ -2,6 +2,7 @@ import { placeRailwayStation } from "../simulation/railwayStation.mjs"
 import { railwayLine } from "../simulation/railwayLine.mjs"
 import { addRailwaySegmentGraphics, deleteRailwayConstructionGraphics, railwayLineDragging } from "../graphics/railwayLineGraphics.mjs"
 
+
 function deleteDuplicateStationPositions(stations){
     let uniqueStations = []
     for (let i = 0; i < stations.length; i++){
@@ -11,7 +12,15 @@ function deleteDuplicateStationPositions(stations){
     }
     return uniqueStations
 }
+export function getUniqueStationsFromSegments(line){
 
+    let stations = []
+    for (let segment of line.segments){
+        stations.push(segment.firstStation)
+        stations.push(segment.secondStation)
+    }
+    return deleteDuplicateStationPositions(stations)
+}
 function checkIfSegmentExists(line, firstStationPosition, secondStationPosition){
     if(line.segments.length == 0){
         return false
@@ -19,10 +28,10 @@ function checkIfSegmentExists(line, firstStationPosition, secondStationPosition)
     //check if a segment with the same two positions exists already
     //TODO fix this
     for (let i = 0; i < line.segments.length; i++){
-        if (JSON.stringify(line.segments[i][0]) == JSON.stringify(firstStationPosition) && JSON.stringify(line.segments[i][1]) == JSON.stringify(secondStationPosition)){
+        if (JSON.stringify(line.segments[i].firstStation) == JSON.stringify(firstStationPosition) && JSON.stringify(line.segments[i].secondStation) == JSON.stringify(secondStationPosition)){
             return true
         }
-        else if (JSON.stringify(line.segments[i][1]) == JSON.stringify(firstStationPosition) && JSON.stringify(line.segments[i][0]) == JSON.stringify(secondStationPosition)){
+        else if (JSON.stringify(line.segments[i].secondStation) == JSON.stringify(firstStationPosition) && JSON.stringify(line.segments[i].firstStation) == JSON.stringify(secondStationPosition)){
             return true
         }
     }
@@ -39,30 +48,25 @@ function selectRailwayStation(game){
     }
 }
 
-function addLineGraphics(game, line, firstStationPosition, secondStationPosition){
-    let lineObj
-    let sceneFirstStationPosition = game.tileMap.tileToWorldXY(firstStationPosition.x, firstStationPosition.y)
-    let sceneSecondStationPosition = game.tileMap.tileToWorldXY(secondStationPosition.x, secondStationPosition.y)
-    // +3 to center the line in the tiles
-    lineObj = game.add.line(0,0, sceneFirstStationPosition.x + 18, sceneFirstStationPosition.y + 18, sceneSecondStationPosition.x + 18, sceneSecondStationPosition.y + 18,  line.color).setOrigin(0);
-    lineObj.setLineWidth(5);
-    
-
-}
 function placeLineSegment(game, firstStationPosition, secondStationPosition){
     if (game.railwayLines.length == 0){
         game.railwayLines.push(new railwayLine(0xff0000, 0))
     }
     let line = game.railwayLines[0]
     console.log(line)
+
+    let segment = {}
     if(!checkIfSegmentExists(line, firstStationPosition, secondStationPosition)){
-        line.segments.push([firstStationPosition, secondStationPosition])
+        segment.firstStation = firstStationPosition
+        segment.secondStation = secondStationPosition
         line.stations.push(firstStationPosition)
         line.stations.push(secondStationPosition)
         line.stations = deleteDuplicateStationPositions(line.stations)
         console.log("created line segment. line stations: " , line.stations)
         try{
-            addRailwaySegmentGraphics(game, line, firstStationPosition, secondStationPosition)
+            segment.lines = []
+            segment = addRailwaySegmentGraphics(game, segment, firstStationPosition, secondStationPosition)
+            line.segments.push(segment)
         } catch (e){
             console.log("error", e)
         }
@@ -96,6 +100,7 @@ export function railwayLineConstruction(game){
             secondStationPosition = null
             firstStationPosition = null
             lineConstruction = false
+            deleteRailwayConstructionGraphics(game)
         }
     }
     if(lineConstruction == true){
@@ -109,3 +114,23 @@ export function railwayLineConstruction(game){
         }
     }
 }
+
+export function createLinesFromSaveGame(game){
+    console.log(game.loadedGameData.railwayLines)
+    for(let i = 0; i < game.loadedGameData.railwayLines.length; i++){
+        console.log("E")
+        let line = game.loadedGameData.railwayLines[i]
+        let newLine = new railwayLine(line.color, line.id)
+        newLine.stations = line.stations
+        for(let segment of line.segments){
+            let newSegment = {}
+            newSegment.firstStation = segment.firstStation
+            newSegment.secondStation = segment.secondStation
+            newSegment.lines = []
+            newSegment = addRailwaySegmentGraphics(game, newSegment, segment.firstStation, segment.secondStation)
+            newLine.segments.push(newSegment)
+        }
+        game.railwayLines.push(newLine)
+    }
+}
+

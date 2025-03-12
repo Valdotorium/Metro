@@ -2,8 +2,12 @@ import { Tilemap } from "../generator/generate.mjs"
 import { setupTileData } from "../simulation/setupTileData.mjs"
 import { generateCities, assignCityClasses, loadCityTextInfos } from "../simulation/citymanegment.mjs"
 import { makeEmptyTileMap } from "./makeEmptyTilemap.mjs"
+import { createLinesFromSaveGame } from "../input/railwayConstruction.mjs"
 
 function setupMainTileMap(scene){
+    if (scene.options.loadMap){
+        scene.tileMapOptions.size = scene.loadedGameData.tileMap.length
+    } 
     //get the tilemap size
     let mapSize = scene.tileMapOptions.size
     console.log(mapSize)
@@ -98,7 +102,8 @@ function setupOtherTilemaps(scene){
         //generating the tileData array (population, etc)
         scene.railwayLines = []    
     } else {
-        scene.railwayLines = scene.loadedGameData.railwayLines
+        scene.railwayLines = []    
+        createLinesFromSaveGame(scene)
     }
 }
 export function setupTilemaps(scene){
