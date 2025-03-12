@@ -82,14 +82,11 @@ let setConstructionTool = function setConstructionTool(scene, state){
     scene.inGameUI.currentActiveTool = tools[state]
 }
 
-let zoomIn = function zoomIn(scene){
+let zoom = function zoom(scene){
     let game = scene.scene.get("GameScene")
-    game.cameras.main.zoom += 0.01
+    game.cameras.main.zoom = scene.inGameUI.zoomSlider.value
 }
-let zoomOut = function zoomOut(scene){
-    let game = scene.scene.get("GameScene")
-    game.cameras.main.zoom -= 0.01
-}
+
 
 //CALLBACK FUNCTION SECTION END
 
@@ -104,10 +101,10 @@ export function setupUI(scene){
     var tilesetnames = [];
     for (var i=0; i < gameScene.tilesets.length ; ++i)
         tilesetnames.push(gameScene.tilesets[i]["name"]);
+    const sliderStyle = { fontFamily: 'Arial Black', fontSize: 32, color: '#BBBBBB'};
     scene.inGameUI.testTextButton = new Listselector(scene, 1000, 220,"SWITCH TILESET",textStyle, handleClickTest, tilesetnames, 0) //temporary
     scene.inGameUI.quitTextButton = new TextButton(scene, 1000, 280,"QUIT GAME",textStyle, quitGame) //temporary
-    scene.inGameUI.zoomInButton = new TextButton(scene, 960, 750,"+",textStyle, zoomIn) //temporary
-    scene.inGameUI.zoomOutButton = new TextButton(scene, 1040, 750,"-",textStyle, zoomOut) //temporary
+    scene.inGameUI.zoomSlider = new Slider(scene, 20, 720,0.3,5, "ZOOM", sliderStyle, zoom)
     scene.inGameUI.saveTextButton = new TextButton(scene, 1000, 340,"SAVE GAME", textStyle, downloadSavescene) //temporary
     scene.inGameUI.forwardButton = new ImageButton(scene, 1100,50, "ForwardIcon", 90, 70, speedUp)
     scene.inGameUI.backwardButton = new ImageButton(scene, 880,50, "BackwardIcon", 90, 70, slowDown)
