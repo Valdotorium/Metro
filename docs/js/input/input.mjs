@@ -11,6 +11,7 @@ import { setPopulationTileMap, setNormalTilemap } from "../tilemap/statisticalTi
 import { railwayLineConstruction, railwayStationConstruction } from "./railwayConstruction.mjs"
 import {Listselector} from "./Listselector.mjs"
 import { clearTile } from "./remove.mjs"
+import {Slider} from "./slider.mjs"
 
 
 
