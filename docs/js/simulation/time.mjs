@@ -11,7 +11,7 @@ export function simulateTime(scene, deltaTime){
             scene.simulation.time.hour %= 24
             scene.simulation.time.day += 1
             if (scene.simulation.time.day > 30){
-                scene.simulation.time.day %= 28
+                scene.simulation.time.day %= 30
                 scene.simulation.time.month += 1
                 if (scene.simulation.time.month > 12){
                     scene.simulation.time.month %= 12
