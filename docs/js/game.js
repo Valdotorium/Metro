@@ -31,7 +31,8 @@ class GameScene extends Phaser.Scene{
         } catch (e){
 
             this.scene.start("StartMenuScene")
-            this.scene.get("StartMenuScene").add.text(20,20,"", { fontFamily: 'Arial Black', fontSize: 22, color: '#ff4444'}).setText(`ERR IN INIT: ${e.name}: ${e.message}`)
+            this.scene.get("StartMenuScene").add.text(20,20,`ERR IN INIT: ${e.name}: ${e.message}`, { fontFamily: 'Arial Black', fontSize: 20, color: '#ff4444'}).setDepth(888888)
+            console.log("ERROR IN INIT: ", e)
             this.scene.stop("GameScene")
         }
 
