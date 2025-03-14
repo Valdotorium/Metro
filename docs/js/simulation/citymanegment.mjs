@@ -47,7 +47,7 @@ export function generateCities(game) {
 }
 export function CityGrowth(game) {
     let randomCity = Math.floor(Math.random() * game.cityNames.length)
-    let growingcity = game.cityNames[999]
+    let growingcity = game.cityNames[randomCity]
     if(Math.floor(Math.random() * (1500 / game.simulation.speed)) < (game.cities.get(growingcity).population*0.05+game.cities.get(growingcity).size*0.1)){
         if(game.cities.get(growingcity).validnextdistricts.length>0){
             let randomIndex = Math.floor(Math.random() * game.cities.get(growingcity).validnextdistricts.length);
