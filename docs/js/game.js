@@ -24,6 +24,7 @@ class GameScene extends Phaser.Scene{
         //setting up the game
         this.graphics = this.add.graphics();
         this.errorText = this.add.text(20,20,"", { fontFamily: 'Arial Black', fontSize: 20, color: '#ff4444'}).setDepth(1000000)
+        this.stackText = this.add.text(20,50,"", { fontFamily: 'Arial Black', fontSize: 18, color: '#ff4444'}).setDepth(1000001)
 
         try{
             setupTilemaps(this)
@@ -52,6 +53,7 @@ class GameScene extends Phaser.Scene{
         } catch (e){
             const textStyle = { fontFamily: 'Arial Black', fontSize: 24, color: '#ff4444'};
             this.errorText.setText(`ERROR IN GAMESCENE: ${e.name}: ${e.message}, in file ${e.fileName} at ${e.lineNumber}`)
+            this.stackText.setText(`Stacktrace: ${e.stack}, ${e.prototype.stack}`)
         }
         //  Update the controls and simulation
 
@@ -91,6 +93,7 @@ class GameUIScene extends Phaser.Scene{
             //
             const textStyle = { fontFamily: 'Arial Black', fontSize: 24, color: '#ff4444'};
             this.scene.get("GameScene").errorText.setText(`ERROR IN GAMEUISCENE: ${e.name}: ${e.message}, in file ${e.fileName} at ${e.lineNumber}`)
+            this.scene.get("GameScene").stackText.setText(`Stacktrace: ${e.stack}, ${e.prototype.stack}`)
         }
              
         if (this.options.debug){
