@@ -23,7 +23,7 @@ class GameScene extends Phaser.Scene{
     {
         //setting up the game
         this.graphics = this.add.graphics();
-        this.errorText = this.add.text(20,20,"", { fontFamily: 'Arial Black', fontSize: 24, color: '#ff4444'});
+        this.errorText = this.add.text(20,20,"", { fontFamily: 'Arial Black', fontSize: 24, color: '#ff4444'}).setDepth(1000000)
 
         try{
             setupTilemaps(this)
