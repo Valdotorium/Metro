@@ -68,6 +68,10 @@ export function touchzoom(game){
                 tempzoom = 5
             }
             camera.zoom = tempzoom
+            camera.preRender();
+            const camanker = camera.getWorldPoint(pointer1.x, pointer1.y);
+            camera.scrollX -= camanker.x - worldPoint.x;
+            camera.scrollY -= camanker.y - worldPoint.y;
         }
         if (pointer1.isDown&&con2==0){
             dist2 = Math.sqrt(((pointer1.x - pointer2.x)**2)+((pointer1.y - pointer2.y)**2))
