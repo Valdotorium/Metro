@@ -23,20 +23,37 @@ class GameScene extends Phaser.Scene{
     {
         //setting up the game
         this.graphics = this.add.graphics();
-        setupTilemaps(this)
-        setupSimulation(this)
+        this.errorText = this.add.text(20,20,"", { fontFamily: 'Arial Black', fontSize: 24, color: '#ff4444'});
+
+        try{
+            setupTilemaps(this)
+            setupSimulation(this)
+        } catch (e){
+
+            this.scene.start("StartMenuScene")
+            this.scene.get("StartMenuScene").add.text(20,20,"", { fontFamily: 'Arial Black', fontSize: 22, color: '#ff4444'}).setText(`ERR IN INIT: ${e.name}: ${e.message}`)
+            this.scene.stop("GameScene")
+        }
+
         this.frame = 0
         this.input.addPointer(2)
         if (this.frame == 0){
             console.log(this.tileMap)
         }    
         setupControls(this)
+
     }
     update (timestep, dt)
     {
+        try{
+            updateControls(this);
+            simulate(this, dt)
+        } catch (e){
+            const textStyle = { fontFamily: 'Arial Black', fontSize: 24, color: '#ff4444'};
+            this.errorText.setText(`ERROR IN GAMESCENE: ${e.name}: ${e.message}`)
+        }
         //  Update the controls and simulation
-        updateControls(this);
-        simulate(this, dt)
+
         //get current window dimensions
         this.windowWidth = window.innerWidth;
         this.windowHeight = window.innerHeight;
@@ -67,7 +84,14 @@ class GameUIScene extends Phaser.Scene{
         }
     }
     update(){
-        updateUI(this)     
+        try{
+            updateUI(this)
+        } catch (e){
+            //
+            const textStyle = { fontFamily: 'Arial Black', fontSize: 24, color: '#ff4444'};
+            this.scene.get("GameScene").errorText.setText(`ERROR IN GAMEUISCENE: ${e.name}: ${e.message}`)
+        }
+             
         if (this.options.debug){
             debugText(this)
         }
