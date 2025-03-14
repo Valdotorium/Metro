@@ -6,8 +6,8 @@ function generateCoastlineNoise(){
     let base
     let a = Math.random() * 0.15 + 0.85
     let b = Math.random() * 0.2 + 0.5
-    let c = Math.random() * 0.15 + 0.275
-    let d = Math.random() * 0.2 + 0.025
+    let c = Math.random() * 0.08+ 0.4
+    let d = Math.random() * 0.1 + 0.01
     let flip = Math.round(Math.random())
     if(flip == 1){
         base = [[a,a,a,a],[b,b,b,b],[c,c,c,c],[d,d,d,d]]
