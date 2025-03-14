@@ -53,7 +53,7 @@ class GameScene extends Phaser.Scene{
         } catch (e){
             const textStyle = { fontFamily: 'Arial Black', fontSize: 24, color: '#ff4444'};
             this.errorText.setText(`ERROR IN GAMESCENE: ${e.name}: ${e.message}, in file ${e.fileName} at ${e.lineNumber}`)
-            this.stackText.setText(`Stacktrace: ${e.stack}, ${e.prototype.stack}`)
+            this.stackText.setText(`Stacktrace: ${e.stack}`)
         }
         //  Update the controls and simulation
 
@@ -93,7 +93,7 @@ class GameUIScene extends Phaser.Scene{
             //
             const textStyle = { fontFamily: 'Arial Black', fontSize: 24, color: '#ff4444'};
             this.scene.get("GameScene").errorText.setText(`ERROR IN GAMEUISCENE: ${e.name}: ${e.message}, in file ${e.fileName} at ${e.lineNumber}`)
-            this.scene.get("GameScene").stackText.setText(`Stacktrace: ${e.stack}, ${e.prototype.stack}`)
+            this.scene.get("GameScene").stackText.setText(`Stacktrace: ${e.stack}`)
         }
              
         if (this.options.debug){
