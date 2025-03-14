@@ -21,7 +21,7 @@ export function updateMouse(game){
 export function dragCamera(game){
     const camera = game.cameras.main;
     let pointer = game.input.activePointer;
-    if (pointer.isDown&&counter==1) {
+    if (pointer.isDown&&counter==1&&!game.input.pointer2.isDown) {
         camera.scrollX = camera.scrollX + ((cameraDragStartX - pointer.x)/camera.zoom*2)
         camera.scrollY = camera.scrollY + ((cameraDragStartY - pointer.y)/camera.zoom*2)
     }
@@ -60,7 +60,7 @@ export function touchzoom(game){
         if (pointer1.isDown&&con2==1) {
             dist1 = Math.sqrt(((pointer1.x - pointer2.x)**2)+((pointer1.y - pointer2.y)**2))
             zoomdist = dist1 - dist2
-            const worldPoint = camera.getWorldPoint(pointer1.x, pointer1.y)
+            //const worldPoint = camera.getWorldPoint(pointer1.x, pointer1.y)
             if(Math.abs(zoomdist) > 40){zoomdist = 0}
             tempzoom = camera.zoom + camera.zoom * 0.005 * zoomdist;
             if(tempzoom < 0.3){
@@ -70,9 +70,9 @@ export function touchzoom(game){
             }
             camera.zoom = tempzoom
             camera.preRender();
-            const camanker = camera.getWorldPoint(pointer1.x, pointer1.y);
-            camera.scrollX -= camanker.x - worldPoint.x;
-            camera.scrollY -= camanker.y - worldPoint.y;
+           // const camanker = camera.getWorldPoint(pointer1.x, pointer1.y);
+           // camera.scrollX -= camanker.x - worldPoint.x;
+            //camera.scrollY -= camanker.y - worldPoint.y;
         }
         if (pointer1.isDown&&con2==0){
             dist2 = Math.sqrt(((pointer1.x - pointer2.x)**2)+((pointer1.y - pointer2.y)**2))
