@@ -20,6 +20,10 @@ export function loadAssets(scene){
     scene.load.image("ClockIcon", "assets/images/static/clock.png")
     scene.load.image("Station", "assets/images/static/station.png")
 
+scene.textStyles = {
+    standard: {fontFamily: 'Arial Black', fontSize: 28, color: '#BBBBBB'},
+    inverted: {fontFamily: 'Arial Black', fontSize: 28, color: '#222222'}
+    }
 
     console.log("loaded assets!")
 }

@@ -4,14 +4,15 @@ import {TextButton} from "./TextButton.mjs"
 import {Checkbox} from "./Checkbox.mjs"
 import {mousewheelzoom} from "./mouse.mjs"
 import {touchzoom} from "./mouse.mjs"
-import { getHoveredTile,setupCurrentTileMarker} from "./selectTiles.mjs"
-import { downloadFileWeb, saveFileDesktop } from "../fileManagement/downloadFile.mjs"
-import { ImageButton } from "./ImageButton.mjs"
-import { setPopulationTileMap, setNormalTilemap } from "../tilemap/statisticalTileMap.mjs"
-import { railwayLineConstruction, railwayStationConstruction } from "./railwayConstruction.mjs"
+import {getHoveredTile,setupCurrentTileMarker} from "./selectTiles.mjs"
+import {downloadFileWeb, saveFileDesktop } from "../fileManagement/downloadFile.mjs"
+import {ImageButton } from "./ImageButton.mjs"
+import {setPopulationTileMap, setNormalTilemap } from "../tilemap/statisticalTileMap.mjs"
+import {railwayLineConstruction, railwayStationConstruction } from "./railwayConstruction.mjs"
 import {Listselector} from "./Listselector.mjs"
-import { clearTile } from "./remove.mjs"
+import {clearTile } from "./remove.mjs"
 import {Slider} from "./slider.mjs"
+import {dialogBox } from "./dialogBox.mjs"
 
 
 
@@ -88,7 +89,6 @@ let zoom = function zoom(scene){
     game.cameras.main.zoom = scene.inGameUI.zoomSlider.value
 }
 
-
 //CALLBACK FUNCTION SECTION END
 
 // DEFINING THE INGAME UI AND GAME CONTROLS
@@ -97,7 +97,7 @@ export function setupUI(scene){
     let gameScene = scene.scene.get("GameScene")
     scene.inGameUI = {}
     scene.inGameUI.currentActiveTool = "NONE"
-    let textStyle = { fontFamily: 'Arial Black', fontSize: 28, color: '#BBBBBB'};
+    let textStyle = gameScene.textStyles.standard;
     //the buttons
     var tilesetnames = [];
     for (var i=0; i < gameScene.tilesets.length ; ++i)
@@ -112,6 +112,7 @@ export function setupUI(scene){
     scene.inGameUI.populationMapButton = new Checkbox(scene, 1000,400, "POP. MAP", textStyle, populationMap, false) //temporary
     scene.inGameUI.toolSelector = new Listselector(scene, 1000, 500, "TOOL", textStyle, setConstructionTool, ["NONE", "STATION", "RAILWAYS", "REMOVE"],0) //temporary
     scene.inGameUI.clockIcon = scene.add.image(990, 50, "ClockIcon").setScale(0.6,0.6)
+    //scene.inGameUI.testBox = new dialogBox(scene, "HIIIII I BIMS TEXTBOX TESTBOX", gameScene.textStyles.inverted, [], []) @Igros10
     //text displaying current time
     textStyle = { fontFamily: 'Arial Black', fontSize: 28, color: '#444444'};
     scene.inGameUI.timeText = scene.add.text(840, 90, gameScene.simulation.time.year + "/" + gameScene.simulation.time.month + "/" + gameScene.simulation.time.day + " - " + gameScene.simulation.time.hour + ":" + gameScene.simulation.time.minute, textStyle)
