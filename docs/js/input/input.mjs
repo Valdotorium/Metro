@@ -139,6 +139,7 @@ export function updateControls (scene) {
         } else if (UIscene.inGameUI.currentActiveTool == "STATION"){
             railwayStationConstruction(scene)
         } else if (UIscene.inGameUI.currentActiveTool == "RAILWAYS"){
+            scene.selectedRailwayLine++
             railwayLineConstruction(scene)
         } else if (UIscene.inGameUI.currentActiveTool == "REMOVE"){
             clearTile(scene)

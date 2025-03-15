@@ -49,10 +49,11 @@ function selectRailwayStation(game){
 }
 
 function placeLineSegment(game, firstStationPosition, secondStationPosition){
-    if (game.railwayLines.length == 0){
-        game.railwayLines.push(new railwayLine(0xff0000, 0))
+    
+    if (game.railwayLines.length == game.selectedRailwayLine){
+        game.railwayLines.push(new railwayLine(game.railwayLineColors[game.selectedRailwayLine], 0))
     }
-    let line = game.railwayLines[0]
+    let line = game.railwayLines[game.selectedRailwayLine]
     console.log(line)
 
     let segment = {}

@@ -56,15 +56,16 @@ export function addRailwaySegmentGraphics(game,line, firstStationPosition, secon
     if (Math.abs(sceneSecondStationPosition.y - sceneFirstStationPosition.y) < smallestDifference){
         smallestDifference = Math.abs(sceneSecondStationPosition.y - sceneFirstStationPosition.y)
     }
+    let color = game.railwayLineColors[game.selectedRailwayLine]
     let viaPointPosition = {x: sceneFirstStationPosition.x + smallestDifference * xDirection, y: sceneFirstStationPosition.y + smallestDifference * yDirection}
-    circleObj = game.add.circle(viaPointPosition.x + 13, viaPointPosition.y + 13, 5, 0xff0000).setOrigin(0)
+    circleObj = game.add.circle(viaPointPosition.x + 13, viaPointPosition.y + 13, 5, color).setOrigin(0)
     line.lines.push(circleObj)
     //now add a line between the first station and the via point
-    lineObj = game.add.line(0,0, sceneFirstStationPosition.x + 18, sceneFirstStationPosition.y + 18, viaPointPosition.x + 18, viaPointPosition.y + 18, 0xff0000).setOrigin(0);
+    lineObj = game.add.line(0,0, sceneFirstStationPosition.x + 18, sceneFirstStationPosition.y + 18, viaPointPosition.x + 18, viaPointPosition.y + 18, color).setOrigin(0);
     lineObj.setLineWidth(5);
     line.lines.push(lineObj)
     //and between the via point and the second station
-    lineObj = game.add.line(0,0, viaPointPosition.x + 18, viaPointPosition.y + 18, sceneSecondStationPosition.x + 18, sceneSecondStationPosition.y + 18, 0xff0000).setOrigin(0);
+    lineObj = game.add.line(0,0, viaPointPosition.x + 18, viaPointPosition.y + 18, sceneSecondStationPosition.x + 18, sceneSecondStationPosition.y + 18, color).setOrigin(0);
     lineObj.setLineWidth(5);
     line.lines.push(lineObj)
 

@@ -92,8 +92,7 @@ class GameUIScene extends Phaser.Scene{
             const textStyle = { fontFamily: 'Arial Black', fontSize: 24, color: '#ff4444'};
             this.scene.get("GameScene").errorText.setText(`ERROR IN GAMEUISCENE: ${e.name}: ${e.message}, in file ${e.fileName} at ${e.lineNumber}`)
 
-        }
-             
+        }    
         if (this.options.debug){
             debugText(this)
         }
