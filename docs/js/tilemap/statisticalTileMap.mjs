@@ -17,7 +17,6 @@ export function setPopulationTileMap(scene){
     //change the tilemap data
     switchTileMapData(game.tileMap, statisticalTilemap)
 
-    game.simulation.speed = 0
     game.statisticalTilemapIsEnabled = true
 }
 export function setNormalTilemap(scene){
@@ -29,7 +28,6 @@ export function setNormalTilemap(scene){
     //change the tilemap data
     switchTileMapData(game.tileMap, game.generatedTilemap)
 
-    game.simulation.speed = 1
     game.statisticalTilemapIsEnabled = false
     game.currentTileset = 0
 }

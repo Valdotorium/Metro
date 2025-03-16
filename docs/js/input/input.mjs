@@ -82,10 +82,6 @@ let slowDown = function slowDown(scene){
 let setConstructionTool = function setConstructionTool(scene, state){
     let tools = ["NONE", "STATION", "RAILWAYS", "REMOVE"]
     scene.inGameUI.currentActiveTool = tools[state]
-    let gameScene = scene.scene.get("GameScene")
-    if (scene.inGameUI.currentActiveTool == "RAILWAYS"){
-        gameScene.selectedRailwayLine = gameScene.railwayLines.length
-    }
 }
 
 let zoom = function zoom(scene){

@@ -67,6 +67,13 @@ function placeLineSegment(game, firstStationPosition, secondStationPosition){
             segment.lines = []
             segment = addRailwaySegmentGraphics(game, segment, firstStationPosition, secondStationPosition)
             line.segments.push(segment)
+            //add lines to the railwaystations in tiledata if the line is not already connected to the station
+            if(game.tileData[firstStationPosition.x][firstStationPosition.y].railwayStation.lines.includes(game.selectedRailwayLine) == false){
+                game.tileData[firstStationPosition.x][firstStationPosition.y].railwayStation.lines.push(game.selectedRailwayLine)
+            }
+            if(game.tileData[secondStationPosition.x][secondStationPosition.y].railwayStation.lines.includes(game.selectedRailwayLine) == false){
+                game.tileData[secondStationPosition.x][secondStationPosition.y].railwayStation.lines.push(game.selectedRailwayLine)
+            }
         } catch (e){
             console.log("error", e)
         }
@@ -81,6 +88,19 @@ export function railwayStationConstruction(game){
         placeRailwayStation(game)
     }
 }
+function selectRailwayLine(game, firstStationPosition){
+    if(game.tileData[firstStationPosition.x][firstStationPosition.y].railwayStation != null){
+        let station = game.tileData[firstStationPosition.x][firstStationPosition.y].railwayStation
+        if (station.lines.length == 0){
+            game.selectedRailwayLine = game.railwayLines.length
+            station.lines.push(game.selectedRailwayLine)
+        }
+        else{
+            game.selectedRailwayLine = station.lines[0]
+        }
+    }
+    console.log("selected line: ", game.selectedRailwayLine)
+}
 let lineConstruction = false
 let firstStationPosition = null
 let secondStationPosition = null
@@ -91,6 +111,7 @@ export function railwayLineConstruction(game){
     if (game.mouse.justDown && game.isTilemapClicked){
         if (firstStationPosition == null && selectRailwayStation(game) != null){
             firstStationPosition = selectRailwayStation(game)
+            selectRailwayLine(game, firstStationPosition)
             lineConstruction = true
         } 
         }else {
