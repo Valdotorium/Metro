@@ -1,4 +1,4 @@
-
+//a simple clickable rectangle with text and callback functions included
 export class TextButton{
     constructor(scene, x, y, text, style, callback){
         this.text = scene.add.text(x, y, text, style)

@@ -1,4 +1,4 @@
-
+// a slider that returns its value, has a label
 export class Slider{
 
     updateHover(){

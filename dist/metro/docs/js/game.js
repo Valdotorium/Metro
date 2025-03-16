@@ -23,30 +23,50 @@ class GameScene extends Phaser.Scene{
     {
         //setting up the game
         this.graphics = this.add.graphics();
-        setupTilemaps(this)
-        setupSimulation(this)
+        this.errorText = this.add.text(20,20,"", { fontFamily: 'Arial Black', fontSize: 20, color: '#ff4444'}).setDepth(1000000)
+
+        try{
+            setupTilemaps(this)
+            setupSimulation(this)
+        } catch (e){
+
+            this.scene.start("StartMenuScene")
+            this.scene.get("StartMenuScene").add.text(20,20,`ERR IN INIT: ${e.name}: ${e.message}, in file ${e.fileName} at ${e.lineNumber}`, { fontFamily: 'Arial Black', fontSize: 18,color: '#ff4444'}).setDepth(888888)
+            console.warn("ERROR IN INIT: ", e)
+            this.scene.stop("GameScene")
+        }
+
         this.frame = 0
         this.input.addPointer(2)
         if (this.frame == 0){
             console.log(this.tileMap)
         }    
         setupControls(this)
+
     }
-    update ()
+    update (timestep, dt)
     {
+        try{
+            updateControls(this);
+            simulate(this, dt)
+        } catch (e){
+            console.warn("ERROR IN GAMESCENE: ", e)
+            const textStyle = { fontFamily: 'Arial Black', fontSize: 24, color: '#ff4444'};
+            this.errorText.setText(`ERROR IN GAMESCENE: ${e.name}: ${e.message}, in file ${e.fileName} at ${e.lineNumber}`)
+        }
+        //  Update the controls and simulation
+
         //get current window dimensions
         this.windowWidth = window.innerWidth;
         this.windowHeight = window.innerHeight;
 
         //draw a tilemap
         this.frame++
+        this.fps = Math.round(1000/dt)
 
         if (this.frame == 1){
             this.scene.launch('GameUIScene');
         }
-        //  Update the controls and simulation
-        updateControls(this);
-        simulate(this)
     }
 }
 class GameUIScene extends Phaser.Scene{
@@ -66,7 +86,15 @@ class GameUIScene extends Phaser.Scene{
         }
     }
     update(){
-        updateUI(this)     
+        try{
+            updateUI(this)
+        } catch (e){
+            //
+            console.warn("ERROR IN GAMEUISCENE: ", e)
+            const textStyle = { fontFamily: 'Arial Black', fontSize: 24, color: '#ff4444'};
+            this.scene.get("GameScene").errorText.setText(`ERROR IN GAMEUISCENE: ${e.name}: ${e.message}, in file ${e.fileName} at ${e.lineNumber}`)
+
+        }    
         if (this.options.debug){
             debugText(this)
         }
@@ -97,6 +125,7 @@ class StartMenuScene extends Phaser.Scene {
         loadStartMenuAssets(this)
     }
     create(){
+        configureGame(this.scene.get("GameScene"))
         this.frame = 0
         setupKeyboard(this);
         console.log(this.options)
@@ -126,6 +155,7 @@ var config = {
     pixelArt: true,
     inputTouch: true,
     backgroundColor: "#161616",
+    powerPreference:"high-performance",
 
     scene: [BootScene, StartMenuScene, GameScene, GameUIScene, SettingsScene],
     scale: {
@@ -137,7 +167,7 @@ var config = {
         resizeInterval: 50,
       },
     fps: {
-        target: 30 // 30x per second
+        target: 30
     }
 };
 

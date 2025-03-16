@@ -3,3 +3,8 @@ Everything that has to do with
 -map modification
 -game mechanics like seasons, politics or whatever well add
 belongs here.
+
+citydistrct, citys, citymanegement.mjs - generating, updateing and managing cities
+simulation.mjs - coordinating simulation functions and game.simulation variables
+setupTileData.mjs - setting up the important tileData array
+time.mjs - simulating time

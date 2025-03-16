@@ -1,7 +1,7 @@
 import { generateRandomNoise } from "./noise.js";
 export function generateSimpleTilemap(targetSize, smoothness){
 
-    //pure smoothed noise terrain
+    //pure smoothed perlin noise terrain
     let baseNoise = generateRandomNoise((targetSize / smoothness) + 3);
     let zoominNoise = [];
     for(let i = 0; i < targetSize; i++){

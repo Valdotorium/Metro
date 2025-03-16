@@ -1,4 +1,5 @@
 export function cameraControls(game){
+    //controlling cam position and zoom with keyboard
     //zoom in or out if q or e are pressed
     if (game.keys.get("Q").isDown && game.cameras.main.zoom < 5) {
         game.cameras.main.zoom += 0.01;

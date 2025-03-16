@@ -15,10 +15,15 @@ export function loadAssets(scene){
 
     scene.statisticalTilesets.push({name: "PopulationTileset", image: scene.load.image("PopulationTileset", "assets/images/gradientTiles.png")})
 
-    scene.load.image("ForwardIcon", "assets/images/icons/forward.png")
-    scene.load.image("BackwardIcon", "assets/images/icons/backward.png")
-    scene.load.image("ClockIcon", "assets/images/icons/clock.png")
+    scene.load.image("ForwardIcon", "assets/images/static/forward.png")
+    scene.load.image("BackwardIcon", "assets/images/static/backward.png")
+    scene.load.image("ClockIcon", "assets/images/static/clock.png")
+    scene.load.image("Station", "assets/images/static/station.png")
 
+scene.textStyles = {
+    standard: {fontFamily: 'Arial Black', fontSize: 28, color: '#BBBBBB'},
+    inverted: {fontFamily: 'Arial Black', fontSize: 28, color: '#222222'}
+    }
 
     console.log("loaded assets!")
 }
@@ -28,10 +33,12 @@ export function configureGame(scene){
     scene.options = {}
     //manually setting scene constants
     scene.options.loadMap = false
-    scene.options.terrainGenerator = "complexBiomes"
-    scene.options.debug = true
+    scene.options.terrainGenerator = "DEFAULT"
+    scene.options.debug = false
 
     scene.tileMapOptions = {}
+    scene.railwayLineColors = [0xdd2222, 0x22dd22, 0x2222dd, 0xdddd22, 0x22dddd, 0xdd22dd]
+    scene.selectedRailwayLine = -1
     scene.tileMapOptions.size = 85
 
     scene.frame = 0

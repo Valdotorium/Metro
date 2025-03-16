@@ -51,12 +51,12 @@ export function CityGrowth(game) {
     if(Math.floor(Math.random() * (1500 / game.simulation.speed)) < (game.cities.get(growingcity).population*0.05+game.cities.get(growingcity).size*0.1)){
         if(game.cities.get(growingcity).validnextdistricts.length>0){
             let randomIndex = Math.floor(Math.random() * game.cities.get(growingcity).validnextdistricts.length);
-            let [districtX, districtY] =  game.cities.get(growingcity).validnextdistricts[randomIndex];
-            game.cities.get(growingcity).addDistrict(game.cities.get(growingcity).districts.length, game.cities.get(growingcity), districtX, districtY, game)
-            game.cities.get(growingcity).size++
-            console.log(game.cities.get(growingcity).districts.length, growingcity)
-            game.cities.get(growingcity).validnextdistricts.splice(randomIndex, 1);
-            game.cities.get(growingcity).cityinfo.setText(`City: ${growingcity} \n Population: ${game.cities.get(growingcity).population} \n Size: ${game.cities.get(growingcity).size}`)
+            let [districtX, districtY, districttype] =  game.cities.get(growingcity).validnextdistricts[randomIndex];
+            if((0 < districtX < game.tileMapOptions.size - 1)&& (0 < districtY < game.tileMapOptions.size - 1)){
+                game.cities.get(growingcity).addDistrict(game.cities.get(growingcity).districts.length, game.cities.get(growingcity), districtX, districtY, game, districttype);
+                console.log(game.cities.get(growingcity).districts.length, growingcity)
+                game.cities.get(growingcity).validnextdistricts.splice(randomIndex, 1);
+                game.cities.get(growingcity).cityinfo.setText(`City: ${growingcity} \n Population: ${game.cities.get(growingcity).population} \n Size: ${game.cities.get(growingcity).size}`)}
         }
     }
 }

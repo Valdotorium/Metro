@@ -4,12 +4,19 @@ import {TextButton} from "./TextButton.mjs"
 import {Checkbox} from "./Checkbox.mjs"
 import {mousewheelzoom} from "./mouse.mjs"
 import {touchzoom} from "./mouse.mjs"
-import { getHoveredTile,setupCurrentTileMarker} from "./selectTiles.mjs"
-import { downloadFileWeb, saveFileDesktop } from "../fileManagement/downloadFile.mjs"
-import { ImageButton } from "./ImageButton.mjs"
-import { setPopulationTileMap, setNormalTilemap } from "../tilemap/statisticalTileMap.mjs"
-import { placeHighway } from "./highwayConstruction.mjs"
+import {getHoveredTile,setupCurrentTileMarker} from "./selectTiles.mjs"
+import {downloadFileWeb, saveFileDesktop } from "../fileManagement/downloadFile.mjs"
+import {ImageButton } from "./ImageButton.mjs"
+import {setPopulationTileMap, setNormalTilemap } from "../tilemap/statisticalTileMap.mjs"
+import {railwayLineConstruction, railwayStationConstruction } from "./railwayConstruction.mjs"
+import {Listselector} from "./Listselector.mjs"
+import {clearTile } from "./remove.mjs"
+import {Slider} from "./slider.mjs"
+import {dialogBox} from "./dialogBox.mjs"
 
+
+
+//CALLBACK FUNCTION SECTION
 let populationMap = function populationMap(scene){
     if ( scene.inGameUI.populationMapButton.state == false){
         setNormalTilemap(scene)
@@ -18,20 +25,11 @@ let populationMap = function populationMap(scene){
     }
 }
 
-function updateTimeText(scene){
+let handleClickTest = function handleClickTest(scene, index){
     let gameScene = scene.scene.get("GameScene")
-    scene.inGameUI.timeText.setText(`Time: ${gameScene.simulation.time.year}-${gameScene.simulation.time.month}-${gameScene.simulation.time.day} ${gameScene.simulation.time.hour}:${Math.round(gameScene.simulation.time.minute)}`)
-
-}
-let handleClickTest = function handleClickTest(scene){
-    let gameScene = scene.scene.get("GameScene")
-    if(!gameScene.statisticalTilemapIsEnabled){
-        gameScene.currentTileset++
-        if(gameScene.currentTileset >= gameScene.tilesets.length){gameScene.currentTileset = 0}
-        const newTileset = scene.sys.textures.get(gameScene.tilesets[gameScene.currentTileset].name)
-        gameScene.currentTilesetImage.setImage(newTileset)
+    const newTileset = scene.sys.textures.get(gameScene.tilesets[index].name)
+    gameScene.currentTilesetImage.setImage(newTileset)
         //temporary, replace with your own logic when you have i
-    }
 }
 
 let quitGame = function quitGame(scene){
@@ -81,30 +79,41 @@ let slowDown = function slowDown(scene){
     
 }
 
-let setConstructionTool = function setConstructionTool(scene){
-    if(scene.inGameUI.currentActiveTool == "construction"){
-        scene.inGameUI.currentActiveTool = "none"
-    } else {
-        scene.inGameUI.currentActiveTool = "construction"
-    }
-    let game = scene.scene.get("GameScene")
-    console.log(scene.inGameUI.currentActiveTool)
+let setConstructionTool = function setConstructionTool(scene, state){
+    let tools = ["NONE", "STATION", "RAILWAYS", "REMOVE"]
+    scene.inGameUI.currentActiveTool = tools[state]
 }
+
+let zoom = function zoom(scene){
+    let game = scene.scene.get("GameScene")
+    game.cameras.main.zoom = scene.inGameUI.zoomSlider.value
+}
+
+//CALLBACK FUNCTION SECTION END
+
+// DEFINING THE INGAME UI AND GAME CONTROLS
+//NOTE: game UI is in the GameUIScene, controls in the GameScene
 export function setupUI(scene){
+    let gameScene = scene.scene.get("GameScene")
     scene.inGameUI = {}
-    scene.inGameUI.currentActiveTool = "none"
-    let textStyle = { fontFamily: 'Arial Black', fontSize: 28, color: '#BBBBBB'};
+    scene.inGameUI.currentActiveTool = "NONE"
+    let textStyle = gameScene.textStyles.standard;
     //the buttons
-    scene.inGameUI.testTextButton = new TextButton(scene, 1000, 160,"SWITCH TILESET",textStyle, handleClickTest) //temporary
-    scene.inGameUI.quitTextButton = new TextButton(scene, 1000, 220,"QUIT GAME",textStyle, quitGame) //temporary
-    scene.inGameUI.saveTextButton = new TextButton(scene, 1000, 280,"SAVE GAME", textStyle, downloadSavescene) //temporary
+    var tilesetnames = [];
+    for (var i=0; i < gameScene.tilesets.length ; ++i)
+        tilesetnames.push(gameScene.tilesets[i]["name"]);
+    const sliderStyle = { fontFamily: 'Arial Black', fontSize: 28, color: '#BBBBBB'};
+    scene.inGameUI.testTextButton = new Listselector(scene, 1000, 220,"SWITCH TILESET",textStyle, handleClickTest, tilesetnames, 0) //temporary
+    scene.inGameUI.quitTextButton = new TextButton(scene, 1000, 280,"QUIT GAME",textStyle, quitGame) //temporary
+    scene.inGameUI.zoomSlider = new Slider(scene, 105, 720,0.3,5, "ZOOM", sliderStyle, zoom)
+    scene.inGameUI.saveTextButton = new TextButton(scene, 1000, 340,"SAVE GAME", textStyle, downloadSavescene) //temporary
     scene.inGameUI.forwardButton = new ImageButton(scene, 1100,50, "ForwardIcon", 90, 70, speedUp)
     scene.inGameUI.backwardButton = new ImageButton(scene, 880,50, "BackwardIcon", 90, 70, slowDown)
-    scene.inGameUI.populationMapButton = new Checkbox(scene, 1000,340, "POP. MAP", textStyle, populationMap, false) //temporary
-    scene.inGameUI.constructionButton = new TextButton(scene, 1000, 400, "BUILD TOOL", textStyle, setConstructionTool) //temporary
+    scene.inGameUI.populationMapButton = new Checkbox(scene, 1000,400, "POP. MAP", textStyle, populationMap, false) //temporary
+    scene.inGameUI.toolSelector = new Listselector(scene, 1000, 500, "TOOL", textStyle, setConstructionTool, ["NONE", "STATION", "RAILWAYS", "REMOVE"],0) //temporary
     scene.inGameUI.clockIcon = scene.add.image(990, 50, "ClockIcon").setScale(0.6,0.6)
+    //scene.inGameUI.testBox = new dialogBox(scene, "HIIIII I BIMS TEXTBOX TESTBOX", gameScene.textStyles.inverted, [], []) @Igros10
     //text displaying current time
-    let gameScene = scene.scene.get("GameScene")
     textStyle = { fontFamily: 'Arial Black', fontSize: 28, color: '#444444'};
     scene.inGameUI.timeText = scene.add.text(840, 90, gameScene.simulation.time.year + "/" + gameScene.simulation.time.month + "/" + gameScene.simulation.time.day + " - " + gameScene.simulation.time.hour + ":" + gameScene.simulation.time.minute, textStyle)
 
@@ -116,22 +125,29 @@ export function setupControls(scene){
     scene.mouse = {}
     scene.mouse.wasDown = false
 }
-
+ 
+//UPDATING GAME UI AND CONTROLS
 export function updateControls (scene) {
     //this fuction is called from the GAME scene
-    try{
+    if(scene.frame>3){
         let UIscene = scene.scene.get("GameUIScene")
-        updateMouse(scene)
-        keyboardControls(scene)
-        if (UIscene.inGameUI.currentActiveTool== "none"){
-            dragCamera(scene)
-        } else if (UIscene.inGameUI.currentActiveTool == "construction"){
-            placeHighway(scene)
-        }
         scene.mouse.worldPoint = scene.input.activePointer.positionToCamera(scene.cameras.main);
+        updateMouse(scene)
         getHoveredTile(scene)
+        keyboardControls(scene)
+        if (UIscene.inGameUI.currentActiveTool== "NONE"){
+            dragCamera(scene)
+        } else if (UIscene.inGameUI.currentActiveTool == "STATION"){
+            railwayStationConstruction(scene)
+        } else if (UIscene.inGameUI.currentActiveTool == "RAILWAYS"){
+            railwayLineConstruction(scene)
+
+        } else if (UIscene.inGameUI.currentActiveTool == "REMOVE"){
+            clearTile(scene)
+        }
+
         touchzoom(scene)
-    } catch {
+    } else{
         //if getting UIscene.inGameUI.currentActiveTool fails
         updateMouse(scene)
         keyboardControls(scene)
@@ -140,6 +156,13 @@ export function updateControls (scene) {
         getHoveredTile(scene)
         touchzoom(scene)
     }
+
+}
+
+
+function updateTimeText(scene){
+    let gameScene = scene.scene.get("GameScene")
+    scene.inGameUI.timeText.setText(`Time: ${gameScene.simulation.time.year}-${gameScene.simulation.time.month}-${gameScene.simulation.time.day} ${gameScene.simulation.time.hour}:${Math.round(gameScene.simulation.time.minute)}`)
 
 }
 

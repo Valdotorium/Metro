@@ -10,7 +10,6 @@ export class city {
         this.population = 0;
         this.x = x;
         this.y = y;
-
         this.name = name;
         this.size = size;
         
@@ -19,30 +18,31 @@ export class city {
     //actually creating it
     createCity(game){
         //the root district of the city
-        this.citycenter = this.addDistrict(0, this, this.x, this.y, game);
+        this.citycenter = this.addDistrict(0, this, this.x, this.y, game, 9);
         //size -1, because one district has already been created
         for (let i = 0; i < this.size - 1; i++) {
             if(this.validnextdistricts.length>0){
                 //generate one of the districts on a valid tile
                 let randomIndex = Math.floor(Math.random() * this.validnextdistricts.length);
-                let [districtX, districtY] = this.validnextdistricts[randomIndex];
-                this.addDistrict(this.districts.length, this, districtX, districtY, game);
+                let [districtX, districtY, districttype] = this.validnextdistricts[randomIndex];
+                this.addDistrict(this.districts.length, this, districtX, districtY, game, districttype);
                 //prevent multiple districts per tile
                 this.validnextdistricts.splice(randomIndex, 1);
             }
         }
         this.textInfo(game, this.x, this.y);
     }
-    addDistrict(id, city, x, y, game) {
-        let tempdist = new cityDistrict(id, city, x, y, game);
+    addDistrict(id, city, x, y, game, districttype) {
+        let tempdist = new cityDistrict(id, city, x, y, game, districttype);
         tempdist.createDistrict(game);
-        tempdist.addNeighbourTiles(game);
+        tempdist.addNeighbourTiles(game, districttype);
 
         for (let i = 0; i < tempdist.validNeighbours.length; i++) {
             this.validnextdistricts.push(tempdist.validNeighbours[i]);
         }
         this.population += tempdist.population;
         this.districts.push(tempdist)
+        this.size = this.districts.length
         return [x, y]
     }
     
