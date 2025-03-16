@@ -4,7 +4,7 @@ export function saveGame(game){
     //return the JSON string
     //log the data first
 
-    console.log(game.generatedTilemap, game.tileData, game.cities)
+
     return JSON.stringify({
         size: game.generatedTilemap[0].length,
         tileMap: game.generatedTilemap,

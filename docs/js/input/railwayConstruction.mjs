@@ -1,6 +1,7 @@
 import { placeRailwayStation } from "../simulation/railwayStation.mjs"
 import { railwayLine } from "../simulation/railwayLine.mjs"
 import { addRailwaySegmentGraphics, deleteRailwayConstructionGraphics, railwayLineDragging } from "../graphics/railwayLineGraphics.mjs"
+import { decToHex } from "../utils/decToHex.mjs"
 
 
 function deleteDuplicateStationPositions(stations){
@@ -47,12 +48,9 @@ function selectRailwayStation(game){
         return mousePosition
     }
 }
-
 function placeLineSegment(game, firstStationPosition, secondStationPosition){
     
-    if (game.railwayLines.length == game.selectedRailwayLine){
-        game.railwayLines.push(new railwayLine(game.railwayLineColors[game.selectedRailwayLine], 0))
-    }
+
     let line = game.railwayLines[game.selectedRailwayLine]
     console.log(line)
 
@@ -60,6 +58,7 @@ function placeLineSegment(game, firstStationPosition, secondStationPosition){
     if(!checkIfSegmentExists(line, firstStationPosition, secondStationPosition)){
         segment.firstStation = firstStationPosition
         segment.secondStation = secondStationPosition
+        segment.line = game.selectedRailwayLine
         line.stations.push(firstStationPosition)
         line.stations.push(secondStationPosition)
         line.stations = deleteDuplicateStationPositions(line.stations)
@@ -86,6 +85,9 @@ let lineConstruction = false
 let firstStationPosition = null
 let secondStationPosition = null
 export function railwayLineConstruction(game){
+    if (game.railwayLines.length ==game.selectedRailwayLine){
+        game.railwayLines.push(new railwayLine(game.railwayLineColors[game.selectedRailwayLine],game.selectedRailwayLine))
+    }
     if (game.mouse.justDown && game.isTilemapClicked){
         if (firstStationPosition == null && selectRailwayStation(game) != null){
             firstStationPosition = selectRailwayStation(game)
@@ -118,8 +120,9 @@ export function railwayLineConstruction(game){
 
 export function createLinesFromSaveGame(game){
     console.log(game.loadedGameData.railwayLines)
+    //temporary uninitialized lines to make them accessible
+    game.railwayLines = game.loadedGameData.railwayLines
     for(let i = 0; i < game.loadedGameData.railwayLines.length; i++){
-        console.log("E")
         let line = game.loadedGameData.railwayLines[i]
         let newLine = new railwayLine(line.color, line.id)
         newLine.stations = line.stations
@@ -128,10 +131,13 @@ export function createLinesFromSaveGame(game){
             newSegment.firstStation = segment.firstStation
             newSegment.secondStation = segment.secondStation
             newSegment.lines = []
+            newSegment.line = i
             newSegment = addRailwaySegmentGraphics(game, newSegment, segment.firstStation, segment.secondStation)
             newLine.segments.push(newSegment)
         }
-        game.railwayLines.push(newLine)
+        //replacing the uninitialized lines with the correct ones
+        game.railwayLines[i] = newLine
     }
+    console.log(game.railwayLines)
 }
 

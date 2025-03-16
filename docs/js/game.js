@@ -32,7 +32,7 @@ class GameScene extends Phaser.Scene{
 
             this.scene.start("StartMenuScene")
             this.scene.get("StartMenuScene").add.text(20,20,`ERR IN INIT: ${e.name}: ${e.message}, in file ${e.fileName} at ${e.lineNumber}`, { fontFamily: 'Arial Black', fontSize: 18,color: '#ff4444'}).setDepth(888888)
-            console.log("ERROR IN INIT: ", e)
+            console.warn("ERROR IN INIT: ", e)
             this.scene.stop("GameScene")
         }
 
@@ -50,6 +50,7 @@ class GameScene extends Phaser.Scene{
             updateControls(this);
             simulate(this, dt)
         } catch (e){
+            console.warn("ERROR IN GAMESCENE: ", e)
             const textStyle = { fontFamily: 'Arial Black', fontSize: 24, color: '#ff4444'};
             this.errorText.setText(`ERROR IN GAMESCENE: ${e.name}: ${e.message}, in file ${e.fileName} at ${e.lineNumber}`)
         }
@@ -89,6 +90,7 @@ class GameUIScene extends Phaser.Scene{
             updateUI(this)
         } catch (e){
             //
+            console.warn("ERROR IN GAMEUISCENE: ", e)
             const textStyle = { fontFamily: 'Arial Black', fontSize: 24, color: '#ff4444'};
             this.scene.get("GameScene").errorText.setText(`ERROR IN GAMEUISCENE: ${e.name}: ${e.message}, in file ${e.fileName} at ${e.lineNumber}`)
 
@@ -123,6 +125,7 @@ class StartMenuScene extends Phaser.Scene {
         loadStartMenuAssets(this)
     }
     create(){
+        configureGame(this.scene.get("GameScene"))
         this.frame = 0
         setupKeyboard(this);
         console.log(this.options)

@@ -9,21 +9,24 @@ export function railwayLineDragging(game, firstStationPosition){
     let circleObj
 
     deleteRailwayConstructionGraphics(game)
-
+    //connecting the two points at mouse and the station with a diagonal and a horizontal/vertical line
     let smallestDifference = Math.abs(sceneMousePosition.x - sceneFirstStationPosition.x)
     if (Math.abs(sceneMousePosition.y - sceneFirstStationPosition.y) < smallestDifference){
         smallestDifference = Math.abs(sceneMousePosition.y - sceneFirstStationPosition.y)
     }
+    //the point where the diagonal line shifts to a verical/horizontal line
     let viaPointPosition = {x: sceneFirstStationPosition.x + smallestDifference * xDirection, y: sceneFirstStationPosition.y + smallestDifference * yDirection}
-    circleObj = game.add.circle(viaPointPosition.x + 13, viaPointPosition.y + 13, 5, 0xff0000).setOrigin(0)
+
+    let color = game.railwayLineColors[game.selectedRailwayLine]
+    circleObj = game.add.circle(viaPointPosition.x + 13, viaPointPosition.y + 13, 5, color).setOrigin(0)
     game.railwayConstructionGraphics.push(circleObj)
     //now add a line between the first station and the via point
     let lineObj
-    lineObj = game.add.line(0,0, sceneFirstStationPosition.x + 18, sceneFirstStationPosition.y + 18, viaPointPosition.x + 18, viaPointPosition.y + 18, 0xff0000).setOrigin(0);
+    lineObj = game.add.line(0,0, sceneFirstStationPosition.x + 18, sceneFirstStationPosition.y + 18, viaPointPosition.x + 18, viaPointPosition.y + 18, color).setOrigin(0);
     lineObj.setLineWidth(5);
     game.railwayConstructionGraphics.push(lineObj)
     //and between the via point and the mouse
-    lineObj = game.add.line(0,0, viaPointPosition.x + 18, viaPointPosition.y + 18, sceneMousePosition.x + 18, sceneMousePosition.y + 18, 0xff0000).setOrigin(0);
+    lineObj = game.add.line(0,0, viaPointPosition.x + 18, viaPointPosition.y + 18, sceneMousePosition.x + 18, sceneMousePosition.y + 18, color).setOrigin(0);
     lineObj.setLineWidth(5);
     game.railwayConstructionGraphics.push(lineObj)
 
@@ -42,6 +45,8 @@ export function deleteRailwayConstructionGraphics(game){
 }
 
 export function addRailwaySegmentGraphics(game,line, firstStationPosition, secondStationPosition){
+    //IMPORTANT: line is a line segment here
+    console.log(line)
     //the same as in railwayLineDragging, but mousePosition is replaced with secondStationPosition
     let sceneFirstStationPosition = game.tileMap.tileToWorldXY(firstStationPosition.x, firstStationPosition.y)
     let sceneSecondStationPosition = game.tileMap.tileToWorldXY(secondStationPosition.x, secondStationPosition.y)
@@ -52,11 +57,14 @@ export function addRailwaySegmentGraphics(game,line, firstStationPosition, secon
     let yDirection = Phaser.Math.Clamp(sceneSecondStationPosition.y - sceneFirstStationPosition.y, -1, 1)
     let circleObj
 
+
     let smallestDifference = Math.abs(sceneSecondStationPosition.x - sceneFirstStationPosition.x)
     if (Math.abs(sceneSecondStationPosition.y - sceneFirstStationPosition.y) < smallestDifference){
         smallestDifference = Math.abs(sceneSecondStationPosition.y - sceneFirstStationPosition.y)
     }
-    let color = game.railwayLineColors[game.selectedRailwayLine]
+    
+    let color = game.railwayLines[line.line].color
+    //the point where the diagonal line shifts to a verical/horizontal line
     let viaPointPosition = {x: sceneFirstStationPosition.x + smallestDifference * xDirection, y: sceneFirstStationPosition.y + smallestDifference * yDirection}
     circleObj = game.add.circle(viaPointPosition.x + 13, viaPointPosition.y + 13, 5, color).setOrigin(0)
     line.lines.push(circleObj)

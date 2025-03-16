@@ -12,7 +12,7 @@ import {railwayLineConstruction, railwayStationConstruction } from "./railwayCon
 import {Listselector} from "./Listselector.mjs"
 import {clearTile } from "./remove.mjs"
 import {Slider} from "./slider.mjs"
-import {dialogBox } from "./dialogBox.mjs"
+import {dialogBox} from "./dialogBox.mjs"
 
 
 
@@ -82,6 +82,10 @@ let slowDown = function slowDown(scene){
 let setConstructionTool = function setConstructionTool(scene, state){
     let tools = ["NONE", "STATION", "RAILWAYS", "REMOVE"]
     scene.inGameUI.currentActiveTool = tools[state]
+    let gameScene = scene.scene.get("GameScene")
+    if (scene.inGameUI.currentActiveTool == "RAILWAYS"){
+        gameScene.selectedRailwayLine = gameScene.railwayLines.length
+    }
 }
 
 let zoom = function zoom(scene){
@@ -140,8 +144,8 @@ export function updateControls (scene) {
         } else if (UIscene.inGameUI.currentActiveTool == "STATION"){
             railwayStationConstruction(scene)
         } else if (UIscene.inGameUI.currentActiveTool == "RAILWAYS"){
-            scene.selectedRailwayLine++
             railwayLineConstruction(scene)
+
         } else if (UIscene.inGameUI.currentActiveTool == "REMOVE"){
             clearTile(scene)
         }

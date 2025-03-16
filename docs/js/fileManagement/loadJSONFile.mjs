@@ -27,7 +27,6 @@ export async function loadJSONFileWeb(game){
     }
     //wait until the user submits a file
     let data = await checkFlag();
-    console.log(data);
     return data
 
 }

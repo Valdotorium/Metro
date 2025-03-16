@@ -16,7 +16,7 @@ export function downloadFileWeb(game) {
 
 export async function saveFileDesktop(game) {
   //make a json array out of necessary data, then open a file dialog
-  let data = saveGame(game.scene.get("GameScene"))
+  let data = await saveGame(game.scene.get("GameScene"))
   
   Neutralino.init();
   let entry

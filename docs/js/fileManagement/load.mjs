@@ -37,7 +37,7 @@ export function configureGame(scene){
     scene.options.debug = false
 
     scene.tileMapOptions = {}
-    scene.railwayLineColors = ["#FF0000", "#00FF00", "#0000FF", "#FFFF00", "#00FFFF", "#FF00FF"]
+    scene.railwayLineColors = [0xdd2222, 0x22dd22, 0x2222dd, 0xdddd22, 0x22dddd, 0xdd22dd]
     scene.selectedRailwayLine = -1
     scene.tileMapOptions.size = 85
 
