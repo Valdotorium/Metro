@@ -1,0 +1,4 @@
+Everything that has to do with
+-general programming helper functions like converters, sorting algorithms etc.
+belongs here.
+

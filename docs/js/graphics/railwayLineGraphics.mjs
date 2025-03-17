@@ -30,10 +30,7 @@ export function railwayLineDragging(game, firstStationPosition){
     lineObj.setLineWidth(5);
     game.railwayConstructionGraphics.push(lineObj)
 
-
-
 }
-
 export function deleteRailwayConstructionGraphics(game){
     if(game.railwayConstructionGraphics == undefined){
         game.railwayConstructionGraphics = []
@@ -79,5 +76,4 @@ export function addRailwaySegmentGraphics(game,line, firstStationPosition, secon
 
     //line is a line segment
     return line
-
 }

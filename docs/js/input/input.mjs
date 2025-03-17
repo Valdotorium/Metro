@@ -76,7 +76,6 @@ let slowDown = function slowDown(scene){
             scene.inGameUI.backwardButton.text.setAlpha(0.5)
         }
     }
-    
 }
 
 let setConstructionTool = function setConstructionTool(scene, state){
@@ -88,7 +87,6 @@ let zoom = function zoom(scene){
     let game = scene.scene.get("GameScene")
     game.cameras.main.zoom = scene.inGameUI.zoomSlider.value
 }
-
 //CALLBACK FUNCTION SECTION END
 
 // DEFINING THE INGAME UI AND GAME CONTROLS

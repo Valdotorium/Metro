@@ -12,8 +12,8 @@ export function setupTileData(game){
     }
     //populate tile data with data
     tileData = generatePopulations(game, tileData)
-    tileData = generateRailways(game, tileData)
-    tileData = generateRailwayStations(game, tileData)
+    tileData = setupRailways(game, tileData)
+    tileData = setupRailwayStations(game, tileData)
     return tileData
 }
 
@@ -66,9 +66,8 @@ function generatePopulations(game, tileData){
         } 
     }
     return tileData
-
 }
-function generateRailways(game, tileData){
+function setupRailways(game, tileData){
     let mapSize = game.tileMapOptions.size
     //save the data of the 2d array to the railwayLines attribute of each tile in tileData
     for(let i = 0; i < mapSize; i++){
@@ -79,7 +78,7 @@ function generateRailways(game, tileData){
     return tileData;
 }
 
-function generateRailwayStations(game, tileData){
+function setupRailwayStations(game, tileData){
     let mapSize = game.tileMapOptions.size
     //save the data of the 2d array to the railwayLines attribute of each tile in tileData
     for(let i = 0; i < mapSize; i++){

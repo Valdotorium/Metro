@@ -10,6 +10,7 @@ export function setPopulationTileMap(scene){
             statisticalTilemap[i][j] = Phaser.Math.Clamp(Math.round(game.tileData[i][j].population), 0,24)
         }
     }
+    //put the population tileset
     game.currentTilesetImage.tileWidth = 1
     game.currentTilesetImage.tileHeight = 1
     let ts = scene.sys.textures.get("PopulationTileset")
@@ -21,6 +22,7 @@ export function setPopulationTileMap(scene){
 }
 export function setNormalTilemap(scene){
     let game = scene.scene.get("GameScene")
+    //put back the sattelite tileset
     game.currentTilesetImage.tileWidth = 8
     game.currentTilesetImage.tileHeight = 8
     let ts = scene.sys.textures.get("SatelliteTileset")

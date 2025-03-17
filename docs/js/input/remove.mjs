@@ -2,6 +2,7 @@ import {getUniqueStationsFromSegments} from "./railwayConstruction.mjs"
 
 
 function removeStationDependencies(game, stationPosition){
+    //TODO: #20 remove all segments of line from station on or connect neighboring stations that belong to the same line with a new segment
     //check if station is in a line
     for (let i = 0; i < game.railwayLines.length; i++){
         let line = game.railwayLines[i]

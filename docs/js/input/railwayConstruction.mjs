@@ -2,13 +2,46 @@ import { placeRailwayStation } from "../simulation/railwayStation.mjs"
 import { railwayLine } from "../simulation/railwayLine.mjs"
 import { addRailwaySegmentGraphics, deleteRailwayConstructionGraphics, railwayLineDragging } from "../graphics/railwayLineGraphics.mjs"
 
-function deleteDuplicateStationPositions(stations){
-    let uniqueStations = []
-    for (let i = 0; i < stations.length; i++){
-        if (uniqueStations.includes(stations[i]) == false){
-            uniqueStations.push(stations[i])
-        }
+//THIS FILE IS RESPONSIBLE FOR MANAGING THE CONSTRUCTION OF RAILWAYS
+//THE RAILWAY STATION AND LINE DEFINITIONS ARE IN THE SIMULATION FOLDER
+
+//definitions:
+//a railway line is a data structure holding color, id, segments and stations of a line (and probably later trains)
+//railway lines are stored in the game object
+
+//a railway station is a data structure holding the position of the station and the lines that are connected to it
+//railway stations are stored as a property in tileData
+
+//a railway segment is a data structure holding the first and second station of a segment and the line it belongs to,
+//and the graphics that make up the connection between the two stations connected with the segment. (Trains travel on segments?)
+//railway segments are stored in the railway lines, and because they need graphics, they need to be re-initialized everytime the game is loaded
+
+//STATIONS
+function selectRailwayStation(game){
+    //check if railway station does not exist at that position
+    let mousePosition = game.currentHoveredTileIndexes
+    let station = game.tileData[mousePosition.x][mousePosition.y].railwayStation
+    if(station == null){
+        return null
+    } else {
+        return mousePosition
     }
+}
+export function railwayStationConstruction(game){
+    if (game.mouse.justDown && game.isTilemapClicked){
+        placeRailwayStation(game)
+    }
+}
+
+//LINES & SEGMENTS
+function deleteDuplicateStationPositions(stations){
+    //the positions are objects with a x and y value
+    //filter out elements with the same x and y values
+    let uniqueStations = stations.filter((station, index, self) =>
+        index === self.findIndex((t) => (
+            t.x === station.x && t.y === station.y
+        ))
+    )
     return uniqueStations
 }
 export function getUniqueStationsFromSegments(line){
@@ -36,21 +69,37 @@ function checkIfSegmentExists(line, firstStationPosition, secondStationPosition)
     return false
 }
 
-function orderLineSegments(line){
+function insertLineSegment(line, segment){
     //order the segments of a line so that they are in the right order
-    let orderedSegments = []
-    
-}
-function selectRailwayStation(game){
-    //check if railway station does not exist at that position
-    let mousePosition = game.currentHoveredTileIndexes
-    let station = game.tileData[mousePosition.x][mousePosition.y].railwayStation
-    if(station == null){
-        return null
+
+    //check if a segment exists in the line
+    if (line.segments.length == 0){
+        //jjust push the segment without any further checks
+        line.segments.push(segment)
+        return true
+    }
+
+    //check if the segment should be placed in fromt of the first segment of the line
+    if (JSON.stringify(segment.firstStation) == JSON.stringify(line.segments[0].firstStation)){
+        line.segments.unshift(segment)
+        //invert the segments stations
+        let temp = segment.firstStation
+        segment.firstStation = segment.secondStation
+        segment.secondStation = temp
+        console.log("inserted segment at the beginning")
+        return true
+    } else if (JSON.stringify(segment.firstStation) == JSON.stringify(line.segments[line.segments.length - 1].secondStation)){
+        //check if the segment should be placed at the end of the line
+        line.segments.push(segment)
+        console.log("inserted segment at the end")
+        return true
     } else {
-        return mousePosition
+        //if the segment is not placed at the beginning or end, it is invalid
+        console.log("segment placement invalid")
+        return false
     }
 }
+
 function placeLineSegment(game, firstStationPosition, secondStationPosition){
     //the line the segment belongs to
     let line = game.railwayLines[game.selectedRailwayLine]
@@ -62,28 +111,28 @@ function placeLineSegment(game, firstStationPosition, secondStationPosition){
         segment.firstStation = firstStationPosition
         segment.secondStation = secondStationPosition
         segment.line = game.selectedRailwayLine
-        line.stations.push(firstStationPosition)
-        line.stations.push(secondStationPosition)
-        line.stations = deleteDuplicateStationPositions(line.stations)
-        console.log("created line segment. line stations: " , line.stations)
-        //add the segments graphics to the game
-        segment.lines = []
-        segment = addRailwaySegmentGraphics(game, segment, firstStationPosition, secondStationPosition)
-        line.segments.push(segment)
-        //add the line to the railwaystations in tiledata if the line is not already connected to the station
-        if(game.tileData[firstStationPosition.x][firstStationPosition.y].railwayStation.lines.includes(game.selectedRailwayLine) == false){
-            game.tileData[firstStationPosition.x][firstStationPosition.y].railwayStation.lines.push(game.selectedRailwayLine)
+
+        //to keep the segments ordered, we need to add the new segment at a specific point in the list
+        let segmentPlacementIsValid = insertLineSegment(line, segment)
+        if(segmentPlacementIsValid == true){
+            line.stations.push(firstStationPosition)
+            line.stations.push(secondStationPosition)
+            line.stations = deleteDuplicateStationPositions(line.stations)
+            console.log("created line segment. line stations: " , line.stations)
+            //add the segments graphics to the game
+            segment.lines = []
+            segment = addRailwaySegmentGraphics(game, segment, firstStationPosition, secondStationPosition)
+            //add the line to the railwaystations in tiledata if the line is not already connected to the station
+            if(game.tileData[firstStationPosition.x][firstStationPosition.y].railwayStation.lines.includes(game.selectedRailwayLine) == false){
+                game.tileData[firstStationPosition.x][firstStationPosition.y].railwayStation.lines.push(game.selectedRailwayLine)
+            }
+            if(game.tileData[secondStationPosition.x][secondStationPosition.y].railwayStation.lines.includes(game.selectedRailwayLine) == false){
+                game.tileData[secondStationPosition.x][secondStationPosition.y].railwayStation.lines.push(game.selectedRailwayLine)
+            }
         }
-        if(game.tileData[secondStationPosition.x][secondStationPosition.y].railwayStation.lines.includes(game.selectedRailwayLine) == false){
-            game.tileData[secondStationPosition.x][secondStationPosition.y].railwayStation.lines.push(game.selectedRailwayLine)
-        }
+
     } else {
         console.log("segment already exists", firstStationPosition, secondStationPosition)
-    }
-}
-export function railwayStationConstruction(game){
-    if (game.mouse.justDown && game.isTilemapClicked){
-        placeRailwayStation(game)
     }
 }
 function selectRailwayLine(game, firstStationPosition){
@@ -122,8 +171,7 @@ export function railwayLineConstruction(game){
         //when both stations are selected, add the railway line segment
         if(firstStationPosition != null && secondStationPosition != null){
             placeLineSegment(game, firstStationPosition, secondStationPosition)
-            //order the segments of the line between the line ends
-            game.railwayLines[game.selectedRailwayLine] = orderLineSegments(game.railwayLines[game.selectedRailwayLine])
+            
             secondStationPosition = null
             firstStationPosition = null
             lineConstruction = false

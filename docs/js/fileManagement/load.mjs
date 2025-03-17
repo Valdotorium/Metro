@@ -1,5 +1,4 @@
 import { initializeDesktopApp } from "./initializeNeutralino.mjs"
-
 //runs when the game SCENE loaded
 export function loadAssets(scene){
     //loading all game scene assets
@@ -50,6 +49,5 @@ export function loadStartMenuAssets(scene){
     scene.name = "METRO"
     //load assets for the start menu
     scene.load.image("startMenuBackground", "assets/images/startScreen.png")
-
 }
 
