@@ -18,16 +18,18 @@ export function railwayLineDragging(game, firstStationPosition){
     let viaPointPosition = {x: sceneFirstStationPosition.x + smallestDifference * xDirection, y: sceneFirstStationPosition.y + smallestDifference * yDirection}
 
     let color = game.railwayLineColors[game.selectedRailwayLine]
-    circleObj = game.add.circle(viaPointPosition.x + 13, viaPointPosition.y + 13, 5, color).setOrigin(0)
+    circleObj = game.add.circle(viaPointPosition.x + 18, viaPointPosition.y + 18, Math.max(Math.round(game.frame % 60), Math.round(60 - game.frame %60 )) * 0.1 + 1, color).setOrigin(0.5,0.5)
     game.railwayConstructionGraphics.push(circleObj)
     //now add a line between the first station and the via point
     let lineObj
-    lineObj = game.add.line(0,0, sceneFirstStationPosition.x + 18, sceneFirstStationPosition.y + 18, viaPointPosition.x + 18, viaPointPosition.y + 18, color).setOrigin(0);
-    lineObj.setLineWidth(5);
+    lineObj = game.add.line(0,0, sceneFirstStationPosition.x + 18, sceneFirstStationPosition.y + 18, viaPointPosition.x + 18, viaPointPosition.y + 18, color).setOrigin(0,0);
+    lineObj.setLineWidth(Math.max(Math.round(game.frame % 60), Math.round(60 - game.frame %60 )) * 0.1 + 1)
     game.railwayConstructionGraphics.push(lineObj)
     //and between the via point and the mouse
     lineObj = game.add.line(0,0, viaPointPosition.x + 18, viaPointPosition.y + 18, sceneMousePosition.x + 18, sceneMousePosition.y + 18, color).setOrigin(0);
-    lineObj.setLineWidth(5);
+    //make the line thickness vary with time
+
+    lineObj.setLineWidth(Math.max(Math.round(game.frame % 60), Math.round(60 - game.frame %60 )) * 0.1 + 1)
     game.railwayConstructionGraphics.push(lineObj)
 
 }

@@ -33,7 +33,7 @@ export function configureGame(scene){
     //manually setting scene constants
     scene.options.loadMap = false
     scene.options.terrainGenerator = "DEFAULT"
-    scene.options.debug = false
+    scene.options.debug = true
 
     scene.tileMapOptions = {}
     scene.railwayLineColors = [0xdd2222, 0x22dd22, 0x2222dd, 0xdddd22, 0x22dddd, 0xdd22dd]
