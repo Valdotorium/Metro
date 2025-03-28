@@ -45,7 +45,6 @@ export function deleteRailwayConstructionGraphics(game){
 
 export function addRailwaySegmentGraphics(game,line, firstStationPosition, secondStationPosition){
     //IMPORTANT: line is a line segment here
-    console.log(line)
     //the same as in railwayLineDragging, but mousePosition is replaced with secondStationPosition
     let sceneFirstStationPosition = game.tileMap.tileToWorldXY(firstStationPosition.x, firstStationPosition.y)
     let sceneSecondStationPosition = game.tileMap.tileToWorldXY(secondStationPosition.x, secondStationPosition.y)
@@ -55,7 +54,6 @@ export function addRailwaySegmentGraphics(game,line, firstStationPosition, secon
     let xDirection = Phaser.Math.Clamp(sceneSecondStationPosition.x - sceneFirstStationPosition.x, -1, 1)
     let yDirection = Phaser.Math.Clamp(sceneSecondStationPosition.y - sceneFirstStationPosition.y, -1, 1)
     let circleObj
-
 
     let smallestDifference = Math.abs(sceneSecondStationPosition.x - sceneFirstStationPosition.x)
     if (Math.abs(sceneSecondStationPosition.y - sceneFirstStationPosition.y) < smallestDifference){

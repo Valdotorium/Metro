@@ -69,7 +69,7 @@ function checkIfSegmentExists(line, firstStationPosition, secondStationPosition)
     return false
 }
 
-function insertLineSegment(line, segment){
+function insertLineSegment(game, line, segment, ignorePlacementRules){
     //order the segments of a line so that they are in the right order
 
     //check if a segment exists in the line
@@ -96,38 +96,59 @@ function insertLineSegment(line, segment){
     } else {
         //if the segment is not placed at the beginning or end, it is invalid
         console.log("segment placement invalid")
+        //except if this is true, which happens when the segment is a reroute when a station is deleted
+        if (ignorePlacementRules){
+            console.log("ignoring placement rules...")
+            for(let j = 0; j < line.segments.length - 1; j++){
+                //segment is not the first and not the last segment in line
+                if (JSON.stringify(segment.firstStation) == JSON.stringify(line.segments[j].secondStation) && JSON.stringify(segment.secondStation) == JSON.stringify(line.segments[j + 1].firstStation)){
+                    line.segments.splice(j + 1, 0, segment)
+                    console.log("inserted segment in index: " + (j + 1))
+                    return true
+                } 
+                //case: segment is at beginning of line
+                else if(JSON.stringify(segment.secondStation) == JSON.stringify(line.segments[0].firstStation) ){
+                    line.segments.splice(0, 0, segment)
+                    console.log("inserted segment in index: " + 0)
+                    return true
+                }
+                //case: segment is at end of line
+                else if(JSON.stringify(segment.firstStation) == JSON.stringify(line.segments[line.segments.length - 1].secondStation) ){
+                    line.segments.push(segment)
+                    console.log("inserted segment in index: " + line.segments.length)
+                    return true
+                }
+            }
+        }
         return false
     }
 }
 
-function placeLineSegment(game, firstStationPosition, secondStationPosition){
+export function placeLineSegment(game, line, firstStationPosition, secondStationPosition, ignorePlacementRules){
     //the line the segment belongs to
-    let line = game.railwayLines[game.selectedRailwayLine]
     console.log(line)
-
     let segment = {}
     //if the segment does not exist yet, add the stations to the line and delete them again if they are duplicates
     if(!checkIfSegmentExists(line, firstStationPosition, secondStationPosition)){
         segment.firstStation = firstStationPosition
         segment.secondStation = secondStationPosition
-        segment.line = game.selectedRailwayLine
+        segment.line = line.id
 
         //to keep the segments ordered, we need to add the new segment at a specific point in the list
-        let segmentPlacementIsValid = insertLineSegment(line, segment)
-        if(segmentPlacementIsValid == true){
+        let segmentPlacementIsValid = insertLineSegment(game, line, segment,ignorePlacementRules)
+        if(segmentPlacementIsValid == true || ignorePlacementRules == true){
             line.stations.push(firstStationPosition)
             line.stations.push(secondStationPosition)
             line.stations = deleteDuplicateStationPositions(line.stations)
-            console.log("created line segment. line stations: " , line.stations)
             //add the segments graphics to the game
             segment.lines = []
             segment = addRailwaySegmentGraphics(game, segment, firstStationPosition, secondStationPosition)
             //add the line to the railwaystations in tiledata if the line is not already connected to the station
-            if(game.tileData[firstStationPosition.x][firstStationPosition.y].railwayStation.lines.includes(game.selectedRailwayLine) == false){
-                game.tileData[firstStationPosition.x][firstStationPosition.y].railwayStation.lines.push(game.selectedRailwayLine)
+            if(game.tileData[firstStationPosition.x][firstStationPosition.y].railwayStation.lines.includes(line.id) == false){
+                game.tileData[firstStationPosition.x][firstStationPosition.y].railwayStation.lines.push(line.id)
             }
-            if(game.tileData[secondStationPosition.x][secondStationPosition.y].railwayStation.lines.includes(game.selectedRailwayLine) == false){
-                game.tileData[secondStationPosition.x][secondStationPosition.y].railwayStation.lines.push(game.selectedRailwayLine)
+            if(game.tileData[secondStationPosition.x][secondStationPosition.y].railwayStation.lines.includes(line.id) == false){
+                game.tileData[secondStationPosition.x][secondStationPosition.y].railwayStation.lines.push(line.id)
             }
         }
 
@@ -170,7 +191,8 @@ export function railwayLineConstruction(game){
             } 
         //when both stations are selected, add the railway line segment
         if(firstStationPosition != null && secondStationPosition != null){
-            placeLineSegment(game, firstStationPosition, secondStationPosition)
+            placeLineSegment(game,game.railwayLines[game.selectedRailwayLine], firstStationPosition, secondStationPosition)
+            console.log("created segment, line is now: ", game.railwayLines[game.selectedRailwayLine])
             
             secondStationPosition = null
             firstStationPosition = null
@@ -205,7 +227,7 @@ export function createLinesFromSaveGame(game){
             newSegment.secondStation = segment.secondStation
             newSegment.lines = []
             newSegment.line = i
-            newSegment = addRailwaySegmentGraphics(game, newSegment, segment.firstStation, segment.secondStation)
+            newSegment = addRailwaySegmentGraphics(game, newSegment, segment.firstStation, segment.secondStation, false)
             newLine.segments.push(newSegment)
         }
         //replacing the uninitialized lines with the correct ones
