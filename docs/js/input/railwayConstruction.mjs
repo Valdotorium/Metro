@@ -36,7 +36,7 @@ export function railwayStationConstruction(game){
 //LINES & SEGMENTS
 function deleteDuplicateStationPositions(stations){
     //the positions are objects with a x and y value
-    //filter out elements with the same x and y values
+    //filter out elements with the same x and y values, so there are only unique elements left
     let uniqueStations = stations.filter((station, index, self) =>
         index === self.findIndex((t) => (
             t.x === station.x && t.y === station.y
@@ -70,7 +70,7 @@ function checkIfSegmentExists(line, firstStationPosition, secondStationPosition)
 }
 
 function insertLineSegment(game, line, segment, ignorePlacementRules){
-    //order the segments of a line so that they are in the right order
+    //insert the new segment in the correct position, so the sagments stay ordered
 
     //check if a segment exists in the line
     if (line.segments.length == 0){
@@ -125,6 +125,7 @@ function insertLineSegment(game, line, segment, ignorePlacementRules){
 }
 
 export function placeLineSegment(game, line, firstStationPosition, secondStationPosition, ignorePlacementRules){
+    //place a new segment on a line and initialize it
     //the line the segment belongs to
     console.log(line)
     let segment = {}
@@ -157,13 +158,16 @@ export function placeLineSegment(game, line, firstStationPosition, secondStation
     }
 }
 function selectRailwayLine(game, firstStationPosition){
+
     if(game.tileData[firstStationPosition.x][firstStationPosition.y].railwayStation != null){
         let station = game.tileData[firstStationPosition.x][firstStationPosition.y].railwayStation
         if (station.lines.length == 0){
+            //if there is now line at the station, create a new one
             game.selectedRailwayLine = game.railwayLines.length
             station.lines.push(game.selectedRailwayLine)
         }
         else{
+            //choose the first line from the station
             game.selectedRailwayLine = station.lines[0]
         }
     }
@@ -172,6 +176,7 @@ function selectRailwayLine(game, firstStationPosition){
 let lineConstruction = false
 let firstStationPosition = null
 let secondStationPosition = null
+//railway line construction manager, calling the other functions
 export function railwayLineConstruction(game){
     //if the user is creating a new line, do that
     if (game.railwayLines.length ==game.selectedRailwayLine){
