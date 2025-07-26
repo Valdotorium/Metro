@@ -13,7 +13,6 @@ export class city {
         this.name = name;
         this.size = size;
         
-
     }
     //actually creating it
     createCity(game){

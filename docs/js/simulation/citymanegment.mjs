@@ -46,16 +46,22 @@ export function generateCities(game) {
     console.log(game.cityCount)
 }
 export function CityGrowth(game) {
+    //select a reandom city
     let randomCity = Math.floor(Math.random() * game.cityNames.length)
+    //select a random city from the game.cities map
     let growingcity = game.cityNames[randomCity]
+    //make the city grow at random times, but more freqiuntly if the city is larger
     if(Math.floor(Math.random() * (1500 / game.simulation.speed)) < (game.cities.get(growingcity).population*0.05+game.cities.get(growingcity).size*0.1)){
         if(game.cities.get(growingcity).validnextdistricts.length>0){
+            //select a random district from the validnextdistricts array and make it appear
             let randomIndex = Math.floor(Math.random() * game.cities.get(growingcity).validnextdistricts.length);
             let [districtX, districtY, districttype] =  game.cities.get(growingcity).validnextdistricts[randomIndex];
             if((0 < districtX < game.tileMapOptions.size - 1)&& (0 < districtY < game.tileMapOptions.size - 1)){
                 game.cities.get(growingcity).addDistrict(game.cities.get(growingcity).districts.length, game.cities.get(growingcity), districtX, districtY, game, districttype);
                 console.log(game.cities.get(growingcity).districts.length, growingcity)
+                //remove the district from the validnextdistricts array
                 game.cities.get(growingcity).validnextdistricts.splice(randomIndex, 1);
+                //update the city info text
                 game.cities.get(growingcity).cityinfo.setText(`City: ${growingcity} \n Population: ${game.cities.get(growingcity).population} \n Size: ${game.cities.get(growingcity).size}`)}
         }
     }

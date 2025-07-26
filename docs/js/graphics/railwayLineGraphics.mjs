@@ -66,7 +66,10 @@ export function addRailwaySegmentGraphics(game,line, firstStationPosition, secon
     circleObj = game.add.circle(viaPointPosition.x + 13, viaPointPosition.y + 13, 5, color).setOrigin(0)
     line.lines.push(circleObj)
     //now add a line between the first station and the via point
-    lineObj = game.add.line(0,0, sceneFirstStationPosition.x + 18, sceneFirstStationPosition.y + 18, viaPointPosition.x + 18, viaPointPosition.y + 18, color).setOrigin(0);
+    lineObj = game.add.line(0,0, sceneFirstStationPosition.x + 18, sceneFirstStationPosition.y + 18, viaPointPosition.x + 18, viaPointPosition.y + 18, color).setOrigin(0).setInteractive().on("pointerdown", () => {
+        console.log("pointerdown")
+    })
+
     lineObj.setLineWidth(5);
     line.lines.push(lineObj)
     //and between the via point and the second station

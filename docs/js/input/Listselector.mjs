@@ -1,4 +1,5 @@
 export class Listselector{
+    //select from a list of different options
     constructor(scene, x, y, text, style, callback, options, state){
         this.options = options
         this.state = state

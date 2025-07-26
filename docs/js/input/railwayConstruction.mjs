@@ -70,7 +70,7 @@ function checkIfSegmentExists(line, firstStationPosition, secondStationPosition)
 }
 
 function insertLineSegment(game, line, segment, ignorePlacementRules){
-    //insert the new segment in the correct position, so the sagments stay ordered
+    //insert the new segment in the correct position, so the segments stay ordered
 
     //check if a segment exists in the line
     if (line.segments.length == 0){

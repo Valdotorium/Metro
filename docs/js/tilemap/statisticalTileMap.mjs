@@ -7,6 +7,7 @@ export function setPopulationTileMap(scene){
     for(let i = 0; i < mapSize; i++){
         statisticalTilemap[i] = []
         for(let j = 0; j < mapSize; j++){
+            //selecting the correct tile from the population map tileset
             statisticalTilemap[i][j] = Phaser.Math.Clamp(Math.round(game.tileData[i][j].population), 0,24)
         }
     }

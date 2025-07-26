@@ -28,7 +28,8 @@ function setupMainTileMap(scene){
     scene.RotatedGeneratedTilemap = scene.generatedTilemap.map((row, col) => row.map((tile, index) => scene.generatedTilemap[index][col]))
 
     //tiles sized 8x8 are placed in a 6x6 grid, allowed to overlap 1 px each side
-    scene.tileMap = scene.make.tilemap({ data: scene.RotatedGeneratedTilemap, tileWidth: 6, tileHeight: 6, width: mapSize, height: mapSize}).setLayerTileSize(8,8)
+    let mapData = { orientation: Phaser.Tilemaps.Orientation.ISOMETRIC, data: scene.RotatedGeneratedTilemap, tileWidth: 6, tileHeight: 6, width: mapSize, height: mapSize}
+    scene.tileMap = scene.make.tilemap(mapData).setLayerTileSize(8,8)
     scene.currentTilesetImage = scene.tileMap.addTilesetImage(scene.tilesets[0].name, scene.tilesets[0].name, 8, 8)
     scene.currentTileset = 0
     const layer = scene.tileMap.createLayer(0, scene.tileMap.tilesets[0],0,0);
@@ -57,9 +58,8 @@ function setupMainTileMap(scene){
 
 }
 function assignImageTypes(scene){
-    //loading cities from savegames
+    //loading railwaystations
     for(let tileArray of scene.tileData){
-        //same for all citydistricts
         let i
         let j
         for(let tile of tileArray){
@@ -85,9 +85,10 @@ function setupOtherTilemaps(scene){
         assignImageTypes(scene)
     }
     if (!scene.options.loadMap){
-        //generating the tileData array (population, etc)
+        //generating the tileData array (population, etc), if not loading a map
         generateCities(scene)      
     } else {
+        //loading cities from savegames
         scene.cities = new Map(Object.entries(scene.loadedGameData.cities))
         //assign all values in cities to city class
         assignCityClasses(scene)
